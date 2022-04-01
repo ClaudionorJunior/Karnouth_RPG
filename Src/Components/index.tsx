@@ -1,1 +1,1 @@
-const teste = '';
+export { default as LoadingScreen } from './LoadingScreen';

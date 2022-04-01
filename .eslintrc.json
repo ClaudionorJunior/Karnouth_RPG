@@ -60,6 +60,9 @@
     "react-hooks/exhaustive-deps": "off",
     "linebreak-style": "off",
     "react/style-prop-object": "off",
+    "react/function-component-definition": "off",
+    "camelcase": "off",
+    "@typescript-eslint/no-empty-interface": "warn",
     "prettier/prettier": ["error", {
       "endOfLine":"auto"
     }],

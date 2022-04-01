@@ -1106,6 +1106,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@expo-google-fonts/graduate@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/graduate/-/graduate-0.2.2.tgz#b4b60ddcfae6ee4bbb37205b2b48dcda1ac7a0fe"
+  integrity sha512-eBvJ0EjBWez3/f8kl6OJWkaJQ0qkEuxIYu9aVUHHj68wBSf5151tdlQp5DP71nb+bmJDlWcd3N+xkFQxicnzyw==
+
 "@expo/config-plugins@4.0.6":
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-4.0.6.tgz#ef52f0e4d96ddd52b4cd4cc8c6efbe3d9576c72d"
