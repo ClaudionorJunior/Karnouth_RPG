@@ -1,19 +1,18 @@
 import styled from 'styled-components/native';
-import { normalizePixel } from '~/Helpers';
+import { TypographyProps, TextSizes } from '.';
+import { normalizePixel } from '../../Helpers';
 
-interface Props {
-  size: 'small' | 'medium' | 'great';
-  color: string | undefined;
-}
+const textSizeMap: {
+  [key in TextSizes]: number;
+} = {
+  great: normalizePixel(35),
+  medium: normalizePixel(22),
+  small: normalizePixel(16),
+  paragraphy: normalizePixel(12),
+};
 
-export const CustomText = styled.Text<Props>`
+export const CustomText = styled.Text<Omit<TypographyProps, 'text'>>`
   font-family: 'Graduate_400Regular';
-  font-size: ${({ size }) =>
-    size === 'small'
-      ? normalizePixel(18)
-      : size === 'medium'
-      ? normalizePixel(22)
-      : normalizePixel(35)}px;
-  color: ${({ color, theme }) =>
-    color !== undefined ? color : theme.colors.textColor};
+  font-size: ${({ textSize }) => textSizeMap[textSize]}px;
+  color: ${({ color, theme }) => color || theme.colors.textColor};
 `;

@@ -2,15 +2,17 @@ import React from 'react';
 
 import { CustomText } from './styles';
 
-interface Props {
-  size: 'small' | 'medium' | 'great';
+export type TextSizes = 'paragraphy' | 'small' | 'medium' | 'great';
+
+export interface TypographyProps {
+  textSize: TextSizes;
   text: string;
   color?: string;
 }
 
-const Typography: React.FC<Props> = ({ size, text, color }) => {
+const Typography = ({ textSize, text, color }: TypographyProps) => {
   return (
-    <CustomText size={size} color={color}>
+    <CustomText textSize={textSize} color={color}>
       {text}
     </CustomText>
   );

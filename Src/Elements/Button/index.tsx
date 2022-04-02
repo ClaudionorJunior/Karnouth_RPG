@@ -1,19 +1,20 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { PressableProps } from 'react-native';
+import { useTheme } from 'styled-components/native';
+import Typography, { TextSizes } from '../Typography';
+import { ButtonContainer } from './styles';
 
-import Typography from '../Typography';
-
-interface Props {
+interface Props extends PressableProps {
   text: string;
-  textSize: 'small' | 'medium' | 'great';
-  onPress: () => void;
+  textSize: TextSizes;
 }
 
-const Button: React.FC<Props> = ({ text, textSize, onPress }) => {
+const Button = ({ text, textSize, ...rest }: Props) => {
+  const { colors } = useTheme();
   return (
-    <TouchableOpacity onPress={onPress}>
-      <Typography size={textSize} text={text} />
-    </TouchableOpacity>
+    <ButtonContainer {...rest}>
+      <Typography textSize={textSize} text={text} color={colors.white} />
+    </ButtonContainer>
   );
 };
 

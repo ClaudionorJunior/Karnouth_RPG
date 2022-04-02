@@ -1,5 +1,5 @@
-import { palletColors } from '~/Hooks/ContextProvider';
+import { palletColors } from '../Styles';
 
-export interface ThemeContextData {
-  colors: typeof palletColors;
-}
+export type PlayerTypies = 'Warrior' | 'Ranger' | 'Mage';
+
+export type Colors = typeof palletColors;

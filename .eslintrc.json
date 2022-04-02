@@ -63,6 +63,7 @@
     "react/function-component-definition": "off",
     "camelcase": "off",
     "@typescript-eslint/no-empty-interface": "warn",
+    "react/require-default-props": "off",
     "prettier/prettier": ["error", {
       "endOfLine":"auto"
     }],
