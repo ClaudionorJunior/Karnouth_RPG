@@ -5,7 +5,7 @@ import store from './Src/Store/store';
 import { LoadingScreen } from './Src/Components';
 import Root from './Src';
 
-export default function App() {
+const App = () => {
   const [fontsLoaded] = useFonts({
     Graduate_400Regular,
   });
@@ -19,4 +19,6 @@ export default function App() {
       <Root />
     </Provider>
   );
-}
+};
+
+export default App;

@@ -4,7 +4,7 @@ import { LoadingScreen } from './Components';
 import ContextProvider from './Hooks/ContextProvider';
 import Main from './Screens/Main';
 
-export default function Root() {
+const Root = () => {
   const [fontsLoaded] = useFonts({
     Graduate_400Regular,
   });
@@ -20,4 +20,6 @@ export default function Root() {
       </NavigationContainer>
     </ContextProvider>
   );
-}
+};
+
+export default Root;
