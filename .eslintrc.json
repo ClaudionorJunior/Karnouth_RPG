@@ -66,6 +66,7 @@
     "react/require-default-props": "off",
     "react/jsx-no-useless-fragment": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "default-case": "off",
     "prettier/prettier": ["error", {
       "endOfLine":"auto"
     }],

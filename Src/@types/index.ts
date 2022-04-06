@@ -2,6 +2,13 @@ import { palletColors } from '../Styles';
 
 export type PlayerTypies = 'Warrior' | 'Ranger' | 'Mage';
 
+export type StatusTypies =
+  | 'intelligence'
+  | 'life'
+  | 'power'
+  | 'presicion'
+  | 'defence';
+
 export interface PlayerStatus {
   life: number;
   power: number;

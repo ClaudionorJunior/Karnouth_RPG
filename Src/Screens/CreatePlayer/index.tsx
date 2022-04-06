@@ -1,12 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/core';
 import { StackActions } from '@react-navigation/routers';
 import { PlayerPointsDistribution, PlayerSelect } from '../../Components';
-import { PlayerStatus, PlayerTypies } from '../../@types';
-import { Container } from './styles';
+import { PlayerTypies } from '../../@types';
+import { Container, RemainingContainer } from './styles';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
-import { Button, Typography } from '../../Elements';
+import { Button, GhostButton, Typography } from '../../Elements';
 import { RootState } from '../../Store/state';
 import { classDescription } from './Helpers';
 import { normalizePixel } from '../../Helpers';
@@ -14,7 +14,6 @@ import { normalizePixel } from '../../Helpers';
 const PLAYERS_TYPE: PlayerTypies[] = ['Warrior', 'Mage', 'Ranger'];
 
 const CreatePlayer = () => {
-  const [distribuitedPoints, setDistribuitedPoints] = useState<PlayerStatus>();
   const playerState = useSelector((state: RootState) => state.playerState);
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -25,8 +24,6 @@ const CreatePlayer = () => {
   }, []);
 
   const handleConfirm = useCallback(() => {
-    distribuitedPoints &&
-      dispatch(PlayerStatusActions.changePlayerStatus(distribuitedPoints));
     navigation.dispatch(StackActions.replace('Home'));
   }, [navigation]);
 
@@ -51,13 +48,19 @@ const CreatePlayer = () => {
         />
       )}
       {playerState.playerType && (
-        <Typography
-          containerStyles={{ marginBottom: 16 }}
-          text={`Remaining points: ${playerState.remainingPoints}`}
-          textSize="paragraphy"
-        />
+        <RemainingContainer>
+          <Typography
+            containerStyles={{ marginBottom: 16 }}
+            text={`Remaining points: ${playerState.remainingPoints}`}
+            textSize="paragraphy"
+          />
+          <GhostButton
+            text="To Reset Status"
+            onPress={() => dispatch(PlayerStatusActions.resetAllStatus())}
+          />
+        </RemainingContainer>
       )}
-      <PlayerPointsDistribution onReturnDistribution={setDistribuitedPoints} />
+      <PlayerPointsDistribution />
 
       <Button
         disabled={!!playerState.remainingPoints}

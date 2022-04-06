@@ -1,14 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PlayerStatus, PlayerTypies } from '../../@types';
-
-export interface PlayerStatusState {
-  Mage: PlayerStatus;
-  Warrior: PlayerStatus;
-  Ranger: PlayerStatus;
-  playerType?: PlayerTypies;
-  remainingPoints: number;
-}
+import { PlayerTypies, StatusTypies } from '../../@types';
+import { ChangePlayerStatusParams, PlayerStatusState } from './@types';
 
 const initialState: PlayerStatusState = {
   playerType: undefined,
@@ -36,14 +29,6 @@ const initialState: PlayerStatusState = {
   remainingPoints: 10,
 };
 
-interface ChangePlayerStatusParams {
-  intelligence?: number;
-  life?: number;
-  power?: number;
-  presicion?: number;
-  defence?: number;
-}
-
 export const PlayerStatusSlice = createSlice({
   name: 'playerState',
   initialState,
@@ -53,16 +38,57 @@ export const PlayerStatusSlice = createSlice({
       action: PayloadAction<ChangePlayerStatusParams>,
     ) => {
       if (state.playerType) {
-        state[state.playerType].defence =
-          action.payload.defence || state[state.playerType]?.defence;
-        state[state.playerType].power =
-          action.payload.power || state[state.playerType]?.power;
-        state[state.playerType].intelligence =
-          action.payload.intelligence || state[state.playerType]?.intelligence;
-        state[state.playerType].presicion =
-          action.payload.presicion || state[state.playerType]?.presicion;
-        state[state.playerType].life =
-          action.payload.life || state[state.playerType]?.life;
+        const add = (type: StatusTypies) => {
+          state[state.playerType!][type] += 1;
+          if (state.remainingPoints >= 1) {
+            state.remainingPoints -= 1;
+          }
+        };
+
+        const takeOff = (type: StatusTypies) => {
+          state[state.playerType!][type] += 1;
+          if (state.remainingPoints < 10) {
+            state.remainingPoints += 1;
+          }
+        };
+
+        switch (action.payload.statusType) {
+          case 'intelligence':
+            if (action.payload.typeToChange === 'add') {
+              add(action.payload.statusType);
+            } else {
+              takeOff(action.payload.statusType);
+            }
+            break;
+          case 'life':
+            if (action.payload.typeToChange === 'add') {
+              add(action.payload.statusType);
+            } else {
+              takeOff(action.payload.statusType);
+            }
+            break;
+          case 'power':
+            if (action.payload.typeToChange === 'add') {
+              add(action.payload.statusType);
+            } else {
+              takeOff(action.payload.statusType);
+            }
+            break;
+          case 'presicion':
+            if (action.payload.typeToChange === 'add') {
+              add(action.payload.statusType);
+            } else {
+              takeOff(action.payload.statusType);
+            }
+            break;
+          case 'defence':
+            if (action.payload.typeToChange === 'add') {
+              add(action.payload.statusType);
+            } else {
+              takeOff(action.payload.statusType);
+            }
+            break;
+        }
       }
     },
 
@@ -74,28 +100,39 @@ export const PlayerStatusSlice = createSlice({
       state.remainingPoints = 0;
     },
 
-    takeOffRemainingPoints: state => {
-      if (state.remainingPoints > 0) {
-        state.remainingPoints -= 1;
-      }
-    },
-
-    addRemainingPoints: state => {
-      if (state.remainingPoints < 10) {
-        state.remainingPoints += 1;
-      }
-    },
-
     resetRemainingPoints: state => {
       state.remainingPoints = 10;
     },
 
-    getPlayerStatus: state => {
-      return state;
+    resetAllStatus: state => {
+      state.Mage = {
+        intelligence: 15,
+        life: 5,
+        power: 0,
+        presicion: 5,
+        defence: 5,
+      };
+      state.Warrior = {
+        intelligence: 0,
+        life: 9,
+        power: 9,
+        presicion: 5,
+        defence: 7,
+      };
+      state.Ranger = {
+        intelligence: 0,
+        life: 5,
+        power: 5,
+        presicion: 15,
+        defence: 5,
+      };
+      state.playerType = undefined;
+      state.remainingPoints = 10;
     },
   },
 });
 
 export const PlayerStatusActions = PlayerStatusSlice.actions;
+export type { ChangePlayerStatusParams };
 
 export default PlayerStatusSlice.reducer;

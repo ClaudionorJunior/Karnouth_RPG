@@ -9,3 +9,9 @@ export const Container = styled.ScrollView.attrs({
   background-color: ${({ theme }) => theme.colors.backgroudColor};
   padding: 0 ${normalizePixel(16)}px;
 `;
+
+export const RemainingContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+`;

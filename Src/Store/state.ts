@@ -1,4 +1,4 @@
-import { PlayerStatusState } from './PlayerStatusSlice';
+import { PlayerStatusState } from './PlayerStatusSlice/@types';
 
 export interface RootState {
   playerState: PlayerStatusState;

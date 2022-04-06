@@ -7,7 +7,7 @@ import { normalizePixel } from '../../Helpers';
 
 interface ButtonPutOrTakeOffProps extends PressableProps {
   name: 'minuscircle' | 'pluscircle';
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 const ButtonPutOrTakeOff = ({
@@ -17,7 +17,7 @@ const ButtonPutOrTakeOff = ({
 }: ButtonPutOrTakeOffProps) => {
   const { colors } = useTheme();
   return (
-    <Container disabled={disabled} {...rest}>
+    <Container disabled={!!disabled} {...rest}>
       <AntDesign
         name={name}
         color={disabled ? colors.borderColor : colors.primary1}
