@@ -6,6 +6,14 @@ export interface PlayerStatusState {
   Ranger: PlayerStatus;
   playerType?: PlayerTypies;
   remainingPoints: number;
+  playerXPPoints: number;
+  playerLifePoints: number;
+  currentPlayerLifePoints: number;
+}
+
+export interface ChangePlayerLifeParams {
+  amount: number;
+  typeToChange: 'take off' | 'add';
 }
 
 export interface ChangePlayerStatusParams {

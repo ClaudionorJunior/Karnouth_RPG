@@ -1,7 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PlayerTypies, StatusTypies } from '../../@types';
-import { ChangePlayerStatusParams, PlayerStatusState } from './@types';
+import {
+  ChangePlayerLifeParams,
+  ChangePlayerStatusParams,
+  PlayerStatusState,
+} from './@types';
 
 const initialState: PlayerStatusState = {
   playerType: undefined,
@@ -27,6 +31,9 @@ const initialState: PlayerStatusState = {
     defence: 5,
   },
   remainingPoints: 10,
+  playerXPPoints: 0,
+  playerLifePoints: 150,
+  currentPlayerLifePoints: 150,
 };
 
 export const PlayerStatusSlice = createSlice({
@@ -42,6 +49,17 @@ export const PlayerStatusSlice = createSlice({
           state[state.playerType!][type] += 1;
           if (state.remainingPoints >= 1) {
             state.remainingPoints -= 1;
+            switch (state.playerType!) {
+              case 'Mage':
+                state.playerLifePoints += 5;
+                break;
+              case 'Warrior':
+                state.playerLifePoints += 15;
+                break;
+              case 'Ranger':
+                state.playerLifePoints += 10;
+                break;
+            }
           }
         };
 
@@ -49,6 +67,17 @@ export const PlayerStatusSlice = createSlice({
           state[state.playerType!][type] -= 1;
           if (state.remainingPoints < 10) {
             state.remainingPoints += 1;
+            switch (state.playerType!) {
+              case 'Mage':
+                state.playerLifePoints -= 5;
+                break;
+              case 'Warrior':
+                state.playerLifePoints -= 15;
+                break;
+              case 'Ranger':
+                state.playerLifePoints -= 10;
+                break;
+            }
           }
         };
 
@@ -96,6 +125,28 @@ export const PlayerStatusSlice = createSlice({
       state.playerType = action.payload;
     },
 
+    addPlayerExp: (state, action: PayloadAction<number>) => {
+      state.playerXPPoints += action.payload;
+    },
+
+    changeCurrentLife: (
+      state,
+      action: PayloadAction<ChangePlayerLifeParams>,
+    ) => {
+      if (action.payload.typeToChange === 'add') {
+        if (
+          state.currentPlayerLifePoints + action.payload.amount >
+          state.playerLifePoints
+        ) {
+          state.currentPlayerLifePoints = state.playerLifePoints;
+        } else {
+          state.currentPlayerLifePoints += action.payload.amount;
+        }
+      } else {
+        state.currentPlayerLifePoints -= action.payload.amount;
+      }
+    },
+
     clearRemainingPoints: state => {
       state.remainingPoints = 0;
     },
@@ -128,6 +179,9 @@ export const PlayerStatusSlice = createSlice({
       };
       state.playerType = undefined;
       state.remainingPoints = 10;
+      state.playerXPPoints = 0;
+      state.playerLifePoints = 150;
+      state.currentPlayerLifePoints = 150;
     },
   },
 });

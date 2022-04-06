@@ -4,7 +4,17 @@ import { normalizePixel } from '../../Helpers';
 export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.secondary3};
+  padding: ${normalizePixel(16)}px;
 `;
+
+export const Header = styled.View`
+  width: 100%;
+  flex-direction: row;
+`;
+
+export const ProgressBarsContainer = styled.View``;
+
+export const StatusPlayerContainer = styled.View``;
 
 export const AvatarImg = styled.Image`
   width: ${normalizePixel(48)}px;
