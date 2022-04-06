@@ -12,9 +12,14 @@ export const Header = styled.View`
   flex-direction: row;
 `;
 
-export const ProgressBarsContainer = styled.View``;
+export const ProgressBarsContainer = styled.View`
+  width: 100%;
+  margin-left: ${normalizePixel(8)}px;
+`;
 
-export const StatusPlayerContainer = styled.View``;
+export const StatusPlayerContainer = styled.View`
+  width: 100%;
+`;
 
 export const AvatarImg = styled.Image`
   width: ${normalizePixel(48)}px;

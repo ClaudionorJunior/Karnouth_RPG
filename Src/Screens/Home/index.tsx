@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { ProgressBarTitle } from '../../Components';
 import { avatarImgMap } from '../../Helpers';
 import { RootState } from '../../Store/state';
 import {
@@ -22,6 +23,18 @@ const Home = () => {
         </AvatarContainerImg>
         <ProgressBarsContainer>
           {/* As barras de status de life e exp */}
+          <ProgressBarTitle
+            title="Life"
+            currentValue={playerState.currentPlayerLifePoints}
+            totalValue={playerState.playerLifePoints}
+            progressColor="life"
+          />
+          <ProgressBarTitle
+            title="XP"
+            currentValue={20}
+            totalValue={100}
+            progressColor="XP"
+          />
           <StatusPlayerContainer>
             {/* As infos de status de life e pwr, int, prec, def */}
           </StatusPlayerContainer>

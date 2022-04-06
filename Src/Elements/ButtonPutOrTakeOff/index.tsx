@@ -20,7 +20,7 @@ const ButtonPutOrTakeOff = ({
     <Container disabled={!!disabled} {...rest}>
       <AntDesign
         name={name}
-        color={disabled ? colors.borderColor : colors.primary1}
+        color={disabled ? colors.neutral : colors.primary1}
         size={normalizePixel(24)}
       />
     </Container>

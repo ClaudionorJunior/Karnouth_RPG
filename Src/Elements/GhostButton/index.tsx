@@ -22,7 +22,7 @@ const GhostButton = ({
       <Typography
         textSize="paragraphy"
         text={text}
-        color={disabled ? colors.borderColor : colors.primary1}
+        color={disabled ? colors.neutral : colors.primary1}
       />
     </Container>
   );
