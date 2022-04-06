@@ -1,7 +1,7 @@
 import React from 'react';
 import { PressableProps, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from 'styled-components/native';
-import { Typography } from '..';
+import Typography from '../Typography';
 import { Container } from './styles';
 
 interface GhostButtonProps extends PressableProps {

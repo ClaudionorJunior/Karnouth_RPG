@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ButtonPutOrTakeOff, Typography } from '../../Elements';
-import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
+import {
+  ChangePlayerStatusParams,
+  PlayerStatusActions,
+} from '../../Store/PlayerStatusSlice';
 import { RootState } from '../../Store/state';
 import {
   Container,
@@ -12,7 +15,17 @@ import {
 
 const PlayerPointsDistribution = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
+  const [isLoading, setIsloading] = useState(false);
   const dispatch = useDispatch();
+
+  const handlePoints = useCallback((payload: ChangePlayerStatusParams) => {
+    setIsloading(true);
+    dispatch(PlayerStatusActions.changePlayerStatus(payload));
+
+    setTimeout(() => {
+      setIsloading(false);
+    }, 250);
+  }, []);
 
   if (!playerState.playerType) {
     return <></>;
@@ -25,14 +38,12 @@ const PlayerPointsDistribution = () => {
           <Typography text="Life" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={playerState.remainingPoints === 10}
+          disabled={isLoading || playerState.remainingPoints === 10}
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'life',
-                typeToChange: 'take off',
-              }),
-            )
+            handlePoints({
+              statusType: 'life',
+              typeToChange: 'take off',
+            })
           }
           name="minuscircle"
         />
@@ -43,14 +54,12 @@ const PlayerPointsDistribution = () => {
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={!playerState.remainingPoints}
+          disabled={isLoading || !playerState.remainingPoints}
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'life',
-                typeToChange: 'add',
-              }),
-            )
+            handlePoints({
+              statusType: 'life',
+              typeToChange: 'add',
+            })
           }
           name="pluscircle"
         />
@@ -60,14 +69,12 @@ const PlayerPointsDistribution = () => {
           <Typography text="Precision" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={!!playerState.remainingPoints}
+          disabled={isLoading || playerState.remainingPoints === 10}
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'presicion',
-                typeToChange: 'take off',
-              }),
-            )
+            handlePoints({
+              statusType: 'presicion',
+              typeToChange: 'take off',
+            })
           }
           name="minuscircle"
         />
@@ -80,14 +87,12 @@ const PlayerPointsDistribution = () => {
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={!playerState.remainingPoints}
+          disabled={isLoading || !playerState.remainingPoints}
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'presicion',
-                typeToChange: 'add',
-              }),
-            )
+            handlePoints({
+              statusType: 'presicion',
+              typeToChange: 'add',
+            })
           }
           name="pluscircle"
         />
@@ -97,14 +102,12 @@ const PlayerPointsDistribution = () => {
           <Typography text="Defence" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={!!playerState.remainingPoints}
+          disabled={isLoading || playerState.remainingPoints === 10}
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'defence',
-                typeToChange: 'take off',
-              }),
-            )
+            handlePoints({
+              statusType: 'defence',
+              typeToChange: 'take off',
+            })
           }
           name="minuscircle"
         />
@@ -117,14 +120,12 @@ const PlayerPointsDistribution = () => {
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={!playerState.remainingPoints}
+          disabled={isLoading || !playerState.remainingPoints}
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'defence',
-                typeToChange: 'add',
-              }),
-            )
+            handlePoints({
+              statusType: 'defence',
+              typeToChange: 'add',
+            })
           }
           name="pluscircle"
         />
@@ -134,14 +135,16 @@ const PlayerPointsDistribution = () => {
           <Typography text="Power" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={!!playerState.remainingPoints}
+          disabled={
+            isLoading ||
+            playerState.remainingPoints === 10 ||
+            playerState?.[playerState?.playerType]?.power === 0
+          }
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'power',
-                typeToChange: 'take off',
-              }),
-            )
+            handlePoints({
+              statusType: 'power',
+              typeToChange: 'take off',
+            })
           }
           name="minuscircle"
         />
@@ -153,16 +156,15 @@ const PlayerPointsDistribution = () => {
         </StatusQuantity>
         <ButtonPutOrTakeOff
           disabled={
+            isLoading ||
             !playerState.remainingPoints ||
             playerState?.[playerState?.playerType]?.power === 0
           }
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'power',
-                typeToChange: 'add',
-              }),
-            )
+            handlePoints({
+              statusType: 'power',
+              typeToChange: 'add',
+            })
           }
           name="pluscircle"
         />
@@ -172,14 +174,16 @@ const PlayerPointsDistribution = () => {
           <Typography text="Intelligence" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={!!playerState.remainingPoints}
+          disabled={
+            isLoading ||
+            playerState.remainingPoints === 10 ||
+            playerState?.[playerState?.playerType]?.intelligence === 0
+          }
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'intelligence',
-                typeToChange: 'take off',
-              }),
-            )
+            handlePoints({
+              statusType: 'intelligence',
+              typeToChange: 'take off',
+            })
           }
           name="minuscircle"
         />
@@ -194,16 +198,15 @@ const PlayerPointsDistribution = () => {
         </StatusQuantity>
         <ButtonPutOrTakeOff
           disabled={
+            isLoading ||
             !playerState.remainingPoints ||
             playerState?.[playerState?.playerType]?.intelligence === 0
           }
           onPress={() =>
-            dispatch(
-              PlayerStatusActions.changePlayerStatus({
-                statusType: 'intelligence',
-                typeToChange: 'add',
-              }),
-            )
+            handlePoints({
+              statusType: 'intelligence',
+              typeToChange: 'add',
+            })
           }
           name="pluscircle"
         />

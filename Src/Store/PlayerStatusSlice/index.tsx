@@ -46,7 +46,7 @@ export const PlayerStatusSlice = createSlice({
         };
 
         const takeOff = (type: StatusTypies) => {
-          state[state.playerType!][type] += 1;
+          state[state.playerType!][type] -= 1;
           if (state.remainingPoints < 10) {
             state.remainingPoints += 1;
           }
