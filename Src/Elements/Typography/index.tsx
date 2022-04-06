@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleProp, TextStyle } from 'react-native';
 
 import { CustomText } from './styles';
 
@@ -8,11 +9,17 @@ export interface TypographyProps {
   textSize: TextSizes;
   text: string;
   color?: string;
+  containerStyles?: StyleProp<TextStyle>;
 }
 
-const Typography = ({ textSize, text, color }: TypographyProps) => {
+const Typography = ({
+  textSize,
+  text,
+  color,
+  containerStyles,
+}: TypographyProps) => {
   return (
-    <CustomText textSize={textSize} color={color}>
+    <CustomText style={containerStyles} textSize={textSize} color={color}>
       {text}
     </CustomText>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PressableProps } from 'react-native';
+import { PressableProps, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import Typography, { TextSizes } from '../Typography';
 import { ButtonContainer } from './styles';
@@ -7,12 +7,20 @@ import { ButtonContainer } from './styles';
 interface Props extends PressableProps {
   text: string;
   textSize: TextSizes;
+  disabled?: boolean;
+  containerStyles?: StyleProp<ViewStyle>;
 }
 
-const Button = ({ text, textSize, ...rest }: Props) => {
+const Button = ({
+  text,
+  textSize,
+  containerStyles,
+  disabled = false,
+  ...rest
+}: Props) => {
   const { colors } = useTheme();
   return (
-    <ButtonContainer {...rest}>
+    <ButtonContainer disabled={disabled} style={containerStyles} {...rest}>
       <Typography textSize={textSize} text={text} color={colors.white} />
     </ButtonContainer>
   );

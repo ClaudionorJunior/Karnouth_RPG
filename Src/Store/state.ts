@@ -1,5 +1,5 @@
-import { Counter } from './CounterSlice';
+import { PlayerStatusState } from './PlayerStatusSlice';
 
 export interface RootState {
-  counter: Counter;
+  playerState: PlayerStatusState;
 }

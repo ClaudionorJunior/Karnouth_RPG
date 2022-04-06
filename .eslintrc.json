@@ -64,6 +64,8 @@
     "camelcase": "off",
     "@typescript-eslint/no-empty-interface": "warn",
     "react/require-default-props": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "prettier/prettier": ["error", {
       "endOfLine":"auto"
     }],

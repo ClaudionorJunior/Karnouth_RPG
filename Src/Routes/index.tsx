@@ -4,9 +4,9 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import { useTheme } from 'styled-components';
-import { StatusBar } from 'react-native';
 import Main from '../Screens/Main';
 import CreatePlayer from '../Screens/CreatePlayer';
+import Home from '../Screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +19,7 @@ const MainStack = () => {
         title,
         headerTitleAlign: 'center',
         headerTintColor: colors.white,
-        headerStyle: { backgroundColor: colors.primary },
+        headerStyle: { backgroundColor: colors.primary1 },
       };
     },
     [],
@@ -36,6 +36,11 @@ const MainStack = () => {
         name="CreatePlayer"
         component={CreatePlayer}
         options={headerOptionsManager('Create Player')}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={headerOptionsManager('Home')}
       />
     </Stack.Navigator>
   );
