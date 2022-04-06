@@ -22,7 +22,6 @@ const Home = () => {
           <AvatarImg source={avatarImgMap(playerState.playerType!)} />
         </AvatarContainerImg>
         <ProgressBarsContainer>
-          {/* As barras de status de life e exp */}
           <ProgressBarTitle
             title="Life"
             currentValue={playerState.currentPlayerLifePoints}
@@ -35,10 +34,10 @@ const Home = () => {
             totalValue={100}
             progressColor="XP"
           />
-          <StatusPlayerContainer>
-            {/* As infos de status de life e pwr, int, prec, def */}
-          </StatusPlayerContainer>
         </ProgressBarsContainer>
+        <StatusPlayerContainer>
+          {/* As infos de status de life e pwr, int, prec, def */}
+        </StatusPlayerContainer>
       </Header>
     </Container>
   );
