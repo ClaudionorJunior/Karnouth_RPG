@@ -5,6 +5,7 @@ export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.backgroudColor};
   padding: ${normalizePixel(12)}px;
+  padding-bottom: 0;
 `;
 
 export const Header = styled.View`
@@ -35,9 +36,4 @@ export const AvatarContainerImg = styled.View`
   border-width: ${normalizePixel(4)}px;
   border-color: ${({ theme }) => theme.colors.secondary1};
   border-radius: ${normalizePixel(6)}px;
-`;
-
-export const HeaderLineWrapper = styled.View`
-  height: 1.5px;
-  background-color: ${({ theme }) => theme.colors.secondary1};
 `;

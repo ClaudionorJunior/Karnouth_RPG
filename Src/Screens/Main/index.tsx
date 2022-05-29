@@ -59,7 +59,7 @@ const Main = () => {
   }, [playerState.playerType]);
 
   const handleContinue = useCallback(() => {
-    navigation.navigate('Home' as never);
+    navigation.navigate('TabNavigator' as never);
   }, []);
 
   return (

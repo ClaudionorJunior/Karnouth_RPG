@@ -1,7 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ProgressBarTitle, Slotitem } from '../../Components';
-import { Typography } from '../../Elements';
+import {
+  Inventory,
+  ItemsEquippedPlayer,
+  ProgressBarTitle,
+} from '../../Components';
+import { LineWrapper, Typography } from '../../Elements';
 import { avatarImgMap } from '../../Helpers';
 import { RootState } from '../../Store/state';
 import {
@@ -11,7 +15,6 @@ import {
   Header,
   ProgressBarsContainer,
   StatusPlayerContainer,
-  HeaderLineWrapper,
 } from './styles';
 
 const Home = () => {
@@ -56,8 +59,10 @@ const Home = () => {
           </StatusPlayerContainer>
         </ProgressBarsContainer>
       </Header>
-      <HeaderLineWrapper />
-      <Slotitem />
+      <LineWrapper />
+      <ItemsEquippedPlayer />
+      <LineWrapper />
+      <Inventory />
     </Container>
   );
 };

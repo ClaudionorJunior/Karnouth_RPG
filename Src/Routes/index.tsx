@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React, { useCallback } from 'react';
 import {
   createNativeStackNavigator,
@@ -5,12 +6,15 @@ import {
 } from '@react-navigation/native-stack';
 import { useTheme } from 'styled-components';
 import { useSelector } from 'react-redux';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Main from '../Screens/Main';
 import CreatePlayer from '../Screens/CreatePlayer';
 import Home from '../Screens/Home';
 import { useLevelManager } from '../Hooks';
 import { RootState } from '../Store/state';
 
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
@@ -44,11 +48,55 @@ const MainStack = () => {
         options={headerOptionsManager('Create Player')}
       />
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="TabNavigator"
+        component={TabNavigator}
         options={headerOptionsManager('Home')}
       />
     </Stack.Navigator>
+  );
+};
+
+const TabNavigator = () => {
+  const { colors } = useTheme();
+
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName: 'castle' | 'store' | 'axe';
+
+          if (route.name === 'Home') {
+            iconName = 'castle';
+          } else if (route.name === 'Mall') {
+            iconName = 'store';
+          } else {
+            iconName = 'axe';
+          }
+          return (
+            <MaterialCommunityIcons name={iconName} size={size} color={color} />
+          );
+        },
+        tabBarActiveTintColor: colors.primary1,
+        tabBarInactiveTintColor: colors.neutral,
+      })}
+    >
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Mall"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Battle"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+    </Tab.Navigator>
   );
 };
 
