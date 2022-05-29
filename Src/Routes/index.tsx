@@ -4,13 +4,18 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import { useTheme } from 'styled-components';
+import { useSelector } from 'react-redux';
 import Main from '../Screens/Main';
 import CreatePlayer from '../Screens/CreatePlayer';
 import Home from '../Screens/Home';
+import { useLevelManager } from '../Hooks';
+import { RootState } from '../Store/state';
 
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
+  const playerState = useSelector((state: RootState) => state.playerState);
+  useLevelManager();
   const { colors } = useTheme();
 
   const headerOptionsManager = useCallback(
@@ -20,9 +25,10 @@ const MainStack = () => {
         headerTitleAlign: 'center',
         headerTintColor: colors.white,
         headerStyle: { backgroundColor: colors.primary1 },
+        headerBackVisible: !playerState.playerType,
       };
     },
-    [],
+    [playerState.playerType],
   );
 
   return (

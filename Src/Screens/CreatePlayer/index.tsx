@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/core';
+import { useFocusEffect, useNavigation } from '@react-navigation/core';
 import { StackActions } from '@react-navigation/routers';
+import { BackHandler } from 'react-native';
 import { PlayerPointsDistribution, PlayerSelect } from '../../Components';
 import { PlayerTypies } from '../../@types';
 import { Container, RemainingContainer } from './styles';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ProgressBarTitle } from '../../Components';
+import { ProgressBarTitle, Slotitem } from '../../Components';
+import { Typography } from '../../Elements';
 import { avatarImgMap } from '../../Helpers';
 import { RootState } from '../../Store/state';
 import {
@@ -10,6 +11,7 @@ import {
   Header,
   ProgressBarsContainer,
   StatusPlayerContainer,
+  HeaderLineWrapper,
 } from './styles';
 
 const Home = () => {
@@ -30,15 +32,32 @@ const Home = () => {
           />
           <ProgressBarTitle
             title="XP"
-            currentValue={20}
-            totalValue={100}
+            currentValue={playerState.playerXPPoints}
+            totalValue={playerState.xpToNextLevel}
             progressColor="XP"
           />
+          <StatusPlayerContainer>
+            <Typography
+              text={`Pwr: ${playerState[playerState.playerType!].power}`}
+              textSize="paragraphy"
+            />
+            <Typography
+              text={`Def: ${playerState[playerState.playerType!].defence}`}
+              textSize="paragraphy"
+            />
+            <Typography
+              text={`Prec: ${playerState[playerState.playerType!].presicion}`}
+              textSize="paragraphy"
+            />
+            <Typography
+              text={`Int: ${playerState[playerState.playerType!].intelligence}`}
+              textSize="paragraphy"
+            />
+          </StatusPlayerContainer>
         </ProgressBarsContainer>
-        <StatusPlayerContainer>
-          {/* As infos de status de life e pwr, int, prec, def */}
-        </StatusPlayerContainer>
       </Header>
+      <HeaderLineWrapper />
+      <Slotitem />
     </Container>
   );
 };

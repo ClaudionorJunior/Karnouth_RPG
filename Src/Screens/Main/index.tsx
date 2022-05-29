@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/core';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Alert, BackHandler } from 'react-native';
 import { SceneMain } from '../../Assets';
 import { Button, Typography } from '../../Elements';
 import { RootState } from '../../Store/state';
 import { Container, MainImage, ButtonContainer } from './styles';
+import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
 
 const Main = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState<boolean>(false);
   const playerState = useSelector((state: RootState) => state.playerState);
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   useFocusEffect(
@@ -17,9 +20,43 @@ const Main = () => {
     }, [playerState.playerType]),
   );
 
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        console.log('asdasdasdsa');
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
+
   const handleCreatePlayer = useCallback(() => {
+    if (playerState.playerType) {
+      Alert.alert(
+        'Caution!',
+        'If you press continue, you will lost your progress...',
+        [
+          {
+            onPress: () => {},
+            text: 'Cancel',
+          },
+          {
+            onPress: () => {
+              dispatch(PlayerStatusActions.resetAllStatus());
+              navigation.navigate('CreatePlayer' as never);
+            },
+            text: 'Continue',
+          },
+        ],
+      );
+      return;
+    }
     navigation.navigate('CreatePlayer' as never);
-  }, []);
+  }, [playerState.playerType]);
 
   const handleContinue = useCallback(() => {
     navigation.navigate('Home' as never);
