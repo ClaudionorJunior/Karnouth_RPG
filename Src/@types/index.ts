@@ -18,3 +18,5 @@ export interface PlayerStatus {
 }
 
 export type Colors = typeof palletColors;
+
+export type { Item, ItemsType } from './item';

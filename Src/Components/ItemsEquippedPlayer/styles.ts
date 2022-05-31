@@ -2,16 +2,25 @@ import styled from 'styled-components/native';
 import { normalizePixel } from '../../Helpers';
 
 export const Container = styled.View`
-  height: ${normalizePixel(35)}%;
   margin-top: ${normalizePixel(8)}px;
   margin-bottom: ${normalizePixel(8)}px;
   align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
 `;
 
-export const XContainer = styled.View`
-  justify-content: space-between;
+export const BodyContainer = styled.View`
+  margin-bottom: ${normalizePixel(8)}px;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
   flex-direction: row;
-  width: ${normalizePixel(48)}%;
+`;
+
+export const HandsContainer = styled.View`
+  justify-content: space-evenly;
+  width: 100%;
+  flex-direction: row;
+`;
+
+export const SlotWithDescription = styled.View`
+  align-items: center;
 `;
