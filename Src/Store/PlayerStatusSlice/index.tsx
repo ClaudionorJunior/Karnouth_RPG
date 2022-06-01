@@ -4,6 +4,7 @@ import { PlayerTypies, StatusTypies } from '../../@types';
 import {
   ChangePlayerLifeParams,
   ChangePlayerStatusParams,
+  OnChangePlayerLevelParams,
   PlayerStatusState,
 } from './@types';
 
@@ -32,6 +33,8 @@ const initialState: PlayerStatusState = {
   },
   remainingPoints: 10,
   playerXPPoints: 0,
+  xpToNextLevel: 150,
+  level: 1,
   playerLifePoints: 150,
   currentPlayerLifePoints: 150,
 };
@@ -155,6 +158,14 @@ export const PlayerStatusSlice = createSlice({
       state.remainingPoints = 10;
     },
 
+    onChangePlayerLevel: (
+      state,
+      action: PayloadAction<OnChangePlayerLevelParams>,
+    ) => {
+      state.level = action.payload.level;
+      state.xpToNextLevel = action.payload.xpToNextLevel;
+    },
+
     resetAllStatus: state => {
       state.Mage = {
         intelligence: 15,
@@ -182,11 +193,13 @@ export const PlayerStatusSlice = createSlice({
       state.playerXPPoints = 0;
       state.playerLifePoints = 150;
       state.currentPlayerLifePoints = 150;
+      state.xpToNextLevel = 150;
+      state.level = 1;
     },
   },
 });
 
 export const PlayerStatusActions = PlayerStatusSlice.actions;
-export type { ChangePlayerStatusParams };
+export type { ChangePlayerStatusParams, OnChangePlayerLevelParams };
 
 export default PlayerStatusSlice.reducer;

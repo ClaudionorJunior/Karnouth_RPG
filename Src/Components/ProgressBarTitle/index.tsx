@@ -16,7 +16,7 @@ const ProgressBarTitle = ({
   currentValue,
   totalValue,
   title,
-  textColor,
+  textColor = 'dark',
   progressColor,
 }: ProgressBarTitleProps) => {
   const [translateX] = useState(new Animated.Value(0));
