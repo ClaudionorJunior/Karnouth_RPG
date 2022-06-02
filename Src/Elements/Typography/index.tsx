@@ -18,6 +18,7 @@ const Typography = ({
   color,
   containerStyles,
 }: TypographyProps) => {
+  console.log('text', text);
   return (
     <CustomText style={containerStyles} textSize={textSize} color={color}>
       {text}

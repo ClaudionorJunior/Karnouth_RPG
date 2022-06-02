@@ -1,7 +1,6 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
 import { Item, LocalPressed } from '../../@types';
-import items from '../../Assets';
 import { useModalItemDetail } from '../../Hooks';
 
 import { Container, Image } from './styles';
@@ -22,7 +21,7 @@ const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
         item && item.itemName && localPressed && show(item, localPressed)
       }
     >
-      {item?.itemName && <Image source={items[item.itemName]} />}
+      {item?.source && <Image source={item.source} />}
     </Container>
   );
 };

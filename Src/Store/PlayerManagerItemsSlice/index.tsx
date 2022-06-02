@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import uuid from 'react-native-uuid';
 import { Item } from '../../@types';
 import { MAX_INVENTORY } from '../../Global';
 import { PlayerManagerItemsState } from './@types';
@@ -19,12 +18,19 @@ export const PlayerManagerItemsSlice = createSlice({
       state.bodyItems = [...state.bodyItems, action.payload];
     },
 
-    addPlayerInventoryItem: (state, action: PayloadAction<Item>) => {
-      if (state.inventoryItems.length < MAX_INVENTORY) {
-        state.inventoryItems = [...state.inventoryItems, action.payload];
+    addPlayerInventoryItem: (
+      state,
+      action: PayloadAction<Item | undefined>,
+    ) => {
+      if (action.payload) {
+        if (state.inventoryItems.length < MAX_INVENTORY) {
+          state.inventoryItems = [...state.inventoryItems, action.payload];
+        } else {
+          state.playerManagerItemsError =
+            "you don't have more slots in your inventory";
+        }
       } else {
-        state.playerManagerItemsError =
-          "you don't have more slots in your inventory";
+        state.playerManagerItemsError = "this item don't exists";
       }
     },
 

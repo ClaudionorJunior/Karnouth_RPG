@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Inventory,
   ItemsEquippedPlayer,
+  LoadingScreen,
   ProgressBarTitle,
 } from '../../Components';
 import { LineWrapper, Typography } from '../../Elements';
-import { avatarImgMap } from '../../Helpers';
+import { avatarImgMap, selectItemById } from '../../Helpers';
+import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 import { RootState } from '../../Store/state';
 import {
   Container,
@@ -19,6 +21,12 @@ import {
 
 const Home = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
+  const disp = useDispatch();
+  // disp(PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)));
+  // disp(PlayerManagerItemsActions.resetAllItems());
+  if (!playerState) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Container>

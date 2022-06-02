@@ -1,5 +1,3 @@
-import { ItemListType } from '../Assets/Items/@types';
-
 export type ItemsType =
   | 'weapon'
   | 'wand'
@@ -11,8 +9,24 @@ export type ItemsType =
   | 'boots'
   | 'potion';
 
-export interface Item {
+interface SourceFile {
+  source?: any;
+}
+
+export type ItemListType =
+  | 'demon_legs'
+  | 'golden_boots'
+  | 'plate_armor'
+  | 'plate_helmet'
+  | 'rapier_sword'
+  | 'steel_sword'
+  | 'wooden_shield'
+  | 'wooden_wand'
+  | 'crossbow';
+
+export interface Item extends SourceFile {
   id: string | number[];
+  itemId: number;
   itemName?: ItemListType;
   itemUIName?: string;
   itemType?: ItemsType;
