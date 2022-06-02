@@ -1,3 +1,5 @@
+import { ItemListType } from '../Assets/Items/@types';
+
 export type ItemsType =
   | 'weapon'
   | 'wand'
@@ -6,15 +8,18 @@ export type ItemsType =
   | 'helmet'
   | 'armor'
   | 'legs'
-  | 'boots';
+  | 'boots'
+  | 'potion';
 
 export interface Item {
-  name: string;
-  itemType: ItemsType;
+  id: string | number[];
+  itemName?: ItemListType;
+  itemUIName?: string;
+  itemType?: ItemsType;
   description?: string;
-  power: number;
-  defense: number;
-  precision: number;
-  intelligence: number;
-  restoreLife: number;
+  power?: number;
+  defense?: number;
+  precision?: number;
+  intelligence?: number;
+  restoreLife?: number;
 }

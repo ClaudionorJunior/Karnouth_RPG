@@ -1,23 +1,28 @@
 import React from 'react';
-import { Image, ImageSourcePropType, ViewStyle } from 'react-native';
-import { normalizePixel } from '../../Helpers';
+import { ViewStyle } from 'react-native';
+import { Item, LocalPressed } from '../../@types';
+import items from '../../Assets';
+import { useModalItemDetail } from '../../Hooks';
 
-import { Container } from './styles';
+import { Container, Image } from './styles';
 
 interface Props {
-  source?: ImageSourcePropType;
+  item?: Item;
+  localPressed?: LocalPressed;
   containerStyles?: ViewStyle;
 }
 
-const Slotitem = ({ source, containerStyles }: Props) => {
+const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
+  const { show } = useModalItemDetail();
+
   return (
-    <Container style={containerStyles}>
-      {source && (
-        <Image
-          style={{ width: normalizePixel(48), height: normalizePixel(48) }}
-          source={source}
-        />
-      )}
+    <Container
+      style={containerStyles}
+      onLongPress={() =>
+        item && item.itemName && localPressed && show(item, localPressed)
+      }
+    >
+      {item?.itemName && <Image source={items[item.itemName]} />}
     </Container>
   );
 };

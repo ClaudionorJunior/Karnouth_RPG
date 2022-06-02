@@ -4,9 +4,11 @@ import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PlayerStatusSlice from './PlayerStatusSlice';
+import PlayerManagerItemsSlice from './PlayerManagerItemsSlice';
 
 const reducers = combineReducers({
   playerState: PlayerStatusSlice,
+  PlayerManagerItemsState: PlayerManagerItemsSlice,
 });
 
 const persistConfig = {

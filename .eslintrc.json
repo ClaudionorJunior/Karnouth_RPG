@@ -27,6 +27,8 @@
       
   ],
   "rules": {
+    "dot-notation":"off",
+    "import/no-dynamic-require": "off",
     "arrow-body-style":"off",
     "prefer-const": "off",
     "global-require":"off",
