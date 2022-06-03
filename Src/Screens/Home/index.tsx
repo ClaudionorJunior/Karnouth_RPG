@@ -48,6 +48,9 @@ const Home = () => {
   );
   dispatch(
     PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)),
+  ); 
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
   ); */
   // dispatch(PlayerManagerItemsActions.resetAllItems());
   if (!playerState) {

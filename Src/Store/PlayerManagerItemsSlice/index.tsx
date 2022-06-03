@@ -20,31 +20,30 @@ export const PlayerManagerItemsSlice = createSlice({
         it => it.itemType === action.payload.itemType,
       )[0];
 
-      /** @description Add new item at bodyItems and remove at inventory */
-      const addBodyRemoveInventory = () => {
+      if (!thisFieldFilled) {
         state.bodyItems = [...state.bodyItems, action.payload];
         state.inventoryItems = state.inventoryItems.filter(
           it => it.id !== action.payload.id,
         );
-      };
-
-      if (!thisFieldFilled) {
-        addBodyRemoveInventory();
+        state.addPlayerBodyItemSuccess = true;
       } else {
-        // We save the body item if this exists
-        const filteredBodyItem = state.bodyItems.filter(
+        state.playerManagerItemsError = `you are already using an item ${action.payload.itemType}`;
+      }
+    },
+
+    unquipePlayerBodyItem: (state, action: PayloadAction<Item>) => {
+      if (state.inventoryItems.length < MAX_INVENTORY) {
+        const toRemoveAtBody = state.bodyItems.filter(
           it => it.itemType === action.payload.itemType,
         )[0];
-        // Remove old item at bodyItems
         state.bodyItems = state.bodyItems.filter(
-          it => it.itemType !== action.payload.itemType,
+          it => it.id !== action.payload.id,
         );
-
-        addBodyRemoveInventory();
-        // return body item at inventoryItems
-        state.inventoryItems = [...state.inventoryItems, filteredBodyItem];
+        state.inventoryItems = [...state.inventoryItems, toRemoveAtBody];
+      } else {
+        state.playerManagerItemsError =
+          "you don't have more slots in your inventory";
       }
-      state.addPlayerBodyItemSuccess = true;
     },
 
     addPlayerInventoryItem: (

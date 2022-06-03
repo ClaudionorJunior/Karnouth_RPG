@@ -22,40 +22,28 @@ const ItemsEquippedPlayer = () => {
           <Typography text="helmet" textSize="small" />
           <Slotitem
             localPressed="body"
-            item={
-              bodyItemsState.filter(it => it.itemType === 'helmet')[0] ||
-              undefined
-            }
+            item={bodyItemsState.filter(it => it.itemType === 'helmet')[0]}
           />
         </SlotWithDescription>
         <SlotWithDescription>
           <Typography text="armor" textSize="small" />
           <Slotitem
             localPressed="body"
-            item={
-              bodyItemsState.filter(it => it.itemType === 'armor')[0] ||
-              undefined
-            }
+            item={bodyItemsState.filter(it => it.itemType === 'armor')[0]}
           />
         </SlotWithDescription>
         <SlotWithDescription>
           <Typography text="legs" textSize="small" />
           <Slotitem
             localPressed="body"
-            item={
-              bodyItemsState.filter(it => it.itemType === 'legs')[0] ||
-              undefined
-            }
+            item={bodyItemsState.filter(it => it.itemType === 'legs')[0]}
           />
         </SlotWithDescription>
         <SlotWithDescription>
           <Typography text="boots" textSize="small" />
           <Slotitem
             localPressed="body"
-            item={
-              bodyItemsState.filter(it => it.itemType === 'boots')[0] ||
-              undefined
-            }
+            item={bodyItemsState.filter(it => it.itemType === 'boots')[0]}
           />
         </SlotWithDescription>
       </BodyContainer>

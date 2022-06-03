@@ -15,13 +15,13 @@ const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
   const { show } = useModalItemDetail();
 
   const handleSlot = useCallback(() => {
-    if (item && item.itemName && localPressed) {
+    if (!!item && !!item.itemName && !!localPressed) {
       show(item, localPressed);
     }
   }, []);
 
   return (
-    <Container style={containerStyles} onLongPress={handleSlot}>
+    <Container style={containerStyles} onPress={handleSlot}>
       {item?.source && <Image source={item.source} />}
     </Container>
   );

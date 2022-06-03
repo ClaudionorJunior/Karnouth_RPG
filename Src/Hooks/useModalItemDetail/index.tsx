@@ -45,10 +45,6 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (addPlayerBodyItemSuccessState) {
-      console.log(
-        'addPlayerBodyItemSuccessState',
-        addPlayerBodyItemSuccessState,
-      );
       dispatch(
         PlayerStatusActions.changePlayerAttributes({
           defense: itemToRender?.defense || 0,
@@ -105,7 +101,10 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
       );
     }
   }, [isVisible, itemToRender]);
-  const handleUnEquipItem = useCallback(() => {}, [isVisible]);
+  const handleUnEquipItem = useCallback(() => {
+    itemToRender &&
+      dispatch(PlayerManagerItemsActions.unquipePlayerBodyItem(itemToRender));
+  }, [isVisible]);
 
   const handleLootItem = useCallback(() => {}, [isVisible]);
 

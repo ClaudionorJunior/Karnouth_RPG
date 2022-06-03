@@ -4,6 +4,7 @@ import {
   PixelRatio,
   Platform,
 } from 'react-native';
+import uuid from 'react-native-uuid';
 import { Item, PlayerTypies } from '../@types';
 import { Mage, Ranger, Warrior } from '../Assets';
 import { AllItems } from '../Assets/Items/@types';
@@ -39,7 +40,9 @@ const avatarImgMap = (playerType: PlayerTypies): ImageSourcePropType => {
  * @returns Item
  */
 const selectItemById = (itemId: number): Item => {
-  return AllItems.filter(it => it.itemId === itemId)[0];
+  let tempItem = AllItems.filter(it => it.itemId === itemId)[0];
+  tempItem.id = uuid.v4();
+  return tempItem;
 };
 
 export { normalizePixel, avatarImgMap, selectItemById };

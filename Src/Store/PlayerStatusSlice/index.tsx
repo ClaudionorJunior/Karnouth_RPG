@@ -129,7 +129,6 @@ export const PlayerStatusSlice = createSlice({
     },
 
     changePlayerAttributes: (state, action: PayloadAction<PlayerStatus>) => {
-      console.log('changePlayerAttributes', action.payload);
       const tempClass = state.playerType;
       if (tempClass) {
         state[tempClass].defense += action.payload.defense;
@@ -138,8 +137,6 @@ export const PlayerStatusSlice = createSlice({
         state[tempClass].power += action.payload.power;
         state[tempClass].precision += action.payload.precision;
       }
-
-      tempClass && console.log('changed Class', state[tempClass]);
     },
 
     addPlayerExp: (state, action: PayloadAction<number>) => {

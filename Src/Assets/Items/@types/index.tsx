@@ -1,3 +1,4 @@
+/* eslint-disable import/no-mutable-exports */
 import uuid from 'react-native-uuid';
 import { Item } from '../../../@types';
 import crossbow from '../crossbow.png';
@@ -10,7 +11,7 @@ import steel_sword from '../steel_sword.png';
 import wooden_shield from '../wooden_shield.png';
 import wooden_wand from '../wooden_wand.png';
 
-export const AllItems: Item[] = [
+export let AllItems: Item[] = [
   {
     id: uuid.v4(),
     itemId: 1000,
