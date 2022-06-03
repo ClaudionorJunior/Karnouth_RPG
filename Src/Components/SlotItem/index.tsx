@@ -18,7 +18,7 @@ const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
     if (!!item && !!item.itemName && !!localPressed) {
       show(item, localPressed);
     }
-  }, []);
+  }, [item, item?.itemName, localPressed]);
 
   return (
     <Container style={containerStyles} onPress={handleSlot}>

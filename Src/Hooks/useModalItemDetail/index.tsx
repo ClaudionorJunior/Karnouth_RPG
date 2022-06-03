@@ -37,14 +37,14 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
   const playerTypeState = useSelector(
     (state: RootState) => state.playerState.playerType,
   );
-  const addPlayerBodyItemSuccessState = useSelector(
-    (state: RootState) =>
-      state.PlayerManagerItemsState.addPlayerBodyItemSuccess,
+  const playerManagerItemsState = useSelector(
+    (state: RootState) => state.PlayerManagerItemsState,
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (addPlayerBodyItemSuccessState) {
+    /** @description This useEffect is to verify if item has been equiped ou unquiped and add or remove attibutes */
+    if (playerManagerItemsState.addPlayerBodyItemSuccess) {
       dispatch(
         PlayerStatusActions.changePlayerAttributes({
           defense: itemToRender?.defense || 0,
@@ -52,29 +52,31 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
           life: itemToRender?.restoreLife || 0,
           power: itemToRender?.power || 0,
           precision: itemToRender?.precision || 0,
+          type: 'add',
         }),
       );
       dispatch(PlayerManagerItemsActions.resetAddPlayerBodyItemSuccess());
       setItemToRender(undefined);
     }
-  }, [itemToRender, addPlayerBodyItemSuccessState]);
-
-  const btnText = useMemo((): string => {
-    if (itemToRender?.itemType === 'potion' && localPressedCtx !== 'hunt') {
-      return 'Use';
+    if (playerManagerItemsState.unquipePlayerBodyItemSuccess) {
+      dispatch(
+        PlayerStatusActions.changePlayerAttributes({
+          defense: itemToRender?.defense || 0,
+          intelligence: itemToRender?.intelligence || 0,
+          life: itemToRender?.restoreLife || 0,
+          power: itemToRender?.power || 0,
+          precision: itemToRender?.precision || 0,
+          type: 'takeoff',
+        }),
+      );
+      dispatch(PlayerManagerItemsActions.resetUnquipePlayerBodyItemSuccess());
+      setItemToRender(undefined);
     }
-
-    switch (localPressedCtx) {
-      case 'inventory':
-        return 'Equip';
-      case 'body':
-        return 'Unquip';
-      case 'hunt':
-        return 'Inventory';
-      default:
-        return 'Sell';
-    }
-  }, [itemToRender, localPressedCtx]);
+  }, [
+    itemToRender,
+    playerManagerItemsState.addPlayerBodyItemSuccess,
+    playerManagerItemsState.unquipePlayerBodyItemSuccess,
+  ]);
 
   const show = useCallback(
     (item: Item, localPressed: LocalPressed) => {
@@ -129,6 +131,23 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
     handleEquipItem();
   }, [isVisible]);
 
+  const btnText = useMemo((): string => {
+    if (itemToRender?.itemType === 'potion' && localPressedCtx !== 'hunt') {
+      return 'Use';
+    }
+
+    switch (localPressedCtx) {
+      case 'inventory':
+        return 'Equip';
+      case 'body':
+        return 'Unquip';
+      case 'hunt':
+        return 'Inventory';
+      default:
+        return 'Sell';
+    }
+  }, [itemToRender, localPressedCtx]);
+
   return (
     <ModalItemDetailContext.Provider value={{ hide, show }}>
       {children}
@@ -142,6 +161,10 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
               text={`${itemToRender?.description}`}
               textSize="paragraphy"
             />
+          </TextContainer>
+          <TextContainer>
+            <Typography text="pwr: " textSize="paragraphy" />
+            <Typography text={`${itemToRender?.power}`} textSize="paragraphy" />
           </TextContainer>
           <TextContainer>
             <Typography text="def: " textSize="paragraphy" />

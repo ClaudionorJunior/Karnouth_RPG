@@ -5,4 +5,5 @@ export interface PlayerManagerItemsState {
   inventoryItems: Item[];
   playerManagerItemsError?: string;
   addPlayerBodyItemSuccess?: boolean;
+  unquipePlayerBodyItemSuccess?: boolean;
 }

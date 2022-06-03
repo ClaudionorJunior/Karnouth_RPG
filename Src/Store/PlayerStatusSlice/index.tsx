@@ -1,6 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PlayerStatus, PlayerTypies, StatusTypies } from '../../@types';
+import {
+  ChangePlayerAttributesProps,
+  PlayerTypies,
+  StatusTypies,
+} from '../../@types';
 import {
   ChangePlayerLifeParams,
   ChangePlayerStatusParams,
@@ -128,14 +132,25 @@ export const PlayerStatusSlice = createSlice({
       state.playerType = action.payload;
     },
 
-    changePlayerAttributes: (state, action: PayloadAction<PlayerStatus>) => {
+    changePlayerAttributes: (
+      state,
+      action: PayloadAction<ChangePlayerAttributesProps>,
+    ) => {
       const tempClass = state.playerType;
       if (tempClass) {
-        state[tempClass].defense += action.payload.defense;
-        state[tempClass].intelligence += action.payload.intelligence;
-        state[tempClass].life += action.payload.life;
-        state[tempClass].power += action.payload.power;
-        state[tempClass].precision += action.payload.precision;
+        if (action.payload.type === 'add') {
+          state[tempClass].defense += action.payload.defense;
+          state[tempClass].intelligence += action.payload.intelligence;
+          state[tempClass].life += action.payload.life;
+          state[tempClass].power += action.payload.power;
+          state[tempClass].precision += action.payload.precision;
+        } else {
+          state[tempClass].defense -= action.payload.defense;
+          state[tempClass].intelligence -= action.payload.intelligence;
+          state[tempClass].life -= action.payload.life;
+          state[tempClass].power -= action.payload.power;
+          state[tempClass].precision -= action.payload.precision;
+        }
       }
     },
 

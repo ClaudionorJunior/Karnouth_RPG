@@ -9,6 +9,7 @@ const initialState: PlayerManagerItemsState = {
   inventoryItems: [],
   playerManagerItemsError: undefined,
   addPlayerBodyItemSuccess: undefined,
+  unquipePlayerBodyItemSuccess: undefined,
 };
 
 export const PlayerManagerItemsSlice = createSlice({
@@ -40,6 +41,7 @@ export const PlayerManagerItemsSlice = createSlice({
           it => it.id !== action.payload.id,
         );
         state.inventoryItems = [...state.inventoryItems, toRemoveAtBody];
+        state.unquipePlayerBodyItemSuccess = true;
       } else {
         state.playerManagerItemsError =
           "you don't have more slots in your inventory";
@@ -77,6 +79,10 @@ export const PlayerManagerItemsSlice = createSlice({
 
     resetAddPlayerBodyItemSuccess: state => {
       state.addPlayerBodyItemSuccess = undefined;
+    },
+
+    resetUnquipePlayerBodyItemSuccess: state => {
+      state.unquipePlayerBodyItemSuccess = undefined;
     },
   },
 });

@@ -29,7 +29,7 @@ export type ItemListType =
 
 export interface Item extends SourceFile {
   id: string | number[];
-  itemId: number;
+  itemId?: number;
   itemName?: ItemListType;
   itemUIName?: string;
   itemType?: ItemsType;

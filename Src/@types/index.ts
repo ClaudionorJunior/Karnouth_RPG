@@ -17,6 +17,10 @@ export interface PlayerStatus {
   defense: number;
 }
 
+export interface ChangePlayerAttributesProps extends PlayerStatus {
+  type: 'takeoff' | 'add';
+}
+
 export type Colors = typeof palletColors;
 
 export type { Item, ItemsType } from './item';
