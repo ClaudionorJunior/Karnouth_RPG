@@ -21,9 +21,35 @@ import {
 
 const Home = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
-  const disp = useDispatch();
-  // disp(PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)));
-  // disp(PlayerManagerItemsActions.resetAllItems());
+  const dispatch = useDispatch();
+  /* dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1000)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1001)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1002)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1003)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1005)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1006)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1007)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)),
+  ); */
+  // dispatch(PlayerManagerItemsActions.resetAllItems());
   if (!playerState) {
     return <LoadingScreen />;
   }
@@ -53,11 +79,11 @@ const Home = () => {
               textSize="paragraphy"
             />
             <Typography
-              text={`Def: ${playerState[playerState.playerType!].defence}`}
+              text={`Def: ${playerState[playerState.playerType!].defense}`}
               textSize="paragraphy"
             />
             <Typography
-              text={`Prec: ${playerState[playerState.playerType!].presicion}`}
+              text={`Prec: ${playerState[playerState.playerType!].precision}`}
               textSize="paragraphy"
             />
             <Typography

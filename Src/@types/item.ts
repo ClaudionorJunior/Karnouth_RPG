@@ -1,3 +1,5 @@
+import { PlayerTypies } from '.';
+
 export type ItemsType =
   | 'weapon'
   | 'wand'
@@ -36,4 +38,5 @@ export interface Item extends SourceFile {
   precision?: number;
   intelligence?: number;
   restoreLife?: number;
+  usedBy?: PlayerTypies;
 }

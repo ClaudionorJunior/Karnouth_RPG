@@ -6,15 +6,15 @@ export type StatusTypies =
   | 'intelligence'
   | 'life'
   | 'power'
-  | 'presicion'
-  | 'defence';
+  | 'precision'
+  | 'defense';
 
 export interface PlayerStatus {
   life: number;
   power: number;
-  presicion: number;
+  precision: number;
   intelligence: number;
-  defence: number;
+  defense: number;
 }
 
 export type Colors = typeof palletColors;

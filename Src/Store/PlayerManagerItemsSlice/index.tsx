@@ -8,6 +8,7 @@ const initialState: PlayerManagerItemsState = {
   bodyItems: [],
   inventoryItems: [],
   playerManagerItemsError: undefined,
+  addPlayerBodyItemSuccess: undefined,
 };
 
 export const PlayerManagerItemsSlice = createSlice({
@@ -15,7 +16,35 @@ export const PlayerManagerItemsSlice = createSlice({
   initialState,
   reducers: {
     addPlayerBodyItem: (state, action: PayloadAction<Item>) => {
-      state.bodyItems = [...state.bodyItems, action.payload];
+      const thisFieldFilled = state.bodyItems.filter(
+        it => it.itemType === action.payload.itemType,
+      )[0];
+
+      /** @description Add new item at bodyItems and remove at inventory */
+      const addBodyRemoveInventory = () => {
+        state.bodyItems = [...state.bodyItems, action.payload];
+        state.inventoryItems = state.inventoryItems.filter(
+          it => it.id !== action.payload.id,
+        );
+      };
+
+      if (!thisFieldFilled) {
+        addBodyRemoveInventory();
+      } else {
+        // We save the body item if this exists
+        const filteredBodyItem = state.bodyItems.filter(
+          it => it.itemType === action.payload.itemType,
+        )[0];
+        // Remove old item at bodyItems
+        state.bodyItems = state.bodyItems.filter(
+          it => it.itemType !== action.payload.itemType,
+        );
+
+        addBodyRemoveInventory();
+        // return body item at inventoryItems
+        state.inventoryItems = [...state.inventoryItems, filteredBodyItem];
+      }
+      state.addPlayerBodyItemSuccess = true;
     },
 
     addPlayerInventoryItem: (
@@ -39,8 +68,16 @@ export const PlayerManagerItemsSlice = createSlice({
       state.inventoryItems = [];
     },
 
+    setMessageError: (state, action: PayloadAction<string>) => {
+      state.playerManagerItemsError = action.payload;
+    },
+
     resetError: state => {
       state.playerManagerItemsError = undefined;
+    },
+
+    resetAddPlayerBodyItemSuccess: state => {
+      state.addPlayerBodyItemSuccess = undefined;
     },
   },
 });

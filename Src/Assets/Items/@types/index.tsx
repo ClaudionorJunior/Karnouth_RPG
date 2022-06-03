@@ -80,6 +80,7 @@ export const AllItems: Item[] = [
     intelligence: 0,
     restoreLife: 0,
     source: rapier_sword,
+    usedBy: 'Warrior',
   },
   {
     id: uuid.v4(),
@@ -94,6 +95,7 @@ export const AllItems: Item[] = [
     intelligence: 0,
     restoreLife: 0,
     source: steel_sword,
+    usedBy: 'Warrior',
   },
   {
     id: uuid.v4(),
@@ -108,6 +110,7 @@ export const AllItems: Item[] = [
     intelligence: 0,
     restoreLife: 0,
     source: wooden_shield,
+    usedBy: 'Warrior',
   },
   {
     id: uuid.v4(),
@@ -122,6 +125,7 @@ export const AllItems: Item[] = [
     intelligence: 2,
     restoreLife: 0,
     source: wooden_wand,
+    usedBy: 'Mage',
   },
   {
     id: uuid.v4(),
@@ -136,5 +140,6 @@ export const AllItems: Item[] = [
     intelligence: 0,
     restoreLife: 0,
     source: crossbow,
+    usedBy: 'Ranger',
   },
 ];

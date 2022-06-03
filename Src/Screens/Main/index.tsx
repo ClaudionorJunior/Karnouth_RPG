@@ -7,6 +7,7 @@ import { Button, Typography } from '../../Elements';
 import { RootState } from '../../Store/state';
 import { Container, MainImage, ButtonContainer } from './styles';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
+import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 
 const Main = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState<boolean>(false);
@@ -23,7 +24,6 @@ const Main = () => {
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
-        console.log('asdasdasdsa');
         return true;
       };
 
@@ -47,6 +47,7 @@ const Main = () => {
           {
             onPress: () => {
               dispatch(PlayerStatusActions.resetAllStatus());
+              dispatch(PlayerManagerItemsActions.resetAllItems());
               navigation.navigate('CreatePlayer' as never);
             },
             text: 'Continue',
