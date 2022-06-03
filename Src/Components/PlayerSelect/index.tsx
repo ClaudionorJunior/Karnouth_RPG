@@ -43,7 +43,7 @@ const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
         <AvatarContainer>
           <Typography text="Presicion" textSize="paragraphy" />
           <Typography
-            text={playerState[playerType].presicion.toString()}
+            text={playerState[playerType].precision.toString()}
             textSize="paragraphy"
           />
         </AvatarContainer>
@@ -57,7 +57,7 @@ const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
         <AvatarContainer>
           <Typography text="Defence" textSize="paragraphy" />
           <Typography
-            text={playerState[playerType].defence.toString()}
+            text={playerState[playerType].defense.toString()}
             textSize="paragraphy"
           />
         </AvatarContainer>

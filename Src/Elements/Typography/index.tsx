@@ -17,12 +17,10 @@ const Typography = ({
   text,
   color,
   containerStyles,
-}: TypographyProps) => {
-  return (
-    <CustomText style={containerStyles} textSize={textSize} color={color}>
-      {text}
-    </CustomText>
-  );
-};
+}: TypographyProps) => (
+  <CustomText style={containerStyles} textSize={textSize} color={color}>
+    {text}
+  </CustomText>
+);
 
 export default Typography;

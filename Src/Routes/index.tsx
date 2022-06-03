@@ -13,6 +13,8 @@ import CreatePlayer from '../Screens/CreatePlayer';
 import Home from '../Screens/Home';
 import { useLevelManager } from '../Hooks';
 import { RootState } from '../Store/state';
+import { normalizePixel } from '../Helpers';
+import CommingSoon from '../Screens/CommingSoon';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -50,7 +52,7 @@ const MainStack = () => {
       <Stack.Screen
         name="TabNavigator"
         component={TabNavigator}
-        options={headerOptionsManager('Home')}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -65,7 +67,6 @@ const TabNavigator = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName: 'castle' | 'store' | 'axe';
-
           if (route.name === 'Home') {
             iconName = 'castle';
           } else if (route.name === 'Mall') {
@@ -74,7 +75,11 @@ const TabNavigator = () => {
             iconName = 'axe';
           }
           return (
-            <MaterialCommunityIcons name={iconName} size={size} color={color} />
+            <MaterialCommunityIcons
+              name={iconName}
+              size={normalizePixel(size)}
+              color={color}
+            />
           );
         },
         tabBarActiveTintColor: colors.primary1,
@@ -88,12 +93,12 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Mall"
-        component={Home}
+        component={CommingSoon}
         options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Battle"
-        component={Home}
+        component={CommingSoon}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

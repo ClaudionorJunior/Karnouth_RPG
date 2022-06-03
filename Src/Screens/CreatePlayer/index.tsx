@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFocusEffect, useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/core';
 import { StackActions } from '@react-navigation/routers';
-import { BackHandler } from 'react-native';
 import { PlayerPointsDistribution, PlayerSelect } from '../../Components';
 import { PlayerTypies } from '../../@types';
 import { Container, RemainingContainer } from './styles';
@@ -25,7 +24,7 @@ const CreatePlayer = () => {
   }, []);
 
   const handleConfirm = useCallback(() => {
-    navigation.dispatch(StackActions.replace('Home'));
+    navigation.dispatch(StackActions.replace('TabNavigator'));
   }, [navigation]);
 
   return (

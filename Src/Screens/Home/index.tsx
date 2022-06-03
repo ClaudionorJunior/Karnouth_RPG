@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Inventory,
   ItemsEquippedPlayer,
+  LoadingScreen,
   ProgressBarTitle,
 } from '../../Components';
 import { LineWrapper, Typography } from '../../Elements';
-import { avatarImgMap } from '../../Helpers';
+import { avatarImgMap, selectItemById } from '../../Helpers';
+import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 import { RootState } from '../../Store/state';
 import {
   Container,
@@ -19,6 +21,41 @@ import {
 
 const Home = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
+  const dispatch = useDispatch();
+  /* dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1000)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1001)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1002)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1003)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1005)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1006)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1007)),
+  );
+  dispatch(
+    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)),
+  ); */
+  // dispatch(
+  //   PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
+  // );
+  // dispatch(PlayerManagerItemsActions.resetAllItems());
+  if (!playerState) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Container>
@@ -45,11 +82,11 @@ const Home = () => {
               textSize="paragraphy"
             />
             <Typography
-              text={`Def: ${playerState[playerState.playerType!].defence}`}
+              text={`Def: ${playerState[playerState.playerType!].defense}`}
               textSize="paragraphy"
             />
             <Typography
-              text={`Prec: ${playerState[playerState.playerType!].presicion}`}
+              text={`Prec: ${playerState[playerState.playerType!].precision}`}
               textSize="paragraphy"
             />
             <Typography

@@ -72,7 +72,7 @@ const PlayerPointsDistribution = () => {
           disabled={isLoading || playerState.remainingPoints === 10}
           onPress={() =>
             handlePoints({
-              statusType: 'presicion',
+              statusType: 'precision',
               typeToChange: 'take off',
             })
           }
@@ -81,7 +81,7 @@ const PlayerPointsDistribution = () => {
         <StatusQuantity>
           <Typography
             text={
-              playerState?.[playerState.playerType].presicion.toString() || ''
+              playerState?.[playerState.playerType].precision.toString() || ''
             }
             textSize="small"
           />
@@ -90,7 +90,7 @@ const PlayerPointsDistribution = () => {
           disabled={isLoading || !playerState.remainingPoints}
           onPress={() =>
             handlePoints({
-              statusType: 'presicion',
+              statusType: 'precision',
               typeToChange: 'add',
             })
           }
@@ -105,7 +105,7 @@ const PlayerPointsDistribution = () => {
           disabled={isLoading || playerState.remainingPoints === 10}
           onPress={() =>
             handlePoints({
-              statusType: 'defence',
+              statusType: 'defense',
               typeToChange: 'take off',
             })
           }
@@ -114,7 +114,7 @@ const PlayerPointsDistribution = () => {
         <StatusQuantity>
           <Typography
             text={
-              playerState?.[playerState.playerType].defence.toString() || ''
+              playerState?.[playerState.playerType].defense.toString() || ''
             }
             textSize="small"
           />
@@ -123,7 +123,7 @@ const PlayerPointsDistribution = () => {
           disabled={isLoading || !playerState.remainingPoints}
           onPress={() =>
             handlePoints({
-              statusType: 'defence',
+              statusType: 'defense',
               typeToChange: 'add',
             })
           }
