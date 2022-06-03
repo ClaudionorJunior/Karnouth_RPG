@@ -24,7 +24,8 @@ export type ItemListType =
   | 'steel_sword'
   | 'wooden_shield'
   | 'wooden_wand'
-  | 'crossbow';
+  | 'crossbow'
+  | 'light_wand';
 
 export interface Item extends SourceFile {
   id: string | number[];

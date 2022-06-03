@@ -1,15 +1,15 @@
 /* eslint-disable import/no-mutable-exports */
 import uuid from 'react-native-uuid';
 import { Item } from '../../../@types';
-import crossbow from '../crossbow.png';
-import demon_legs from '../demon_legs.png';
-import golden_boots from '../golden_boots.png';
-import plate_armor from '../plate_armor.png';
-import plate_helmet from '../plate_helmet.png';
-import rapier_sword from '../rapier_sword.png';
-import steel_sword from '../steel_sword.png';
-import wooden_shield from '../wooden_shield.png';
-import wooden_wand from '../wooden_wand.png';
+import crossbow from '../crossbow.bmp';
+import demon_legs from '../demon_legs.bmp';
+import golden_boots from '../golden_boots.bmp';
+import plate_armor from '../plate_armor.bmp';
+import plate_helmet from '../plate_helmet.bmp';
+import rapier_sword from '../rapier_sword.bmp';
+import steel_sword from '../steel_sword.bmp';
+import wooden_shield from '../wooden_shield.bmp';
+import light_wand from '../light_wand.bmp';
 
 export let AllItems: Item[] = [
   {
@@ -116,8 +116,8 @@ export let AllItems: Item[] = [
   {
     id: uuid.v4(),
     itemId: 1007,
-    itemName: 'wooden_wand',
-    itemUIName: 'Wooden Wand',
+    itemName: 'light_wand',
+    itemUIName: 'Light Wand',
     itemType: 'wand',
     description: 'the simple wand, warning!',
     power: 0,
@@ -125,7 +125,7 @@ export let AllItems: Item[] = [
     precision: 2,
     intelligence: 2,
     restoreLife: 0,
-    source: wooden_wand,
+    source: light_wand,
     usedBy: 'Mage',
   },
   {

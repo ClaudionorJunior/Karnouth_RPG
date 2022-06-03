@@ -14,6 +14,7 @@ import Home from '../Screens/Home';
 import { useLevelManager } from '../Hooks';
 import { RootState } from '../Store/state';
 import { normalizePixel } from '../Helpers';
+import CommingSoon from '../Screens/CommingSoon';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -51,7 +52,7 @@ const MainStack = () => {
       <Stack.Screen
         name="TabNavigator"
         component={TabNavigator}
-        options={headerOptionsManager('Home')}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -92,12 +93,12 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Mall"
-        component={Home}
+        component={CommingSoon}
         options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Battle"
-        component={Home}
+        component={CommingSoon}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
