@@ -3,7 +3,7 @@ import { normalizePixel } from '../../Helpers';
 
 export const Container = styled.View`
   position: absolute;
-  z-index: 2;
+  z-index: 99;
   top: ${normalizePixel(80)}px;
   left: 0;
   height: ${normalizePixel(64)}px;
