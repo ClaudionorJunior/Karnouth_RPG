@@ -7,7 +7,7 @@ import { PlayerManagerItemsState } from './@types';
 const initialState: PlayerManagerItemsState = {
   bodyItems: [],
   inventoryItems: [],
-  playerManagerItemsError: undefined,
+  playerManagerItemsError: '',
   addPlayerBodyItemSuccess: undefined,
   unquipePlayerBodyItemSuccess: undefined,
 };
@@ -74,7 +74,7 @@ export const PlayerManagerItemsSlice = createSlice({
     },
 
     resetError: state => {
-      state.playerManagerItemsError = undefined;
+      state.playerManagerItemsError = '';
     },
 
     resetAddPlayerBodyItemSuccess: state => {

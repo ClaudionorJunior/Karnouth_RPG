@@ -20,8 +20,8 @@ import { RootState } from '../../Store/state';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
 
 interface ModalItemDetailProps {
-  show(item: Item, localPressed: LocalPressed): void;
-  hide(): void;
+  showModalDetails(item: Item, localPressed: LocalPressed): void;
+  hideModalDetails(): void;
 }
 
 const ModalItemDetailContext = createContext<ModalItemDetailProps>(
@@ -78,7 +78,7 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
     playerManagerItemsState.unquipePlayerBodyItemSuccess,
   ]);
 
-  const show = useCallback(
+  const showModalDetails = useCallback(
     (item: Item, localPressed: LocalPressed) => {
       setItemToRender(item);
       setLocalPressedCtx(localPressed);
@@ -87,7 +87,7 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
     [isVisible],
   );
 
-  const hide = useCallback(() => {
+  const hideModalDetails = useCallback(() => {
     setIsVisible(false);
   }, [isVisible]);
 
@@ -111,7 +111,7 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
   const handleLootItem = useCallback(() => {}, [isVisible]);
 
   const handleAction = useCallback(() => {
-    hide();
+    hideModalDetails();
 
     if (itemToRender?.itemType === 'potion' && localPressedCtx !== 'hunt') {
       handleUseSupportItem();
@@ -149,10 +149,12 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
   }, [itemToRender, localPressedCtx]);
 
   return (
-    <ModalItemDetailContext.Provider value={{ hide, show }}>
+    <ModalItemDetailContext.Provider
+      value={{ hideModalDetails, showModalDetails }}
+    >
       {children}
       <ModalFeedbackItems visible={isVisible}>
-        <BackgroundModal onPress={hide} />
+        <BackgroundModal onPress={hideModalDetails} />
         <ContainerModal>
           <Typography text={`${itemToRender?.itemUIName}`} textSize="medium" />
 

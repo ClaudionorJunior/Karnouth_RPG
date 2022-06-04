@@ -10,6 +10,7 @@ export const palletColors = {
     neutral: '#9ea3a1',
     textColor: '#403E3E',
     goldCoin: '#ffd700',
+    warning: '#FFAE40',
     blood: '#CC1F1F',
     red: '#CC1F1F',
     green: '#60AE31',

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, BackHandler } from 'react-native';
