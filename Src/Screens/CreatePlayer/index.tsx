@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/core';
 import { StackActions } from '@react-navigation/routers';
@@ -14,17 +14,27 @@ import { normalizePixel } from '../../Helpers';
 const PLAYERS_TYPE: PlayerTypies[] = ['Warrior', 'Mage', 'Ranger'];
 
 const CreatePlayer = () => {
+  const [lastClass, setLastClass] = useState<PlayerTypies>();
   const playerState = useSelector((state: RootState) => state.playerState);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const handleSelectPlayer = useCallback((player: PlayerTypies) => {
-    dispatch(PlayerStatusActions.changePlayerClass(player));
-    dispatch(PlayerStatusActions.resetRemainingPoints());
-  }, []);
+  const handleSelectPlayer = useCallback(
+    (player: PlayerTypies) => {
+      dispatch(PlayerStatusActions.changePlayerClass(player));
+      setLastClass(player);
+
+      dispatch(PlayerStatusActions.resetRemainingPoints());
+
+      if (lastClass && lastClass !== player) {
+        dispatch(PlayerStatusActions.resetPartialStatus());
+      }
+    },
+    [lastClass],
+  );
 
   const handleConfirm = useCallback(() => {
-    navigation.dispatch(StackActions.replace('Home'));
+    navigation.dispatch(StackActions.replace('TabNavigator'));
   }, [navigation]);
 
   return (

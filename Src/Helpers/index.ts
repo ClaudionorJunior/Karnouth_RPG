@@ -4,8 +4,10 @@ import {
   PixelRatio,
   Platform,
 } from 'react-native';
-import { PlayerTypies } from '../@types';
+import uuid from 'react-native-uuid';
+import { Item, PlayerTypies } from '../@types';
 import { Mage, Ranger, Warrior } from '../Assets';
+import { AllItems } from '../Assets/Items/@types';
 
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
   Dimensions.get('window');
@@ -32,4 +34,15 @@ const avatarImgMap = (playerType: PlayerTypies): ImageSourcePropType => {
   }
 };
 
-export { normalizePixel, avatarImgMap };
+/**
+ *
+ * @param id - between 1000 and 9999
+ * @returns Item
+ */
+const selectItemById = (itemId: number): Item => {
+  let tempItem = AllItems.filter(it => it.itemId === itemId)[0];
+  tempItem.id = uuid.v4();
+  return tempItem;
+};
+
+export { normalizePixel, avatarImgMap, selectItemById };

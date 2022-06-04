@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleProp, TextStyle } from 'react-native';
+import { StyleProp, TextProps, TextStyle } from 'react-native';
 
 import { CustomText } from './styles';
 
 export type TextSizes = 'paragraphy' | 'small' | 'medium' | 'great';
 
-export interface TypographyProps {
+export interface TypographyProps extends TextProps {
   textSize: TextSizes;
   text: string;
   color?: string;
@@ -17,12 +17,16 @@ const Typography = ({
   text,
   color,
   containerStyles,
-}: TypographyProps) => {
-  return (
-    <CustomText style={containerStyles} textSize={textSize} color={color}>
-      {text}
-    </CustomText>
-  );
-};
+  ...rest
+}: TypographyProps) => (
+  <CustomText
+    {...rest}
+    style={containerStyles}
+    textSize={textSize}
+    color={color}
+  >
+    {text}
+  </CustomText>
+);
 
 export default Typography;

@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { ProgressBarTitle } from '../../Components';
+import {
+  Inventory,
+  ItemsEquippedPlayer,
+  LoadingScreen,
+  ProgressBarTitle,
+} from '../../Components';
+import { LineWrapper, Typography } from '../../Elements';
 import { avatarImgMap } from '../../Helpers';
 import { RootState } from '../../Store/state';
 import {
@@ -11,9 +18,23 @@ import {
   ProgressBarsContainer,
   StatusPlayerContainer,
 } from './styles';
+import { useAutoRegerateLife } from '../../Hooks';
 
 const Home = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
+  const { restoreLife } = useAutoRegerateLife();
+
+  useFocusEffect(
+    useCallback(() => {
+      if (playerState.currentPlayerLifePoints < playerState.playerLifePoints) {
+        restoreLife();
+      }
+    }, [playerState.currentPlayerLifePoints]),
+  );
+
+  if (!playerState) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Container>
@@ -30,15 +51,34 @@ const Home = () => {
           />
           <ProgressBarTitle
             title="XP"
-            currentValue={20}
-            totalValue={100}
+            currentValue={playerState.playerXPPoints}
+            totalValue={playerState.xpToNextLevel}
             progressColor="XP"
           />
+          <StatusPlayerContainer>
+            <Typography
+              text={`Pwr: ${playerState[playerState.playerType!].power}`}
+              textSize="paragraphy"
+            />
+            <Typography
+              text={`Def: ${playerState[playerState.playerType!].defense}`}
+              textSize="paragraphy"
+            />
+            <Typography
+              text={`Prec: ${playerState[playerState.playerType!].precision}`}
+              textSize="paragraphy"
+            />
+            <Typography
+              text={`Int: ${playerState[playerState.playerType!].intelligence}`}
+              textSize="paragraphy"
+            />
+          </StatusPlayerContainer>
         </ProgressBarsContainer>
-        <StatusPlayerContainer>
-          {/* As infos de status de life e pwr, int, prec, def */}
-        </StatusPlayerContainer>
       </Header>
+      <LineWrapper />
+      <ItemsEquippedPlayer />
+      <LineWrapper />
+      <Inventory />
     </Container>
   );
 };
