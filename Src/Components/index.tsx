@@ -5,3 +5,4 @@ export { default as ProgressBarTitle } from './ProgressBarTitle';
 export { default as Slotitem } from './SlotItem';
 export { default as ItemsEquippedPlayer } from './ItemsEquippedPlayer';
 export { default as Inventory } from './Inventory';
+export { default as PlayerStatus } from './PlayerStatus';

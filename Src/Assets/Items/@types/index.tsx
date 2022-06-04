@@ -10,6 +10,7 @@ import rapier_sword from '../rapier_sword.bmp';
 import steel_sword from '../steel_sword.bmp';
 import wooden_shield from '../wooden_shield.bmp';
 import light_wand from '../light_wand.bmp';
+import gold from '../gold.bmp';
 
 export let AllItems: Item[] = [
   {
@@ -142,5 +143,19 @@ export let AllItems: Item[] = [
     restoreLife: 0,
     source: crossbow,
     usedBy: 'Ranger',
+  },
+  {
+    id: uuid.v4(),
+    itemId: 1009,
+    itemName: 'gold',
+    itemUIName: 'Golds',
+    itemType: 'gold',
+    description: '',
+    power: 0,
+    defense: 0,
+    precision: 0,
+    intelligence: 0,
+    restoreLife: 0,
+    source: gold,
   },
 ];
