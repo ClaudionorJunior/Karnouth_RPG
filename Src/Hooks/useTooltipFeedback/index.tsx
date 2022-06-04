@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect } from 'react';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -17,7 +17,6 @@ const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 export const TooltipFeedbackProvider: React.FC = ({ children }) => {
   const tooltipPosition = useSharedValue(normalizePixel(-280));
-  const tooltipOpacity = useSharedValue(1);
   const { playerManagerItemsError } = useSelector(
     (state: RootState) => state.PlayerManagerItemsState,
   );
@@ -25,23 +24,17 @@ export const TooltipFeedbackProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (playerManagerItemsError) {
-      console.log('if asdasd', playerManagerItemsError);
       tooltipPosition.value = withTiming(0, {
         duration: 700,
-        easing: Easing.bounce,
       });
       setTimeout(() => {
+        console.log();
         dispatch(PlayerManagerItemsActions.resetError());
-      }, 2000);
-    } else {
-      console.log('else asdasd', playerManagerItemsError);
+      }, 3500);
+    } else if (!tooltipPosition.value) {
       tooltipPosition.value = withTiming(normalizePixel(-280), {
         duration: 700,
-        easing: Easing.cubic,
-      });
-
-      tooltipOpacity.value = withTiming(0, {
-        duration: 1000,
+        easing: Easing.circle,
       });
     }
   }, [playerManagerItemsError]);
@@ -49,7 +42,6 @@ export const TooltipFeedbackProvider: React.FC = ({ children }) => {
   const tooltipStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: tooltipPosition.value }],
-      opacity: tooltipOpacity.value,
     };
   });
 
