@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item } from '../../@types';
 import { MAX_INVENTORY } from '../../Global';
+import { selectItemById } from '../../Helpers';
 import { PlayerManagerItemsState } from './@types';
 
 const initialState: PlayerManagerItemsState = {
@@ -62,6 +63,24 @@ export const PlayerManagerItemsSlice = createSlice({
       } else {
         state.playerManagerItemsError = "this item don't exists";
       }
+    },
+
+    addGoldItemOnBody: state => {
+      state.bodyItems = [...state.bodyItems, selectItemById(1009)];
+    },
+
+    addGoldCoin: (state, action: PayloadAction<number>) => {
+      state.bodyItems = state.bodyItems.filter(it => {
+        if (it.itemId === 1009) {
+          if (!it.amount) {
+            it.amount = 0;
+            it.amount = action.payload;
+          } else {
+            it.amount += action.payload;
+          }
+        }
+        return it;
+      });
     },
 
     resetAllItems: state => {

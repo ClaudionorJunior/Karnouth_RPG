@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import Slotitem from '../SlotItem';
 import {
@@ -9,11 +9,17 @@ import {
 } from './styles';
 import { Typography } from '../../Elements';
 import { RootState } from '../../Store/state';
+import { goldLengthMask } from '../../Helpers';
 
 const ItemsEquippedPlayer = () => {
   const bodyItemsState = useSelector(
     (state: RootState) => state.PlayerManagerItemsState.bodyItems,
   );
+
+  const goldCoin = useMemo(() => {
+    return bodyItemsState.filter(it => it.itemType === 'gold')[0];
+  }, [bodyItemsState]);
+
   return (
     <Container>
       <Typography text="Equips" textSize="medium" />
@@ -59,7 +65,7 @@ const ItemsEquippedPlayer = () => {
                   it.itemType === 'weapon' ||
                   it.itemType === 'wand' ||
                   it.itemType === 'distance',
-              )[0] || undefined
+              )[0]
             }
           />
         </SlotWithDescription>
@@ -68,11 +74,15 @@ const ItemsEquippedPlayer = () => {
           <Typography text="right hand" textSize="small" />
           <Slotitem
             localPressed="body"
-            item={
-              bodyItemsState.filter(it => it.itemType === 'shield')[0] ||
-              undefined
-            }
+            item={bodyItemsState.filter(it => it.itemType === 'shield')[0]}
           />
+        </SlotWithDescription>
+        <SlotWithDescription>
+          <Typography
+            text={`${goldLengthMask(goldCoin?.amount || 0)}`}
+            textSize="small"
+          />
+          <Slotitem localPressed="body" item={goldCoin} />
         </SlotWithDescription>
       </HandsContainer>
     </Container>

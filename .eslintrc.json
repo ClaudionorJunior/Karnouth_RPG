@@ -27,6 +27,7 @@
       
   ],
   "rules": {
+    "no-extra-boolean-cast":"off",
     "dot-notation":"off",
     "import/no-dynamic-require": "off",
     "arrow-body-style":"off",

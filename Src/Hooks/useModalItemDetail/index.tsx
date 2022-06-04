@@ -164,39 +164,66 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
               textSize="paragraphy"
             />
           </TextContainer>
-          <TextContainer>
-            <Typography text="pwr: " textSize="paragraphy" />
-            <Typography text={`${itemToRender?.power}`} textSize="paragraphy" />
-          </TextContainer>
-          <TextContainer>
-            <Typography text="def: " textSize="paragraphy" />
-            <Typography
-              text={`${itemToRender?.defense}`}
-              textSize="paragraphy"
-            />
-          </TextContainer>
-          <TextContainer>
-            <Typography text="prec: " textSize="paragraphy" />
-            <Typography
-              text={`${itemToRender?.precision}`}
-              textSize="paragraphy"
-            />
-          </TextContainer>
-          <TextContainer>
-            <Typography text="int: " textSize="paragraphy" />
-            <Typography
-              text={`${itemToRender?.intelligence}`}
-              textSize="paragraphy"
-            />
-          </TextContainer>
-          <TextContainer>
-            <Typography text="restore life: " textSize="paragraphy" />
-            <Typography
-              text={`${itemToRender?.restoreLife}`}
-              textSize="paragraphy"
-            />
-          </TextContainer>
-          <Button text={btnText} textSize="small" onPress={handleAction} />
+          {!!itemToRender?.power && (
+            <TextContainer>
+              <Typography text="pwr: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.power}`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          {!!itemToRender?.defense && (
+            <TextContainer>
+              <Typography text="def: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.defense}`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          {!!itemToRender?.precision && (
+            <TextContainer>
+              <Typography text="prec: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.precision}`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          {!!itemToRender?.intelligence && (
+            <TextContainer>
+              <Typography text="int: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.intelligence}`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          {!!itemToRender?.restoreLife && (
+            <TextContainer>
+              <Typography text="restore life: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.restoreLife}`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          {!!itemToRender?.amount && (
+            <TextContainer>
+              <Typography text="amount: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.amount}`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          <Button
+            text={btnText}
+            textSize="small"
+            onPress={handleAction}
+            disabled={itemToRender?.itemType === 'gold'}
+          />
         </ContainerModal>
       </ModalFeedbackItems>
     </ModalItemDetailContext.Provider>

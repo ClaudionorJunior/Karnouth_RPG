@@ -45,4 +45,16 @@ const selectItemById = (itemId: number): Item => {
   return tempItem;
 };
 
-export { normalizePixel, avatarImgMap, selectItemById };
+/**
+ * @description This method is to mask when gold is bigger than 1.000.000.000 returning 999kk like string
+ * @param amount
+ * @returns string - masked gold
+ */
+const goldLengthMask = (amount: number): string => {
+  if (amount >= 1000000000) {
+    return '999kk';
+  }
+  return String(amount);
+};
+
+export { normalizePixel, avatarImgMap, selectItemById, goldLengthMask };

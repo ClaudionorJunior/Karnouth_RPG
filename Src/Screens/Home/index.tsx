@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Inventory,
   ItemsEquippedPlayer,
@@ -19,10 +19,23 @@ import {
   StatusPlayerContainer,
 } from './styles';
 import { useAutoRegerateLife } from '../../Hooks';
+import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 
 const Home = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
+  const bodyItemsState = useSelector(
+    (state: RootState) => state.PlayerManagerItemsState.bodyItems,
+  );
+  const dispatch = useDispatch();
   const { restoreLife } = useAutoRegerateLife();
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!bodyItemsState.length) {
+        dispatch(PlayerManagerItemsActions.addGoldItemOnBody());
+      }
+    }, [bodyItemsState]),
+  );
 
   useFocusEffect(
     useCallback(() => {
