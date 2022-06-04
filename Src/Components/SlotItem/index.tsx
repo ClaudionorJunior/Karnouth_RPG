@@ -12,11 +12,11 @@ interface Props {
 }
 
 const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
-  const { show } = useModalItemDetail();
+  const { showModalDetails } = useModalItemDetail();
 
   const handleSlot = useCallback(() => {
     if (!!item && !!item.itemName && !!localPressed) {
-      show(item, localPressed);
+      showModalDetails(item, localPressed);
     }
   }, [item, item?.itemName, localPressed]);
 

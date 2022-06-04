@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
-import { FlatList, Pressable } from 'react-native';
+import { FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native';
 import { Item } from '../../@types';
 import { normalizePixel, selectItemById } from '../../Helpers';
 import { RootState } from '../../Store/state';
 import Slotitem from '../SlotItem';
-import { Button, Typography } from '../../Elements';
+import { Typography } from '../../Elements';
 import { useMakeFakeSlotWithItems } from '../../Hooks';
 import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 
@@ -25,35 +26,37 @@ const Inventory = () => {
   );
   const newItemsToSlot = useMakeFakeSlotWithItems(inventoryItemsState, 25);
 
-  const TODO = useCallback(() => {
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1000)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1001)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1002)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1003)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1005)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1006)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1007)),
-    );
-    dispatch(
-      PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)),
-    );
-  }, []);
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1000)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1001)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1002)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1003)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1005)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1006)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1007)),
+  //     );
+  //     dispatch(
+  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)),
+  //     );
+  //   }, []),
+  // );
 
   const dispatch = useDispatch();
 
@@ -63,13 +66,7 @@ const Inventory = () => {
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={
         <>
-          <Button
-            text="remover"
-            textSize="paragraphy"
-            onPress={() => dispatch(PlayerManagerItemsActions.resetAllItems())}
-          />
           <Typography text="inventory" textSize="medium" />
-          <Button text="adicionar" textSize="paragraphy" onPress={TODO} />
         </>
       }
       ListHeaderComponentStyle={{ alignItems: 'center' }}
