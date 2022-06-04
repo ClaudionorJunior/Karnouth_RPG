@@ -1,5 +1,6 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import {
   Inventory,
   ItemsEquippedPlayer,
@@ -7,8 +8,7 @@ import {
   ProgressBarTitle,
 } from '../../Components';
 import { LineWrapper, Typography } from '../../Elements';
-import { avatarImgMap, selectItemById } from '../../Helpers';
-import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
+import { avatarImgMap } from '../../Helpers';
 import { RootState } from '../../Store/state';
 import {
   Container,
@@ -18,41 +18,20 @@ import {
   ProgressBarsContainer,
   StatusPlayerContainer,
 } from './styles';
+import { useAutoRegerateLife } from '../../Hooks';
 
 const Home = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
-  const dispatch = useDispatch();
-  /* dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1000)),
+  const { restoreLife } = useAutoRegerateLife();
+
+  useFocusEffect(
+    useCallback(() => {
+      if (playerState.currentPlayerLifePoints < playerState.playerLifePoints) {
+        restoreLife();
+      }
+    }, [playerState.currentPlayerLifePoints]),
   );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1001)),
-  );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1002)),
-  );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1003)),
-  );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
-  );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1005)),
-  );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1006)),
-  );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1007)),
-  );
-  dispatch(
-    PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)),
-  ); */
-  // dispatch(
-  //   PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
-  // );
-  // dispatch(PlayerManagerItemsActions.resetAllItems());
+
   if (!playerState) {
     return <LoadingScreen />;
   }

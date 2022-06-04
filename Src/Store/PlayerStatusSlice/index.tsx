@@ -56,16 +56,18 @@ export const PlayerStatusSlice = createSlice({
           state[state.playerType!][type] += 1;
           if (state.remainingPoints >= 1) {
             state.remainingPoints -= 1;
-            switch (state.playerType!) {
-              case 'Mage':
-                state.playerLifePoints += 5;
-                break;
-              case 'Warrior':
-                state.playerLifePoints += 15;
-                break;
-              case 'Ranger':
-                state.playerLifePoints += 10;
-                break;
+            if (type === 'life') {
+              switch (state.playerType!) {
+                case 'Mage':
+                  state.playerLifePoints += 5;
+                  break;
+                case 'Warrior':
+                  state.playerLifePoints += 15;
+                  break;
+                case 'Ranger':
+                  state.playerLifePoints += 10;
+                  break;
+              }
             }
           }
         };
@@ -74,16 +76,18 @@ export const PlayerStatusSlice = createSlice({
           state[state.playerType!][type] -= 1;
           if (state.remainingPoints < 10) {
             state.remainingPoints += 1;
-            switch (state.playerType!) {
-              case 'Mage':
-                state.playerLifePoints -= 5;
-                break;
-              case 'Warrior':
-                state.playerLifePoints -= 15;
-                break;
-              case 'Ranger':
-                state.playerLifePoints -= 10;
-                break;
+            if (type === 'life') {
+              switch (state.playerType!) {
+                case 'Mage':
+                  state.playerLifePoints -= 5;
+                  break;
+                case 'Warrior':
+                  state.playerLifePoints -= 15;
+                  break;
+                case 'Ranger':
+                  state.playerLifePoints -= 10;
+                  break;
+              }
             }
           }
         };
@@ -221,6 +225,33 @@ export const PlayerStatusSlice = createSlice({
       state.currentPlayerLifePoints = 150;
       state.xpToNextLevel = 150;
       state.level = 1;
+    },
+
+    resetPartialStatus: state => {
+      state.Mage = {
+        intelligence: 15,
+        life: 5,
+        power: 0,
+        precision: 5,
+        defense: 5,
+      };
+      state.Warrior = {
+        intelligence: 0,
+        life: 9,
+        power: 9,
+        precision: 5,
+        defense: 7,
+      };
+      state.Ranger = {
+        intelligence: 0,
+        life: 5,
+        power: 5,
+        precision: 15,
+        defense: 5,
+      };
+
+      state.playerLifePoints = 150;
+      state.currentPlayerLifePoints = 150;
     },
   },
 });
