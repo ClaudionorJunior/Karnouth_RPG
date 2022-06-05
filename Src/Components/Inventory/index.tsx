@@ -1,72 +1,68 @@
-import React, { useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { FlatList } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { useFocusEffect } from '@react-navigation/native';
-import { Item } from '../../@types';
-import { normalizePixel, selectItemById } from '../../Helpers';
+import { useSelector } from 'react-redux';
+import { Item, LocalPressed } from '../../@types';
+import { normalizePixel } from '../../Helpers';
 import { RootState } from '../../Store/state';
 import Slotitem from '../SlotItem';
 import { Typography } from '../../Elements';
-import { useMakeFakeSlotWithItems } from '../../Hooks';
-import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
+import { HowManySlots, useMakeFakeSlotWithItems } from '../../Hooks';
 
-const RenderSlot = (item: Item) => (
+interface InventoryProps {
+  item: Item;
+  localPressed: LocalPressed;
+  howManySlots: HowManySlots;
+}
+
+const RenderSlot = ({
+  item,
+  localPressed,
+}: Omit<InventoryProps, 'howManySlots'>) => (
   <>
     <Slotitem
-      localPressed="inventory"
+      localPressed={localPressed}
       item={item}
       containerStyles={{ marginTop: normalizePixel(8) }}
     />
   </>
 );
 
-const Inventory = () => {
+const Inventory = ({
+  localPressed,
+  howManySlots,
+}: Omit<InventoryProps, 'item'>) => {
   const inventoryItemsState = useSelector(
     (state: RootState) => state.PlayerManagerItemsState.inventoryItems,
   );
-  const newItemsToSlot = useMakeFakeSlotWithItems(inventoryItemsState, 25);
+  const sellerItemsState = useSelector(
+    (state: RootState) => state.SellerManagerItemsState.sellingItems,
+  );
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1000)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1001)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1002)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1003)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1004)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1005)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1006)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1007)),
-  //     );
-  //     dispatch(
-  //       PlayerManagerItemsActions.addPlayerInventoryItem(selectItemById(1008)),
-  //     );
-  //   }, []),
-  // );
+  const currentInventory = useMemo(() => {
+    if (localPressed === 'sellerInventory') {
+      return sellerItemsState;
+    }
+    return inventoryItemsState;
+  }, [sellerItemsState, inventoryItemsState]);
 
-  const dispatch = useDispatch();
+  const newItemsToSlot = useMakeFakeSlotWithItems(
+    currentInventory,
+    howManySlots,
+  );
 
   return (
     <FlatList
+      style={{ width: '100%' }}
       columnWrapperStyle={{ flexWrap: 'wrap', justifyContent: 'space-around' }}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={
         <>
-          <Typography text="inventory" textSize="medium" />
+          <Typography
+            text={
+              localPressed === 'sellerInventory' ? 'seller items' : 'inventory'
+            }
+            textSize="medium"
+          />
         </>
       }
       ListHeaderComponentStyle={{ alignItems: 'center' }}
@@ -74,7 +70,7 @@ const Inventory = () => {
       numColumns={5}
       horizontal={false}
       data={newItemsToSlot}
-      renderItem={({ item }) => RenderSlot(item)}
+      renderItem={({ item }) => RenderSlot({ item, localPressed })}
     />
   );
 };

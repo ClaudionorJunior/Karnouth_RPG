@@ -43,4 +43,6 @@ export interface Item extends SourceFile {
   restoreLife?: number;
   usedBy?: PlayerTypies;
   amount?: number;
+  buyFor?: number;
+  sellFor?: number;
 }
