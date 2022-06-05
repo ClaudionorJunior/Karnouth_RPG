@@ -17,6 +17,21 @@ export interface PlayerStatus {
   defense: number;
 }
 
+export interface MonsterLoot {
+  itemId: number;
+  rarityChance: number;
+}
+
+export interface MonsterStatus {
+  name: string;
+  life: number;
+  xp: number;
+  power: number;
+  defense: number;
+  source: any;
+  lote: MonsterLoot[];
+}
+
 export interface ChangePlayerAttributesProps extends PlayerStatus {
   type: 'takeoff' | 'add';
 }
