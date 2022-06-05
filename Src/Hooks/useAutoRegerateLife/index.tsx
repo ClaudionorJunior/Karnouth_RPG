@@ -2,9 +2,6 @@ import { useDispatch } from 'react-redux';
 import { AMOUNT_TO_REGENATE_LIFE, TIME_TO_REGENATE_LIFE } from '../../Global';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
 
-TIME_TO_REGENATE_LIFE;
-AMOUNT_TO_REGENATE_LIFE;
-
 interface UseAutoRegerateLifeReturns {
   restoreLife: () => void;
 }

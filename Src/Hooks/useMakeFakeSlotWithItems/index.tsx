@@ -2,14 +2,16 @@ import { useMemo } from 'react';
 import uuid from 'react-native-uuid';
 import { Item } from '../../@types';
 
+export type HowManySlots = 5 | 25;
+
 /**
  * @param items Item[]
- * @param howManySlots 8(to MAX_HUNT_INVENTORY) or 25(to MAX_INVENTORY)
+ * @param howManySlots 5(to MAX_HUNT_INVENTORY) or 25(to MAX_INVENTORY)
  * @returns Item[]
  */
 const useMakeFakeSlotWithItems = (
   items: Item[],
-  howManySlots: 8 | 25,
+  howManySlots: HowManySlots,
 ): Item[] => {
   const fakeArray = useMemo(() => {
     let tempNewArray: Item[] = [];

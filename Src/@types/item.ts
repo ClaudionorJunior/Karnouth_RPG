@@ -9,7 +9,8 @@ export type ItemsType =
   | 'armor'
   | 'legs'
   | 'boots'
-  | 'potion';
+  | 'potion'
+  | 'gold';
 
 interface SourceFile {
   source?: any;
@@ -25,7 +26,8 @@ export type ItemListType =
   | 'wooden_shield'
   | 'wooden_wand'
   | 'crossbow'
-  | 'light_wand';
+  | 'light_wand'
+  | 'gold';
 
 export interface Item extends SourceFile {
   id: string | number[];
@@ -40,4 +42,7 @@ export interface Item extends SourceFile {
   intelligence?: number;
   restoreLife?: number;
   usedBy?: PlayerTypies;
+  amount?: number;
+  buyFor?: number;
+  sellFor?: number;
 }

@@ -1,28 +1,33 @@
 import React, { useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Inventory,
   ItemsEquippedPlayer,
   LoadingScreen,
-  ProgressBarTitle,
+  PlayerStatus,
 } from '../../Components';
-import { LineWrapper, Typography } from '../../Elements';
-import { avatarImgMap } from '../../Helpers';
+import { LineWrapper } from '../../Elements';
 import { RootState } from '../../Store/state';
-import {
-  Container,
-  AvatarImg,
-  AvatarContainerImg,
-  Header,
-  ProgressBarsContainer,
-  StatusPlayerContainer,
-} from './styles';
+import { Container } from './styles';
 import { useAutoRegerateLife } from '../../Hooks';
+import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 
 const Home = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
+  const bodyItemsState = useSelector(
+    (state: RootState) => state.PlayerManagerItemsState.bodyItems,
+  );
+  const dispatch = useDispatch();
   const { restoreLife } = useAutoRegerateLife();
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!bodyItemsState.length) {
+        dispatch(PlayerManagerItemsActions.addGoldItemOnBody());
+      }
+    }, [bodyItemsState]),
+  );
 
   useFocusEffect(
     useCallback(() => {
@@ -38,47 +43,11 @@ const Home = () => {
 
   return (
     <Container>
-      <Header>
-        <AvatarContainerImg>
-          <AvatarImg source={avatarImgMap(playerState.playerType!)} />
-        </AvatarContainerImg>
-        <ProgressBarsContainer>
-          <ProgressBarTitle
-            title="Life"
-            currentValue={playerState.currentPlayerLifePoints}
-            totalValue={playerState.playerLifePoints}
-            progressColor="life"
-          />
-          <ProgressBarTitle
-            title="XP"
-            currentValue={playerState.playerXPPoints}
-            totalValue={playerState.xpToNextLevel}
-            progressColor="XP"
-          />
-          <StatusPlayerContainer>
-            <Typography
-              text={`Pwr: ${playerState[playerState.playerType!].power}`}
-              textSize="paragraphy"
-            />
-            <Typography
-              text={`Def: ${playerState[playerState.playerType!].defense}`}
-              textSize="paragraphy"
-            />
-            <Typography
-              text={`Prec: ${playerState[playerState.playerType!].precision}`}
-              textSize="paragraphy"
-            />
-            <Typography
-              text={`Int: ${playerState[playerState.playerType!].intelligence}`}
-              textSize="paragraphy"
-            />
-          </StatusPlayerContainer>
-        </ProgressBarsContainer>
-      </Header>
+      <PlayerStatus />
       <LineWrapper />
       <ItemsEquippedPlayer />
       <LineWrapper />
-      <Inventory />
+      <Inventory localPressed="inventory" howManySlots={25} />
     </Container>
   );
 };

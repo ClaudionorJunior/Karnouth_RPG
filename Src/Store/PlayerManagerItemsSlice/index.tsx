@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item } from '../../@types';
 import { MAX_INVENTORY } from '../../Global';
+import { selectItemById } from '../../Helpers';
 import { PlayerManagerItemsState } from './@types';
 
 const initialState: PlayerManagerItemsState = {
@@ -30,6 +31,15 @@ export const PlayerManagerItemsSlice = createSlice({
       } else {
         state.playerManagerItemsError = `you are already using an item ${action.payload.itemType}`;
       }
+    },
+
+    removeOneItem: (
+      state,
+      action: PayloadAction<{ id: string | number[] | undefined }>,
+    ) => {
+      state.inventoryItems = state.inventoryItems.filter(
+        it => it.id !== action.payload.id,
+      );
     },
 
     unquipePlayerBodyItem: (state, action: PayloadAction<Item>) => {
@@ -62,6 +72,41 @@ export const PlayerManagerItemsSlice = createSlice({
       } else {
         state.playerManagerItemsError = "this item don't exists";
       }
+    },
+
+    addGoldItemOnBody: state => {
+      state.bodyItems = [...state.bodyItems, selectItemById(9999)];
+    },
+
+    addGoldCoin: (state, action: PayloadAction<number>) => {
+      state.bodyItems = state.bodyItems.filter(it => {
+        if (it.itemId === 9999) {
+          if (!it.amount) {
+            it.amount = 0;
+            it.amount = action.payload;
+          } else {
+            it.amount += action.payload;
+          }
+        }
+        return it;
+      });
+    },
+
+    removeGoldCoin: (state, action: PayloadAction<number>) => {
+      state.bodyItems = state.bodyItems.filter(it => {
+        if (it.itemId === 9999) {
+          if (it.amount) {
+            if (it.amount > action.payload) {
+              it.amount -= action.payload;
+            } else {
+              state.playerManagerItemsError = "you don't have money";
+            }
+          } else {
+            state.playerManagerItemsError = "you don't have money";
+          }
+        }
+        return it;
+      });
     },
 
     resetAllItems: state => {

@@ -10,6 +10,7 @@ import rapier_sword from '../rapier_sword.bmp';
 import steel_sword from '../steel_sword.bmp';
 import wooden_shield from '../wooden_shield.bmp';
 import light_wand from '../light_wand.bmp';
+import gold from '../gold.bmp';
 
 export let AllItems: Item[] = [
   {
@@ -25,6 +26,8 @@ export let AllItems: Item[] = [
     intelligence: 0,
     restoreLife: 0,
     source: demon_legs,
+    buyFor: 200,
+    sellFor: 90,
   },
   {
     id: uuid.v4(),
@@ -39,6 +42,8 @@ export let AllItems: Item[] = [
     intelligence: 1,
     restoreLife: 0,
     source: golden_boots,
+    buyFor: 200,
+    sellFor: 90,
   },
   {
     id: uuid.v4(),
@@ -53,6 +58,8 @@ export let AllItems: Item[] = [
     intelligence: 1,
     restoreLife: 0,
     source: plate_armor,
+    buyFor: 100,
+    sellFor: 40,
   },
   {
     id: uuid.v4(),
@@ -67,6 +74,8 @@ export let AllItems: Item[] = [
     intelligence: 0,
     restoreLife: 0,
     source: plate_helmet,
+    buyFor: 100,
+    sellFor: 40,
   },
   {
     id: uuid.v4(),
@@ -82,6 +91,8 @@ export let AllItems: Item[] = [
     restoreLife: 0,
     source: rapier_sword,
     usedBy: 'Warrior',
+    buyFor: 45,
+    sellFor: 10,
   },
   {
     id: uuid.v4(),
@@ -97,6 +108,8 @@ export let AllItems: Item[] = [
     restoreLife: 0,
     source: steel_sword,
     usedBy: 'Warrior',
+    buyFor: 55,
+    sellFor: 15,
   },
   {
     id: uuid.v4(),
@@ -112,6 +125,8 @@ export let AllItems: Item[] = [
     restoreLife: 0,
     source: wooden_shield,
     usedBy: 'Warrior',
+    buyFor: 10,
+    sellFor: 2,
   },
   {
     id: uuid.v4(),
@@ -127,6 +142,8 @@ export let AllItems: Item[] = [
     restoreLife: 0,
     source: light_wand,
     usedBy: 'Mage',
+    buyFor: 200,
+    sellFor: 90,
   },
   {
     id: uuid.v4(),
@@ -142,5 +159,21 @@ export let AllItems: Item[] = [
     restoreLife: 0,
     source: crossbow,
     usedBy: 'Ranger',
+    buyFor: 45,
+    sellFor: 10,
+  },
+  {
+    id: uuid.v4(),
+    itemId: 9999,
+    itemName: 'gold',
+    itemUIName: 'Golds',
+    itemType: 'gold',
+    description: '',
+    power: 0,
+    defense: 0,
+    precision: 0,
+    intelligence: 0,
+    restoreLife: 0,
+    source: gold,
   },
 ];
