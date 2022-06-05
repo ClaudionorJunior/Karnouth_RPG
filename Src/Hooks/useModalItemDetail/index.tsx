@@ -18,6 +18,7 @@ import {
 } from './styles';
 import { RootState } from '../../Store/state';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
+import { SellerManagerItemsActions } from '../../Store/SellerManagerItemsSlice';
 
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;
@@ -91,8 +92,6 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
     setIsVisible(false);
   }, [isVisible]);
 
-  const handleUseSupportItem = useCallback(() => {}, [isVisible]);
-
   const handleEquipItem = useCallback(() => {
     if (!itemToRender?.usedBy || playerTypeState === itemToRender?.usedBy) {
       itemToRender &&
@@ -108,7 +107,52 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
       dispatch(PlayerManagerItemsActions.unquipePlayerBodyItem(itemToRender));
   }, [isVisible]);
 
+  const handleSellItem = useCallback(() => {
+    if (itemToRender?.sellFor) {
+      dispatch(
+        PlayerManagerItemsActions.removeOneItem({ id: itemToRender?.id }),
+      );
+      itemToRender?.sellFor &&
+        dispatch(PlayerManagerItemsActions.addGoldCoin(itemToRender?.sellFor));
+    } else {
+      dispatch(
+        PlayerManagerItemsActions.setMessageError(
+          'not possible sell this item, contact suport',
+        ),
+      );
+    }
+  }, [isVisible]);
+
+  const handleBuyItem = useCallback(() => {
+    if (itemToRender?.buyFor) {
+      dispatch(PlayerManagerItemsActions.removeGoldCoin(itemToRender?.buyFor));
+
+      const currentAmount = playerManagerItemsState.bodyItems.filter(
+        it => it?.itemId === 9999,
+      )[0]?.amount;
+
+      if (currentAmount) {
+        if (currentAmount > itemToRender.buyFor) {
+          dispatch(
+            SellerManagerItemsActions.removeOneItem({ id: itemToRender?.id }),
+          );
+          dispatch(
+            PlayerManagerItemsActions.addPlayerInventoryItem(itemToRender),
+          );
+        }
+      }
+    } else {
+      dispatch(
+        PlayerManagerItemsActions.setMessageError(
+          'you can not buy this item, contact suport',
+        ),
+      );
+    }
+  }, [isVisible, playerManagerItemsState]);
+
   const handleLootItem = useCallback(() => {}, [isVisible]);
+
+  const handleUseSupportItem = useCallback(() => {}, [isVisible]);
 
   const handleAction = useCallback(() => {
     hideModalDetails();
@@ -128,6 +172,16 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
       return;
     }
 
+    if (localPressedCtx === 'mallInventory') {
+      handleSellItem();
+      return;
+    }
+
+    if (localPressedCtx === 'sellerInventory') {
+      handleBuyItem();
+      return;
+    }
+
     handleEquipItem();
   }, [isVisible]);
 
@@ -143,6 +197,8 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
         return 'Unquip';
       case 'hunt':
         return 'Inventory';
+      case 'sellerInventory':
+        return 'Buy';
       default:
         return 'Sell';
     }
@@ -214,6 +270,24 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
               <Typography text="amount: " textSize="paragraphy" />
               <Typography
                 text={`${itemToRender?.amount}`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          {!!itemToRender?.buyFor && (
+            <TextContainer>
+              <Typography text="buy for: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.buyFor} golds`}
+                textSize="paragraphy"
+              />
+            </TextContainer>
+          )}
+          {!!itemToRender?.sellFor && (
+            <TextContainer>
+              <Typography text="sell for: " textSize="paragraphy" />
+              <Typography
+                text={`${itemToRender?.sellFor} golds`}
                 textSize="paragraphy"
               />
             </TextContainer>

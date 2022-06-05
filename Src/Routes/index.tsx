@@ -15,6 +15,7 @@ import { useLevelManager } from '../Hooks';
 import { RootState } from '../Store/state';
 import { normalizePixel } from '../Helpers';
 import CommingSoon from '../Screens/CommingSoon';
+import Mall from '../Screens/Mall';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -93,7 +94,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Mall"
-        component={CommingSoon}
+        component={Mall}
         options={{ headerShown: false }}
       />
       <Tab.Screen

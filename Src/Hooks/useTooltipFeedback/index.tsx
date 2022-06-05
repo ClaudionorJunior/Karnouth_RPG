@@ -28,7 +28,6 @@ export const TooltipFeedbackProvider: React.FC = ({ children }) => {
         duration: 700,
       });
       setTimeout(() => {
-        console.log();
         dispatch(PlayerManagerItemsActions.resetError());
       }, 3500);
     } else if (!tooltipPosition.value) {

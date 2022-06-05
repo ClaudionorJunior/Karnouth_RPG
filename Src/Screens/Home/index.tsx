@@ -47,7 +47,7 @@ const Home = () => {
       <LineWrapper />
       <ItemsEquippedPlayer />
       <LineWrapper />
-      <Inventory />
+      <Inventory localPressed="inventory" howManySlots={25} />
     </Container>
   );
 };

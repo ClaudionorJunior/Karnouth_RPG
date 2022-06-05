@@ -31,4 +31,9 @@ export type { Item, ItemsType } from './item';
  * @param body - you pressed at your equiped items.
  * @param hunt - you pressed at loot of your hunt.
  */
-export type LocalPressed = 'inventory' | 'body' | 'hunt';
+export type LocalPressed =
+  | 'inventory'
+  | 'body'
+  | 'hunt'
+  | 'mallInventory'
+  | 'sellerInventory';

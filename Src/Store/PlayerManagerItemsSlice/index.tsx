@@ -33,6 +33,15 @@ export const PlayerManagerItemsSlice = createSlice({
       }
     },
 
+    removeOneItem: (
+      state,
+      action: PayloadAction<{ id: string | number[] | undefined }>,
+    ) => {
+      state.inventoryItems = state.inventoryItems.filter(
+        it => it.id !== action.payload.id,
+      );
+    },
+
     unquipePlayerBodyItem: (state, action: PayloadAction<Item>) => {
       if (state.inventoryItems.length < MAX_INVENTORY) {
         const toRemoveAtBody = state.bodyItems.filter(
@@ -66,17 +75,34 @@ export const PlayerManagerItemsSlice = createSlice({
     },
 
     addGoldItemOnBody: state => {
-      state.bodyItems = [...state.bodyItems, selectItemById(1009)];
+      state.bodyItems = [...state.bodyItems, selectItemById(9999)];
     },
 
     addGoldCoin: (state, action: PayloadAction<number>) => {
       state.bodyItems = state.bodyItems.filter(it => {
-        if (it.itemId === 1009) {
+        if (it.itemId === 9999) {
           if (!it.amount) {
             it.amount = 0;
             it.amount = action.payload;
           } else {
             it.amount += action.payload;
+          }
+        }
+        return it;
+      });
+    },
+
+    removeGoldCoin: (state, action: PayloadAction<number>) => {
+      state.bodyItems = state.bodyItems.filter(it => {
+        if (it.itemId === 9999) {
+          if (it.amount) {
+            if (it.amount > action.payload) {
+              it.amount -= action.payload;
+            } else {
+              state.playerManagerItemsError = "you don't have money";
+            }
+          } else {
+            state.playerManagerItemsError = "you don't have money";
           }
         }
         return it;
