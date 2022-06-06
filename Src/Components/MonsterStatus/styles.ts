@@ -2,9 +2,15 @@ import styled from 'styled-components/native';
 import { normalizePixel } from '../../Helpers';
 
 export const Container = styled.View`
+  width: 100%;
+  align-items: center;
+  margin-top: ${normalizePixel(12)}px;
+`;
+
+export const ContainerStatus = styled.View`
+  width: 100%;
   flex-direction: row;
   height: ${normalizePixel(90)}px;
-  margin-top: ${normalizePixel(12)}px;
 `;
 
 export const ProgressBarsContainer = styled.View`

@@ -24,7 +24,6 @@ const normalizePixel = (size: number, based: 'width' | 'height' = 'width') => {
 };
 
 const avatarImgMap = (playerType: PlayerTypies): ImageSourcePropType => {
-  // TODO deve ter um parametro de monster ou player
   switch (playerType) {
     case 'Mage':
       return Mage;
