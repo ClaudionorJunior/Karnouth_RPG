@@ -16,6 +16,7 @@ import { RootState } from '../Store/state';
 import { normalizePixel } from '../Helpers';
 import Mall from '../Screens/Mall';
 import Battle from '../Screens/Battle';
+import { ModalItemDetailProvider } from '../Screens/Battle/Hooks/useModalSelectMonster';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -59,6 +60,12 @@ const MainStack = () => {
   );
 };
 
+const BattleScreenWrapper = () => (
+  <ModalItemDetailProvider>
+    <Battle />
+  </ModalItemDetailProvider>
+);
+
 const TabNavigator = () => {
   const { colors } = useTheme();
 
@@ -99,7 +106,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Battle"
-        component={Battle}
+        component={BattleScreenWrapper}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

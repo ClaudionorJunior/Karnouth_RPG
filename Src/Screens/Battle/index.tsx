@@ -6,34 +6,40 @@ import { ButtonBattle, LineWrapper, Typography } from '../../Elements';
 import { BattleHistoryActions } from '../../Store/BattleHistorySlice';
 import { MonsterStatusActions } from '../../Store/MonsterStatusSlice';
 import ScrollTurns from './Components/ScrollTurns';
+import useModalSelectMonster, {
+  ModalItemDetailProvider,
+} from './Hooks/useModalSelectMonster';
 import { Container, ContainerBtnBattle } from './styles';
 
 const Battle = () => {
   const [isDisabled, setIsDisbled] = useState<boolean>(false);
+  const { showModalMonsters } = useModalSelectMonster();
   const dispatch = useDispatch();
 
   useFocusEffect(
     useCallback(() => {
       dispatch(BattleHistoryActions.resetAllStatus());
       dispatch(MonsterStatusActions.resetAllStatus());
-      // TODO abrir modal
+      showModalMonsters();
     }, []),
   );
   return (
-    <Container>
-      <PlayerStatus />
-      <ContainerBtnBattle>
-        <Typography text="Attack" textSize="small" />
-        <ButtonBattle disabled={!isDisabled} onPress={() => {}} />
-        {!isDisabled && (
-          <Typography text="waiting your turn" textSize="paragraphy" />
-        )}
-      </ContainerBtnBattle>
-      <LineWrapper />
-      <ScrollTurns />
-      <LineWrapper />
-      <MonsterStatus />
-    </Container>
+    <ModalItemDetailProvider>
+      <Container>
+        <PlayerStatus />
+        <ContainerBtnBattle>
+          <Typography text="Attack" textSize="small" />
+          <ButtonBattle disabled={!isDisabled} onPress={() => {}} />
+          {!isDisabled && (
+            <Typography text="waiting your turn" textSize="paragraphy" />
+          )}
+        </ContainerBtnBattle>
+        <LineWrapper />
+        <ScrollTurns />
+        <LineWrapper />
+        <MonsterStatus />
+      </Container>
+    </ModalItemDetailProvider>
   );
 };
 

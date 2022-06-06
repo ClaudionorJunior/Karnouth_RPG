@@ -1,16 +1,24 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { normalizePixel } from '../../Helpers';
 
-export const Container = styled.View`
-  width: 100%;
+export const Container = styled.Pressable<{ isSelected: boolean }>`
+  width: 90%;
   align-items: center;
+  justify-content: center;
   margin-top: ${normalizePixel(12)}px;
 `;
 
-export const ContainerStatus = styled.View`
+export const ContainerStatus = styled.View<{ isSelected: boolean }>`
   width: 100%;
   flex-direction: row;
-  height: ${normalizePixel(90)}px;
+  border-width: ${normalizePixel(2)}px;
+  border-color: transparent;
+  border-radius: ${normalizePixel(6)}px;
+  ${({ theme, isSelected }) =>
+    isSelected &&
+    css`
+      border-color: ${theme.colors.green};
+    `}
 `;
 
 export const ProgressBarsContainer = styled.View`
@@ -21,7 +29,7 @@ export const ProgressBarsContainer = styled.View`
 export const StatusMonsterContainer = styled.View`
   width: 70%;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 export const AvatarImg = styled.Image`
