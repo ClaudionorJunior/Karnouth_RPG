@@ -14,7 +14,7 @@ const ModalItemDetailContext = createContext<ModalItemDetailProps>(
 const useModalSelectMonster = () => useContext(ModalItemDetailContext);
 
 export const ModalItemDetailProvider: React.FC = ({ children }) => {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const showModalMonsters = useCallback(() => {
     setIsVisible(true);

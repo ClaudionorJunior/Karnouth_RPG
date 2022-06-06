@@ -1,5 +1,5 @@
 import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { PlayerStatus, MonsterStatus } from '../../Components';
 import { ButtonBattle, LineWrapper, Typography } from '../../Elements';
@@ -13,7 +13,7 @@ import { Container, ContainerBtnBattle } from './styles';
 
 const Battle = () => {
   const [isDisabled, setIsDisbled] = useState<boolean>(false);
-  const { showModalMonsters } = useModalSelectMonster();
+  const { showModalMonsters, hideModalMonsters } = useModalSelectMonster();
   const dispatch = useDispatch();
 
   useFocusEffect(
@@ -23,6 +23,11 @@ const Battle = () => {
       showModalMonsters();
     }, []),
   );
+
+  useEffect(() => {
+    return () => hideModalMonsters();
+  }, []);
+
   return (
     <ModalItemDetailProvider>
       <Container>
