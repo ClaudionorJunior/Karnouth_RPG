@@ -68,8 +68,13 @@ const useBattleTurn = () => {
       // depois de 800 milisegundos, passar a vez
     }
     if (battleTurn === 'monster') {
-      const result = calcHitPoints(battleTurn);
-      // com o dano tirar a vida do player
+      const amount = calcHitPoints(battleTurn);
+      dispatch(
+        PlayerStatusActions.changeCurrentLife({
+          amount,
+          typeToChange: 'take off',
+        }),
+      );
       // depois de 800 milisegundos, passar a vez setando undefined no battleTurn
     }
   }, [battleTurn]);
