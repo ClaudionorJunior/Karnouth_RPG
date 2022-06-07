@@ -2,15 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MonsterStatusActions } from '../../../../Store/MonsterStatusSlice';
 import { RootState } from '../../../../Store/state';
-import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
+import { PlayerStatusActions } from '../../../../Store/PlayerStatusSlice';
 
 interface UseBattleTurnReturns {
   handleBattle: () => void;
+  isYourTurn: boolean;
 }
 
 type BattleCreature = 'player' | 'monster';
 
-const useBattleTurn = () => {
+const useBattleTurn = (): UseBattleTurnReturns => {
   const playerState = useSelector((state: RootState) => state.playerState);
   const monsterState = useSelector((state: RootState) => state.MonsterState);
   const [battleTurn, setBattleTurn] = useState<BattleCreature>();
@@ -57,6 +58,7 @@ const useBattleTurn = () => {
   };
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (battleTurn === 'player') {
       const amount = calcHitPoints(battleTurn);
       dispatch(
@@ -65,7 +67,9 @@ const useBattleTurn = () => {
           typeToChange: 'take off',
         }),
       );
-      // depois de 800 milisegundos, passar a vez
+      timer = setTimeout(() => {
+        setBattleTurn('monster');
+      }, 700);
     }
     if (battleTurn === 'monster') {
       const amount = calcHitPoints(battleTurn);
@@ -75,9 +79,18 @@ const useBattleTurn = () => {
           typeToChange: 'take off',
         }),
       );
-      // depois de 800 milisegundos, passar a vez setando undefined no battleTurn
+      timer = setTimeout(() => {
+        setBattleTurn(undefined);
+        if (monsterState.monsterDead) {
+          dispatch(
+            PlayerStatusActions.addPlayerExp(monsterState.Monster?.xp || 0),
+          );
+        }
+      }, 700);
     }
-  }, [battleTurn]);
+
+    return () => clearTimeout(timer);
+  }, [battleTurn, monsterState.monsterDead]);
 
   const handleBattle = useCallback(() => {
     setBattleTurn('player');
@@ -85,6 +98,7 @@ const useBattleTurn = () => {
 
   return {
     handleBattle,
+    isYourTurn: !battleTurn,
   };
 };
 

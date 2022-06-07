@@ -193,6 +193,7 @@ export const PlayerStatusSlice = createSlice({
       action: PayloadAction<OnChangePlayerLevelParams>,
     ) => {
       state.level = action.payload.level;
+      state.remainingPoints += 1;
       state.xpToNextLevel = action.payload.xpToNextLevel;
     },
 

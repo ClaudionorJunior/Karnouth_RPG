@@ -3,7 +3,6 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MonsterStatus as MonsterStatusType } from '../../@types';
 import { Typography } from '../../Elements';
-import useModalSelectMonster from '../../Screens/Battle/Hooks/useModalSelectMonster';
 import { MonsterStatusActions } from '../../Store/MonsterStatusSlice';
 import { RootState } from '../../Store/state';
 import ProgressBarTitle from '../ProgressBarTitle';
@@ -18,17 +17,21 @@ import {
 
 interface MonsterStatusProps {
   monsterToRender?: MonsterStatusType;
+  showModalMonsters?: () => void;
 }
 
-const MonsterStatus = ({ monsterToRender }: MonsterStatusProps) => {
-  const { showModalMonsters } = useModalSelectMonster();
+const MonsterStatus = ({
+  monsterToRender,
+  showModalMonsters,
+}: MonsterStatusProps) => {
   const monsterState = useSelector((state: RootState) => state.MonsterState);
   const dispatch = useDispatch();
 
   const handleSelected = useCallback(() => {
     if (monsterToRender) {
       dispatch(MonsterStatusActions.addMonter(monsterToRender));
-    } else {
+    }
+    if (showModalMonsters) {
       showModalMonsters();
     }
   }, [monsterToRender]);

@@ -15,7 +15,8 @@ const useLevelManager = () => {
 
   const calcXpToNextLevel = useCallback(() => {
     const nextPlayerLevel = playerState.level + 1;
-    const nextXpNeeded = nextPlayerLevel * 150;
+    // eslint-disable-next-line prettier/prettier
+    const nextXpNeeded = (50 * ((playerState.level**3 - (6 * playerState.level**2)) + ((17*playerState.level) - 12))) / 3
 
     dispatch(
       PlayerStatusActions.onChangePlayerLevel({
