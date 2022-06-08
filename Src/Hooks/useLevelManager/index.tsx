@@ -16,15 +16,28 @@ const useLevelManager = () => {
   const calcXpToNextLevel = useCallback(() => {
     const nextPlayerLevel = playerState.level + 1;
     // eslint-disable-next-line prettier/prettier
-    const nextXpNeeded = (50 * ((playerState.level**3 - (6 * playerState.level**2)) + ((17*playerState.level) - 12))) / 3
+    let nextXpNeeded = (50 * ((playerState.level**3 - (6 * playerState.level**2)) + ((17*playerState.level) - 12))) / 3
 
+    if (nextXpNeeded < 300) {
+      nextXpNeeded = 300;
+    }
+
+    if (playerState.playerXPPoints >= 300 && playerState.playerXPPoints < 450) {
+      nextXpNeeded = 450;
+    }
+
+    if (playerState.playerXPPoints >= 450 && playerState.playerXPPoints < 600) {
+      nextXpNeeded = 600;
+    }
+
+    dispatch(PlayerStatusActions.resetRemainingPoints(2));
     dispatch(
       PlayerStatusActions.onChangePlayerLevel({
         level: nextPlayerLevel,
         xpToNextLevel: nextXpNeeded,
       }),
     );
-  }, [playerState.level]);
+  }, [playerState.level, playerState.playerXPPoints]);
 };
 
 export default useLevelManager;

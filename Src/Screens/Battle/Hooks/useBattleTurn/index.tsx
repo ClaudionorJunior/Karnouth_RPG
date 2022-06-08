@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MonsterStatusActions } from '../../../../Store/MonsterStatusSlice';
 import { RootState } from '../../../../Store/state';
 import { PlayerStatusActions } from '../../../../Store/PlayerStatusSlice';
+import { BattleHistoryActions } from '../../../../Store/BattleHistorySlice';
 
 interface UseBattleTurnReturns {
   handleBattle: () => void;
@@ -57,40 +58,72 @@ const useBattleTurn = (): UseBattleTurnReturns => {
     return 0;
   };
 
+  const managerMessageCombat = (hitPoint: number) => {
+    let message = '';
+    if (battleTurn === 'player' && hitPoint > 0) {
+      message = `you hit ${hitPoint} damage to the monster`;
+    } else if (battleTurn === 'player' && hitPoint === 0) {
+      message = `the monster blocked your damage`;
+    } else if (battleTurn === 'monster' && hitPoint > 0) {
+      message = `you lose ${hitPoint} of life by the monster damage`;
+    } else if (battleTurn === 'monster' && hitPoint === 0) {
+      message = `you blocked monster damage`;
+    }
+    if (!monsterState.monsterDead && message && battleTurn) {
+      dispatch(BattleHistoryActions.addBattleHistory(message));
+    }
+  };
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
+    let amount: number | undefined;
+
     if (battleTurn === 'player') {
-      const amount = calcHitPoints(battleTurn);
-      dispatch(
-        MonsterStatusActions.changeCurrentLife({
-          amount,
-          typeToChange: 'take off',
-        }),
-      );
+      amount = calcHitPoints(battleTurn);
+      if (!monsterState.monsterDead) {
+        dispatch(
+          MonsterStatusActions.changeCurrentLife({
+            amount,
+            typeToChange: 'take off',
+          }),
+        );
+      }
+
       timer = setTimeout(() => {
         setBattleTurn('monster');
       }, 700);
     }
     if (battleTurn === 'monster') {
-      const amount = calcHitPoints(battleTurn);
-      dispatch(
-        PlayerStatusActions.changeCurrentLife({
-          amount,
-          typeToChange: 'take off',
-        }),
-      );
+      amount = calcHitPoints(battleTurn);
+      if (!monsterState.monsterDead) {
+        dispatch(
+          PlayerStatusActions.changeCurrentLife({
+            amount,
+            typeToChange: 'take off',
+          }),
+        );
+      }
+
       timer = setTimeout(() => {
         setBattleTurn(undefined);
-        if (monsterState.monsterDead) {
-          dispatch(
-            PlayerStatusActions.addPlayerExp(monsterState.Monster?.xp || 0),
-          );
-        }
       }, 700);
     }
 
-    return () => clearTimeout(timer);
+    if (!monsterState.monsterDead && monsterState.Monster) {
+      amount !== undefined && managerMessageCombat(amount);
+    }
+
+    return () => timer && clearTimeout(timer);
   }, [battleTurn, monsterState.monsterDead]);
+
+  useEffect(() => {
+    if (monsterState.monsterDead) {
+      dispatch(PlayerStatusActions.addPlayerExp(monsterState.Monster?.xp || 0));
+      dispatch(MonsterStatusActions.resetAllStatus());
+      dispatch(BattleHistoryActions.resetAllStatus());
+      // TODO - abrir modal de loot
+    }
+  }, [monsterState.monsterDead]);
 
   const handleBattle = useCallback(() => {
     setBattleTurn('player');

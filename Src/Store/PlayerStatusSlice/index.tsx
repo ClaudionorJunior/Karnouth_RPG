@@ -184,8 +184,12 @@ export const PlayerStatusSlice = createSlice({
       state.remainingPoints = 0;
     },
 
-    resetRemainingPoints: state => {
-      state.remainingPoints = 10;
+    resetRemainingPoints: (state, action?: PayloadAction<number>) => {
+      if (action?.payload) {
+        state.remainingPoints += action.payload;
+      } else {
+        state.remainingPoints = 10;
+      }
     },
 
     onChangePlayerLevel: (

@@ -7,3 +7,10 @@ export const Container = styled.View`
   padding: ${normalizePixel(12)}px;
   padding-bottom: 0;
 `;
+
+export const PointsContainerText = styled.View`
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+`;

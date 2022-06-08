@@ -14,6 +14,7 @@ import {
 
 const PlayerStatus = () => {
   const playerState = useSelector((state: RootState) => state.playerState);
+
   return (
     <>
       <Container onPress={() => {}}>
@@ -57,12 +58,6 @@ const PlayerStatus = () => {
           </StatusPlayerContainer>
         </ProgressBarsContainer>
       </Container>
-      {!playerState?.remainingPoints && (
-        <Typography
-          text="you have points to distribute"
-          textSize="paragraphy"
-        />
-      )}
     </>
   );
 };
