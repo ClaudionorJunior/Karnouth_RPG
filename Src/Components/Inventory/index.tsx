@@ -37,18 +37,40 @@ const Inventory = ({
   const sellerItemsState = useSelector(
     (state: RootState) => state.SellerManagerItemsState.sellingItems,
   );
+  const monsterRewards = useSelector(
+    (state: RootState) => state.LootManagerState.loot,
+  );
 
   const currentInventory = useMemo(() => {
     if (localPressed === 'sellerInventory') {
       return sellerItemsState;
     }
+
+    if (localPressed === 'rewards') {
+      return monsterRewards || [];
+    }
     return inventoryItemsState;
-  }, [sellerItemsState, inventoryItemsState]);
+  }, [sellerItemsState, inventoryItemsState, monsterRewards]);
 
   const newItemsToSlot = useMakeFakeSlotWithItems(
     currentInventory,
     howManySlots,
   );
+
+  const findTitle = useMemo(() => {
+    if (localPressed === 'sellerInventory') {
+      return 'seller items';
+    }
+    if (localPressed === 'mallInventory') {
+      return 'inventory';
+    }
+
+    if (localPressed === 'rewards') {
+      return 'rewards';
+    }
+
+    return 'inventory';
+  }, [sellerItemsState, inventoryItemsState]);
 
   return (
     <FlatList
@@ -57,12 +79,7 @@ const Inventory = ({
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={
         <>
-          <Typography
-            text={
-              localPressed === 'sellerInventory' ? 'seller items' : 'inventory'
-            }
-            textSize="medium"
-          />
+          <Typography text={findTitle} textSize="medium" />
         </>
       }
       ListHeaderComponentStyle={{ alignItems: 'center' }}

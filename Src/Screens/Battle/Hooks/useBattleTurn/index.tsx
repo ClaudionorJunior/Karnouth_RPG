@@ -4,6 +4,10 @@ import { MonsterStatusActions } from '../../../../Store/MonsterStatusSlice';
 import { RootState } from '../../../../Store/state';
 import { PlayerStatusActions } from '../../../../Store/PlayerStatusSlice';
 import { BattleHistoryActions } from '../../../../Store/BattleHistorySlice';
+import useModalRewards from '../useModalRewards';
+import { LootManagerActions } from '../../../../Store/LootManagerSlice';
+import { PlayerManagerItemsActions } from '../../../../Store/PlayerManagerItemsSlice';
+import { getRandomGoldByArray } from '../../../../Helpers';
 
 interface UseBattleTurnReturns {
   handleBattle: () => void;
@@ -13,22 +17,28 @@ interface UseBattleTurnReturns {
 type BattleCreature = 'player' | 'monster';
 
 const useBattleTurn = (): UseBattleTurnReturns => {
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
   const monsterState = useSelector((state: RootState) => state.MonsterState);
   const [battleTurn, setBattleTurn] = useState<BattleCreature>();
+  const { showModalRewards } = useModalRewards();
   const dispatch = useDispatch();
 
   const attrsState = useMemo(() => {
     return {
-      playerLvl: playerState.level,
-      playerPwr: playerState[playerState.playerType!].power,
-      playerInt: playerState[playerState.playerType!].intelligence,
-      playerDef: playerState[playerState.playerType!].defense,
-      playerPrec: playerState[playerState.playerType!].precision,
+      playerLvl: PlayerState.level,
+      playerPwr: PlayerState[PlayerState.playerType!].power,
+      playerInt: PlayerState[PlayerState.playerType!].intelligence,
+      playerDef: PlayerState[PlayerState.playerType!].defense,
+      playerPrec: PlayerState[PlayerState.playerType!].precision,
       monsterPwr: monsterState.Monster?.power || 0,
       monsterDef: monsterState.Monster?.defense || 0,
     };
-  }, [playerState, monsterState]);
+  }, [PlayerState, monsterState]);
+
+  const monsterDead = useMemo(
+    () => !!monsterState.monsterDead,
+    [monsterState.monsterDead],
+  );
 
   const calcHitPoints = (turn: BattleCreature) => {
     let pwr = 0;
@@ -44,7 +54,7 @@ const useBattleTurn = (): UseBattleTurnReturns => {
     prec = turn === 'player' ? attrsState.playerPrec : attrsState.monsterPwr;
     level = turn === 'player' ? attrsState.playerLvl : attrsState.monsterPwr;
 
-    if (playerState.playerType === 'Mage') {
+    if (PlayerState.playerType === 'Mage') {
       pwr = turn === 'player' ? attrsState.playerInt : attrsState.monsterPwr;
     }
 
@@ -58,21 +68,24 @@ const useBattleTurn = (): UseBattleTurnReturns => {
     return 0;
   };
 
-  const managerMessageCombat = (hitPoint: number) => {
-    let message = '';
-    if (battleTurn === 'player' && hitPoint > 0) {
-      message = `you hit ${hitPoint} damage to the monster`;
-    } else if (battleTurn === 'player' && hitPoint === 0) {
-      message = `the monster blocked your damage`;
-    } else if (battleTurn === 'monster' && hitPoint > 0) {
-      message = `you lose ${hitPoint} of life by the monster damage`;
-    } else if (battleTurn === 'monster' && hitPoint === 0) {
-      message = `you blocked monster damage`;
-    }
-    if (!monsterState.monsterDead && message && battleTurn) {
-      dispatch(BattleHistoryActions.addBattleHistory(message));
-    }
-  };
+  const managerMessageCombat = useCallback(
+    (hitPoint: number) => {
+      let message = '';
+      if (battleTurn === 'player' && hitPoint > 0) {
+        message = `you hit ${hitPoint} damage to the monster`;
+      } else if (battleTurn === 'player' && hitPoint === 0) {
+        message = `the monster blocked your damage`;
+      } else if (battleTurn === 'monster' && hitPoint > 0) {
+        message = `you lose ${hitPoint} of life by the monster damage`;
+      } else if (battleTurn === 'monster' && hitPoint === 0) {
+        message = `you blocked monster damage`;
+      }
+      if (!monsterDead && message && battleTurn) {
+        dispatch(BattleHistoryActions.addBattleHistory(message));
+      }
+    },
+    [monsterDead, battleTurn],
+  );
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -80,7 +93,7 @@ const useBattleTurn = (): UseBattleTurnReturns => {
 
     if (battleTurn === 'player') {
       amount = calcHitPoints(battleTurn);
-      if (!monsterState.monsterDead) {
+      if (!monsterDead) {
         dispatch(
           MonsterStatusActions.changeCurrentLife({
             amount,
@@ -95,7 +108,7 @@ const useBattleTurn = (): UseBattleTurnReturns => {
     }
     if (battleTurn === 'monster') {
       amount = calcHitPoints(battleTurn);
-      if (!monsterState.monsterDead) {
+      if (!monsterDead) {
         dispatch(
           PlayerStatusActions.changeCurrentLife({
             amount,
@@ -109,21 +122,29 @@ const useBattleTurn = (): UseBattleTurnReturns => {
       }, 700);
     }
 
-    if (!monsterState.monsterDead && monsterState.Monster) {
+    if (!monsterDead && monsterState.Monster) {
       amount !== undefined && managerMessageCombat(amount);
     }
 
     return () => timer && clearTimeout(timer);
-  }, [battleTurn, monsterState.monsterDead]);
+  }, [battleTurn, monsterDead]);
 
   useEffect(() => {
-    if (monsterState.monsterDead) {
+    if (monsterDead) {
       dispatch(PlayerStatusActions.addPlayerExp(monsterState.Monster?.xp || 0));
-      dispatch(MonsterStatusActions.resetAllStatus());
       dispatch(BattleHistoryActions.resetAllStatus());
-      // TODO - abrir modal de loot
+      monsterState.Monster?.lote &&
+        dispatch(LootManagerActions.addItemsToLoot(monsterState.Monster?.lote));
+      monsterState.Monster?.rangeGold &&
+        dispatch(
+          PlayerManagerItemsActions.addGoldCoin(
+            getRandomGoldByArray(monsterState.Monster?.rangeGold),
+          ),
+        );
+      dispatch(MonsterStatusActions.resetAllStatus());
+      showModalRewards();
     }
-  }, [monsterState.monsterDead]);
+  }, [monsterDead]);
 
   const handleBattle = useCallback(() => {
     setBattleTurn('player');

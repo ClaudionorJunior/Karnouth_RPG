@@ -19,6 +19,7 @@ import {
 import { RootState } from '../../Store/state';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
 import { SellerManagerItemsActions } from '../../Store/SellerManagerItemsSlice';
+import { LootManagerActions } from '../../Store/LootManagerSlice';
 
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;
@@ -36,7 +37,10 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
   const [itemToRender, setItemToRender] = useState<Item>();
   const [localPressedCtx, setLocalPressedCtx] = useState<LocalPressed>();
   const playerTypeState = useSelector(
-    (state: RootState) => state.playerState.playerType,
+    (state: RootState) => state.PlayerState.playerType,
+  );
+  const monsterRangeGold = useSelector(
+    (state: RootState) => state.MonsterState.Monster?.rangeGold,
   );
   const playerManagerItemsState = useSelector(
     (state: RootState) => state.PlayerManagerItemsState,
@@ -150,14 +154,22 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
     }
   }, [isVisible, playerManagerItemsState]);
 
-  const handleLootItem = useCallback(() => {}, [isVisible]);
+  const handleLootItem = useCallback(() => {
+    if (itemToRender?.itemId) {
+      dispatch(PlayerManagerItemsActions.addPlayerInventoryItem(itemToRender));
+    }
+
+    if (itemToRender?.id) {
+      dispatch(LootManagerActions.removeOneItem({ id: itemToRender.id }));
+    }
+  }, [itemToRender?.itemId]);
 
   const handleUseSupportItem = useCallback(() => {}, [isVisible]);
 
   const handleAction = useCallback(() => {
     hideModalDetails();
 
-    if (itemToRender?.itemType === 'potion' && localPressedCtx !== 'hunt') {
+    if (itemToRender?.itemType === 'potion' && localPressedCtx !== 'rewards') {
       handleUseSupportItem();
       return;
     }
@@ -167,7 +179,7 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
       return;
     }
 
-    if (localPressedCtx === 'hunt') {
+    if (localPressedCtx === 'rewards') {
       handleLootItem();
       return;
     }
@@ -199,6 +211,8 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
         return 'Inventory';
       case 'sellerInventory':
         return 'Buy';
+      case 'rewards':
+        return 'Loot Item';
       default:
         return 'Sell';
     }

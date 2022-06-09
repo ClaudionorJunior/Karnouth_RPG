@@ -1,4 +1,5 @@
 import { palletColors } from '../Styles';
+import { Item } from './item';
 
 export type PlayerTypies = 'Warrior' | 'Ranger' | 'Mage';
 
@@ -19,7 +20,6 @@ export interface PlayerStatus {
 
 export interface MonsterLoot {
   itemId: number;
-  rarityChance: number;
 }
 
 export interface MonsterStatus {
@@ -29,7 +29,8 @@ export interface MonsterStatus {
   power: number;
   defense: number;
   source: any;
-  lote: MonsterLoot[];
+  rangeGold?: number[];
+  lote: Item[];
 }
 
 export interface ChangePlayerAttributesProps extends PlayerStatus {
@@ -51,4 +52,5 @@ export type LocalPressed =
   | 'body'
   | 'hunt'
   | 'mallInventory'
-  | 'sellerInventory';
+  | 'sellerInventory'
+  | 'rewards';

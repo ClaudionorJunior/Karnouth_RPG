@@ -1,19 +1,19 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import ModalSelectMonster from '../../Components/ModalSelectMonster';
 
-interface ModalItemDetailProps {
+interface ModalSelectMonsterProps {
   showModalMonsters(): void;
   hideModalMonsters(): void;
   isVisible: boolean;
 }
 
-const ModalItemDetailContext = createContext<ModalItemDetailProps>(
-  {} as ModalItemDetailProps,
+const ModalSelectMonsterContext = createContext<ModalSelectMonsterProps>(
+  {} as ModalSelectMonsterProps,
 );
 
-const useModalSelectMonster = () => useContext(ModalItemDetailContext);
+const useModalSelectMonster = () => useContext(ModalSelectMonsterContext);
 
-export const ModalItemDetailProvider: React.FC = ({ children }) => {
+export const ModalSelectMonsterProvider: React.FC = ({ children }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const showModalMonsters = useCallback(() => {
@@ -25,7 +25,7 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
   }, [isVisible]);
 
   return (
-    <ModalItemDetailContext.Provider
+    <ModalSelectMonsterContext.Provider
       value={{ hideModalMonsters, showModalMonsters, isVisible }}
     >
       {children}
@@ -33,7 +33,7 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
         hideModalMonsters={hideModalMonsters}
         isVisible={isVisible}
       />
-    </ModalItemDetailContext.Provider>
+    </ModalSelectMonsterContext.Provider>
   );
 };
 

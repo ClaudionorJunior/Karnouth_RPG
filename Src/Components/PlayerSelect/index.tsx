@@ -17,10 +17,10 @@ interface PlayerSelectProps extends PressableProps {
 }
 
 const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
 
   return (
-    <Container isSelected={playerState.playerType === playerType} {...rest}>
+    <Container isSelected={PlayerState.playerType === playerType} {...rest}>
       <AvatarContainer>
         <Typography text={playerType} textSize="small" />
         <AvatarTypeImg source={avatarImgMap(playerType)} />
@@ -29,35 +29,35 @@ const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
         <AvatarContainer>
           <Typography text="Life" textSize="paragraphy" />
           <Typography
-            text={playerState[playerType].life.toString()}
+            text={PlayerState[playerType].life.toString()}
             textSize="paragraphy"
           />
         </AvatarContainer>
         <AvatarContainer>
           <Typography text="Power" textSize="paragraphy" />
           <Typography
-            text={playerState[playerType].power.toString()}
+            text={PlayerState[playerType].power.toString()}
             textSize="paragraphy"
           />
         </AvatarContainer>
         <AvatarContainer>
           <Typography text="Presicion" textSize="paragraphy" />
           <Typography
-            text={playerState[playerType].precision.toString()}
+            text={PlayerState[playerType].precision.toString()}
             textSize="paragraphy"
           />
         </AvatarContainer>
         <AvatarContainer>
           <Typography text="Intelligence" textSize="paragraphy" />
           <Typography
-            text={playerState[playerType].intelligence.toString()}
+            text={PlayerState[playerType].intelligence.toString()}
             textSize="paragraphy"
           />
         </AvatarContainer>
         <AvatarContainer>
           <Typography text="Defence" textSize="paragraphy" />
           <Typography
-            text={playerState[playerType].defense.toString()}
+            text={PlayerState[playerType].defense.toString()}
             textSize="paragraphy"
           />
         </AvatarContainer>

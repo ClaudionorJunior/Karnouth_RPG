@@ -6,13 +6,15 @@ import PlayerStatusSlice from './PlayerStatusSlice';
 import SellerManagerItemsSlice from './SellerManagerItemsSlice';
 import MonsterStatusSlice from './MonsterStatusSlice';
 import BattleHistorySlice from './BattleHistorySlice';
+import LootManagerSlice from './LootManagerSlice';
 
 const reducers = combineReducers({
-  playerState: PlayerStatusSlice,
+  PlayerState: PlayerStatusSlice,
   PlayerManagerItemsState: PlayerManagerItemsSlice,
   SellerManagerItemsState: SellerManagerItemsSlice,
   MonsterState: MonsterStatusSlice,
   BattleHistoryState: BattleHistorySlice,
+  LootManagerState: LootManagerSlice,
 });
 
 const persistConfig = {

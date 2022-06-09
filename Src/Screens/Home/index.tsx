@@ -18,7 +18,7 @@ import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 import { normalizePixel } from '../../Helpers';
 
 const Home = () => {
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
   const bodyItemsState = useSelector(
     (state: RootState) => state.PlayerManagerItemsState.bodyItems,
   );
@@ -36,20 +36,20 @@ const Home = () => {
 
   useFocusEffect(
     useCallback(() => {
-      if (playerState.currentPlayerLifePoints < playerState.playerLifePoints) {
+      if (PlayerState.currentPlayerLifePoints < PlayerState.playerLifePoints) {
         restoreLife();
       }
-    }, [playerState.currentPlayerLifePoints]),
+    }, [PlayerState.currentPlayerLifePoints]),
   );
 
-  if (!playerState) {
+  if (!PlayerState) {
     return <LoadingScreen />;
   }
 
   return (
     <Container>
       <PlayerStatus />
-      {!!playerState?.remainingPoints && (
+      {!!PlayerState?.remainingPoints && (
         <>
           <PointsContainerText>
             <AntDesign
@@ -58,7 +58,7 @@ const Home = () => {
               color={colors.primary2}
             />
             <Typography
-              text={`you have ${playerState?.remainingPoints} points to distribute`}
+              text={`you have ${PlayerState?.remainingPoints} points to distribute`}
               textSize="paragraphy"
               color={colors.primary2}
               containerStyles={{ textDecorationLine: 'underline' }}

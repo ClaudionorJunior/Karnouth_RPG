@@ -13,46 +13,46 @@ import {
 } from './styles';
 
 const PlayerStatus = () => {
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
 
   return (
     <>
       <Container onPress={() => {}}>
         <AvatarContainerImg>
           <Typography
-            text={`lvl: ${playerState?.level}`}
+            text={`lvl: ${PlayerState?.level}`}
             textSize="paragraphy"
           />
-          <AvatarImg source={avatarImgMap(playerState.playerType!)} />
+          <AvatarImg source={avatarImgMap(PlayerState.playerType!)} />
         </AvatarContainerImg>
         <ProgressBarsContainer>
           <ProgressBarTitle
             title="life"
-            currentValue={playerState.currentPlayerLifePoints}
-            totalValue={playerState.playerLifePoints}
+            currentValue={PlayerState.currentPlayerLifePoints}
+            totalValue={PlayerState.playerLifePoints}
             progressColor="life"
           />
           <ProgressBarTitle
             title="xp"
-            currentValue={playerState.playerXPPoints}
-            totalValue={playerState.xpToNextLevel}
+            currentValue={PlayerState.playerXPPoints}
+            totalValue={PlayerState.xpToNextLevel}
             progressColor="XP"
           />
           <StatusPlayerContainer>
             <Typography
-              text={`pwr: ${playerState[playerState.playerType!].power}`}
+              text={`pwr: ${PlayerState[PlayerState.playerType!].power}`}
               textSize="paragraphy"
             />
             <Typography
-              text={`def: ${playerState[playerState.playerType!].defense}`}
+              text={`def: ${PlayerState[PlayerState.playerType!].defense}`}
               textSize="paragraphy"
             />
             <Typography
-              text={`prec: ${playerState[playerState.playerType!].precision}`}
+              text={`prec: ${PlayerState[PlayerState.playerType!].precision}`}
               textSize="paragraphy"
             />
             <Typography
-              text={`int: ${playerState[playerState.playerType!].intelligence}`}
+              text={`int: ${PlayerState[PlayerState.playerType!].intelligence}`}
               textSize="paragraphy"
             />
           </StatusPlayerContainer>

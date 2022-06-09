@@ -1,5 +1,5 @@
 import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { PlayerStatus, MonsterStatus } from '../../Components';
 import { ButtonBattle, LineWrapper, Typography } from '../../Elements';
@@ -8,7 +8,7 @@ import { MonsterStatusActions } from '../../Store/MonsterStatusSlice';
 import ScrollTurns from './Components/ScrollTurns';
 import useBattleTurn from './Hooks/useBattleTurn';
 import useModalSelectMonster, {
-  ModalItemDetailProvider,
+  ModalSelectMonsterProvider,
 } from './Hooks/useModalSelectMonster';
 import { Container, ContainerBtnBattle } from './styles';
 
@@ -30,7 +30,7 @@ const Battle = () => {
   }, []);
 
   return (
-    <ModalItemDetailProvider>
+    <ModalSelectMonsterProvider>
       <Container>
         <PlayerStatus />
         <ContainerBtnBattle>
@@ -45,7 +45,7 @@ const Battle = () => {
         <LineWrapper />
         <MonsterStatus showModalMonsters={showModalMonsters} />
       </Container>
-    </ModalItemDetailProvider>
+    </ModalSelectMonsterProvider>
   );
 };
 

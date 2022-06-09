@@ -2,6 +2,7 @@
 import { MonsterStatus } from '../../../@types';
 import troll from '../troll.bmp';
 import orc from '../orc.bmp';
+import { selectItemById } from '../../../Helpers';
 
 export const AllMonsters: MonsterStatus[] = [
   {
@@ -11,10 +12,10 @@ export const AllMonsters: MonsterStatus[] = [
     source: troll,
     life: 200,
     xp: 100,
+    rangeGold: [2, 20],
     lote: [
       {
-        itemId: 1004,
-        rarityChance: 1000,
+        ...selectItemById(1004),
       },
     ],
   },
@@ -25,10 +26,10 @@ export const AllMonsters: MonsterStatus[] = [
     source: orc,
     life: 200,
     xp: 100,
+    rangeGold: [20, 200],
     lote: [
       {
-        itemId: 1001,
-        rarityChance: 1000,
+        ...selectItemById(1001),
       },
     ],
   },
