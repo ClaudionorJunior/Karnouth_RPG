@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { AllMonsters } from '../../../../Assets/Monsters/@types';
-import { MonsterStatus } from '../../../../Components';
+import { CloseModalContainer, MonsterStatus } from '../../../../Components';
 import { Button, Typography } from '../../../../Elements';
 import { normalizePixel } from '../../../../Helpers';
 import { RootState } from '../../../../Store/state';
@@ -40,9 +40,10 @@ const ModalSelectMonster = ({
 
   return (
     <ModalFeedbackMonsters visible={isVisible}>
-      <BackgroundModal onPress={handleCloseModal} />
+      <BackgroundModal />
 
       <ContainerModal>
+        <CloseModalContainer onPress={handleCloseModal} />
         <Typography text="Select one Monster" textSize="medium" />
         <FlatList
           style={{

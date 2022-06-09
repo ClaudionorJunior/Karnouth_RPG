@@ -7,3 +7,4 @@ export { default as ItemsEquippedPlayer } from './ItemsEquippedPlayer';
 export { default as Inventory } from './Inventory';
 export { default as PlayerStatus } from './PlayerStatus';
 export { default as MonsterStatus } from './MonsterStatus';
+export { default as CloseModalContainer } from './CloseModalContainer';

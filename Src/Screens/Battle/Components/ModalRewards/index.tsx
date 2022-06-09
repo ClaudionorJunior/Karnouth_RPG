@@ -1,5 +1,6 @@
 import React from 'react';
-import { Inventory } from '../../../../Components';
+import { CloseModalContainer, Inventory } from '../../../../Components';
+import { Typography } from '../../../../Elements';
 import {
   BackgroundModal,
   ContainerModal,
@@ -13,10 +14,15 @@ interface ModalRewardsProps {
 
 const ModalRewards = ({ hideModalRewards, isVisible }: ModalRewardsProps) => (
   <ModalFeedbackRewards visible={isVisible}>
-    <BackgroundModal onPress={hideModalRewards} />
+    <BackgroundModal />
 
     <ContainerModal>
+      <CloseModalContainer onPress={hideModalRewards} />
       <Inventory howManySlots={5} localPressed="rewards" />
+      <Typography
+        text="get your items then close modal"
+        textSize="paragraphy"
+      />
     </ContainerModal>
   </ModalFeedbackRewards>
 );

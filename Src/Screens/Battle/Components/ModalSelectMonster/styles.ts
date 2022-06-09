@@ -6,7 +6,7 @@ export const ModalFeedbackMonsters = styled.Modal.attrs({
   transparent: true,
 })``;
 
-export const BackgroundModal = styled.Pressable`
+export const BackgroundModal = styled.View`
   flex: 1;
   background-color: rgba(0, 0, 0, 0.2);
 `;

@@ -20,6 +20,7 @@ import { RootState } from '../../Store/state';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
 import { SellerManagerItemsActions } from '../../Store/SellerManagerItemsSlice';
 import { LootManagerActions } from '../../Store/LootManagerSlice';
+import { CloseModalContainer } from '../../Components';
 
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;
@@ -38,9 +39,6 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
   const [localPressedCtx, setLocalPressedCtx] = useState<LocalPressed>();
   const playerTypeState = useSelector(
     (state: RootState) => state.PlayerState.playerType,
-  );
-  const monsterRangeGold = useSelector(
-    (state: RootState) => state.MonsterState.Monster?.rangeGold,
   );
   const playerManagerItemsState = useSelector(
     (state: RootState) => state.PlayerManagerItemsState,
@@ -224,8 +222,9 @@ export const ModalItemDetailProvider: React.FC = ({ children }) => {
     >
       {children}
       <ModalFeedbackItems visible={isVisible}>
-        <BackgroundModal onPress={hideModalDetails} />
+        <BackgroundModal />
         <ContainerModal>
+          <CloseModalContainer onPress={hideModalDetails} />
           <Typography text={`${itemToRender?.itemUIName}`} textSize="medium" />
 
           <TextContainer>
