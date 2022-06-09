@@ -14,14 +14,16 @@ import Home from '../Screens/Home';
 import { useLevelManager } from '../Hooks';
 import { RootState } from '../Store/state';
 import { normalizePixel } from '../Helpers';
-import CommingSoon from '../Screens/CommingSoon';
 import Mall from '../Screens/Mall';
+import Battle from '../Screens/Battle';
+import { ModalSelectMonsterProvider } from '../Screens/Battle/Hooks/useModalSelectMonster';
+import { ModalRewardsProvider } from '../Screens/Battle/Hooks/useModalRewards';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
   useLevelManager();
   const { colors } = useTheme();
 
@@ -32,10 +34,10 @@ const MainStack = () => {
         headerTitleAlign: 'center',
         headerTintColor: colors.white,
         headerStyle: { backgroundColor: colors.primary1 },
-        headerBackVisible: !playerState.playerType,
+        headerBackVisible: !PlayerState.playerType,
       };
     },
-    [playerState.playerType],
+    [PlayerState.playerType],
   );
 
   return (
@@ -58,6 +60,14 @@ const MainStack = () => {
     </Stack.Navigator>
   );
 };
+
+const BattleScreenWrapper = () => (
+  <ModalSelectMonsterProvider>
+    <ModalRewardsProvider>
+      <Battle />
+    </ModalRewardsProvider>
+  </ModalSelectMonsterProvider>
+);
 
 const TabNavigator = () => {
   const { colors } = useTheme();
@@ -99,7 +109,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Battle"
-        component={CommingSoon}
+        component={BattleScreenWrapper}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

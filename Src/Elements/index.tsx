@@ -3,3 +3,7 @@ export { default as Typography } from './Typography';
 export { default as ButtonPutOrTakeOff } from './ButtonPutOrTakeOff';
 export { default as GhostButton } from './GhostButton';
 export { default as LineWrapper } from './LineWrapper';
+export { default as ButtonBattle } from './ButtonBattle';
+export { default as CloseButton } from './CloseButton';
+
+export type { CloseButtonProps } from './CloseButton';

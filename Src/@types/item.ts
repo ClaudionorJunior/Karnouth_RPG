@@ -12,7 +12,7 @@ export type ItemsType =
   | 'potion'
   | 'gold';
 
-interface SourceFile {
+export interface SourceFile {
   source?: any;
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import {
   Dimensions,
   ImageSourcePropType,
@@ -57,4 +58,36 @@ const goldLengthMask = (amount: number): string => {
   return String(amount);
 };
 
-export { normalizePixel, avatarImgMap, selectItemById, goldLengthMask };
+/**
+ * @description This method is to create a randomic gold in array
+ * @param receivedArr number[]
+ * @returns number -  gold
+ */
+const getRandomGoldByArray = (receivedArr: number[]) => {
+  let min = 0;
+  let max = 0;
+  if (receivedArr.length === 0) {
+    return 0;
+  }
+  if (receivedArr.length === 1) {
+    return receivedArr[0];
+  }
+  if (receivedArr.length >= 2) {
+    if (receivedArr[0] <= receivedArr[1]) {
+      min = receivedArr[0];
+      max = receivedArr[1];
+    } else {
+      min = receivedArr[1];
+      max = receivedArr[0];
+    }
+  }
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export {
+  normalizePixel,
+  avatarImgMap,
+  selectItemById,
+  goldLengthMask,
+  getRandomGoldByArray,
+};

@@ -44,7 +44,7 @@ const initialState: PlayerStatusState = {
 };
 
 export const PlayerStatusSlice = createSlice({
-  name: 'playerState',
+  name: 'PlayerState',
   initialState,
   reducers: {
     changePlayerStatus: (
@@ -184,8 +184,15 @@ export const PlayerStatusSlice = createSlice({
       state.remainingPoints = 0;
     },
 
-    resetRemainingPoints: state => {
-      state.remainingPoints = 10;
+    resetRemainingPoints: (
+      state,
+      action: PayloadAction<{ points?: number }>,
+    ) => {
+      if (action.payload?.points) {
+        state.remainingPoints += action.payload.points;
+      } else {
+        state.remainingPoints = 10;
+      }
     },
 
     onChangePlayerLevel: (
@@ -193,6 +200,7 @@ export const PlayerStatusSlice = createSlice({
       action: PayloadAction<OnChangePlayerLevelParams>,
     ) => {
       state.level = action.payload.level;
+      state.remainingPoints += 1;
       state.xpToNextLevel = action.payload.xpToNextLevel;
     },
 

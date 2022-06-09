@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ButtonPutOrTakeOff, Typography } from '../../Elements';
 import {
@@ -13,21 +13,34 @@ import {
   StatusQuantity,
 } from './styles';
 
-const PlayerPointsDistribution = () => {
-  const playerState = useSelector((state: RootState) => state.playerState);
+interface PlayerPointsDistributionProps {
+  isToDistributeOnLevel?: boolean;
+}
+
+const PlayerPointsDistribution = ({
+  isToDistributeOnLevel = false,
+}: PlayerPointsDistributionProps) => {
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
   const [isLoading, setIsloading] = useState(false);
   const dispatch = useDispatch();
 
   const handlePoints = useCallback((payload: ChangePlayerStatusParams) => {
     setIsloading(true);
     dispatch(PlayerStatusActions.changePlayerStatus(payload));
-
-    setTimeout(() => {
-      setIsloading(false);
-    }, 250);
   }, []);
 
-  if (!playerState.playerType) {
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isLoading) {
+      timer = setTimeout(() => {
+        setIsloading(false);
+      }, 250);
+    }
+
+    return () => timer && clearTimeout(timer);
+  }, [isLoading]);
+
+  if (!PlayerState.playerType) {
     return <></>;
   }
 
@@ -38,7 +51,11 @@ const PlayerPointsDistribution = () => {
           <Typography text="Life" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={isLoading || playerState.remainingPoints === 10}
+          disabled={
+            isToDistributeOnLevel ||
+            isLoading ||
+            PlayerState.remainingPoints === 10
+          }
           onPress={() =>
             handlePoints({
               statusType: 'life',
@@ -49,12 +66,12 @@ const PlayerPointsDistribution = () => {
         />
         <StatusQuantity>
           <Typography
-            text={playerState?.[playerState.playerType].life.toString() || ''}
+            text={PlayerState?.[PlayerState.playerType].life.toString() || ''}
             textSize="small"
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={isLoading || !playerState.remainingPoints}
+          disabled={isLoading || !PlayerState.remainingPoints}
           onPress={() =>
             handlePoints({
               statusType: 'life',
@@ -69,7 +86,11 @@ const PlayerPointsDistribution = () => {
           <Typography text="Precision" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={isLoading || playerState.remainingPoints === 10}
+          disabled={
+            isToDistributeOnLevel ||
+            isLoading ||
+            PlayerState.remainingPoints === 10
+          }
           onPress={() =>
             handlePoints({
               statusType: 'precision',
@@ -81,13 +102,13 @@ const PlayerPointsDistribution = () => {
         <StatusQuantity>
           <Typography
             text={
-              playerState?.[playerState.playerType].precision.toString() || ''
+              PlayerState?.[PlayerState.playerType].precision.toString() || ''
             }
             textSize="small"
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={isLoading || !playerState.remainingPoints}
+          disabled={isLoading || !PlayerState.remainingPoints}
           onPress={() =>
             handlePoints({
               statusType: 'precision',
@@ -102,7 +123,11 @@ const PlayerPointsDistribution = () => {
           <Typography text="Defence" textSize="small" />
         </StatusName>
         <ButtonPutOrTakeOff
-          disabled={isLoading || playerState.remainingPoints === 10}
+          disabled={
+            isToDistributeOnLevel ||
+            isLoading ||
+            PlayerState.remainingPoints === 10
+          }
           onPress={() =>
             handlePoints({
               statusType: 'defense',
@@ -114,13 +139,13 @@ const PlayerPointsDistribution = () => {
         <StatusQuantity>
           <Typography
             text={
-              playerState?.[playerState.playerType].defense.toString() || ''
+              PlayerState?.[PlayerState.playerType].defense.toString() || ''
             }
             textSize="small"
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={isLoading || !playerState.remainingPoints}
+          disabled={isLoading || !PlayerState.remainingPoints}
           onPress={() =>
             handlePoints({
               statusType: 'defense',
@@ -136,9 +161,10 @@ const PlayerPointsDistribution = () => {
         </StatusName>
         <ButtonPutOrTakeOff
           disabled={
+            isToDistributeOnLevel ||
             isLoading ||
-            playerState.remainingPoints === 10 ||
-            playerState?.[playerState?.playerType]?.power === 0
+            PlayerState.remainingPoints === 10 ||
+            PlayerState?.[PlayerState?.playerType]?.power === 0
           }
           onPress={() =>
             handlePoints({
@@ -150,15 +176,15 @@ const PlayerPointsDistribution = () => {
         />
         <StatusQuantity>
           <Typography
-            text={playerState?.[playerState.playerType].power.toString() || ''}
+            text={PlayerState?.[PlayerState.playerType].power.toString() || ''}
             textSize="small"
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
           disabled={
             isLoading ||
-            !playerState.remainingPoints ||
-            playerState?.[playerState?.playerType]?.power === 0
+            !PlayerState.remainingPoints ||
+            PlayerState?.[PlayerState?.playerType]?.power === 0
           }
           onPress={() =>
             handlePoints({
@@ -175,9 +201,10 @@ const PlayerPointsDistribution = () => {
         </StatusName>
         <ButtonPutOrTakeOff
           disabled={
+            isToDistributeOnLevel ||
             isLoading ||
-            playerState.remainingPoints === 10 ||
-            playerState?.[playerState?.playerType]?.intelligence === 0
+            PlayerState.remainingPoints === 10 ||
+            PlayerState?.[PlayerState?.playerType]?.intelligence === 0
           }
           onPress={() =>
             handlePoints({
@@ -190,7 +217,7 @@ const PlayerPointsDistribution = () => {
         <StatusQuantity>
           <Typography
             text={
-              playerState?.[playerState.playerType].intelligence.toString() ||
+              PlayerState?.[PlayerState.playerType].intelligence.toString() ||
               ''
             }
             textSize="small"
@@ -199,8 +226,8 @@ const PlayerPointsDistribution = () => {
         <ButtonPutOrTakeOff
           disabled={
             isLoading ||
-            !playerState.remainingPoints ||
-            playerState?.[playerState?.playerType]?.intelligence === 0
+            !PlayerState.remainingPoints ||
+            PlayerState?.[PlayerState?.playerType]?.intelligence === 0
           }
           onPress={() =>
             handlePoints({

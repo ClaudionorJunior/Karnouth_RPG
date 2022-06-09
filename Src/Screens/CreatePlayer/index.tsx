@@ -15,7 +15,7 @@ const PLAYERS_TYPE: PlayerTypies[] = ['Warrior', 'Mage', 'Ranger'];
 
 const CreatePlayer = () => {
   const [lastClass, setLastClass] = useState<PlayerTypies>();
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -24,7 +24,7 @@ const CreatePlayer = () => {
       dispatch(PlayerStatusActions.changePlayerClass(player));
       setLastClass(player);
 
-      dispatch(PlayerStatusActions.resetRemainingPoints());
+      dispatch(PlayerStatusActions.resetRemainingPoints({}));
 
       if (lastClass && lastClass !== player) {
         dispatch(PlayerStatusActions.resetPartialStatus());
@@ -46,22 +46,22 @@ const CreatePlayer = () => {
           playerType={player}
         />
       ))}
-      {playerState.playerType && (
+      {PlayerState.playerType && (
         <Typography
           containerStyles={{
             marginTop: 16,
             marginBottom: 16,
             textAlign: 'center',
           }}
-          text={classDescription[playerState.playerType]}
+          text={classDescription[PlayerState.playerType]}
           textSize="paragraphy"
         />
       )}
-      {playerState.playerType && (
+      {PlayerState.playerType && (
         <RemainingContainer>
           <Typography
             containerStyles={{ marginBottom: 16 }}
-            text={`Remaining points: ${playerState.remainingPoints}`}
+            text={`Remaining points: ${PlayerState.remainingPoints}`}
             textSize="paragraphy"
           />
           <GhostButton
@@ -73,7 +73,7 @@ const CreatePlayer = () => {
       <PlayerPointsDistribution />
 
       <Button
-        disabled={!!playerState.remainingPoints}
+        disabled={!!PlayerState.remainingPoints}
         containerStyles={{
           width: '100%',
           marginBottom: normalizePixel(32),

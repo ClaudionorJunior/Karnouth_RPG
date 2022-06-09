@@ -12,7 +12,7 @@ export const palletColors = {
     goldCoin: '#ffd700',
     warning: '#FFAE40',
     blood: '#CC1F1F',
-    red: '#CC1F1F',
+    btnBattle: '#CC1F1F',
     green: '#60AE31',
     slotBGColor: '#e6e6e6',
     cardBGColor: '#D1D1D1',

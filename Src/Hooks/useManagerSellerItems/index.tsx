@@ -1,11 +1,14 @@
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AllItems } from '../../Assets/Items/@types';
 import { SellerManagerItemsActions } from '../../Store/SellerManagerItemsSlice';
 import { RootState } from '../../Store/state';
 
+const tempCalc = 1000 * 60 * 2;
+
 const useManagerSellerItems = () => {
+  const [counter, setCounter] = useState<number>(0);
   const dispatch = useDispatch();
   const { sellingItems, lastSee } = useSelector(
     (state: RootState) => state.SellerManagerItemsState,
@@ -19,13 +22,17 @@ const useManagerSellerItems = () => {
     return tempNum;
   }, []);
 
-  const sendItemToSeller = useCallback((itemIds: number[]) => {
-    dispatch(SellerManagerItemsActions.addSellerItem(itemIds));
-  }, []);
+  const sendItemToSeller = useCallback(
+    (itemIds: number[]) => {
+      if (!sellingItems.length) {
+        dispatch(SellerManagerItemsActions.addSellerItem(itemIds));
+      }
+    },
+    [sellingItems],
+  );
 
   useFocusEffect(
     useCallback(() => {
-      const tempCalc = 1000 * 60 * 40;
       let tempLastSee = 0;
       let dateNow = Date.now();
       let itemIds: number[] = [];
@@ -41,22 +48,19 @@ const useManagerSellerItems = () => {
         }
       });
 
-      if (sellingItems.length > 0 && dateNow > tempLastSee) {
+      if (dateNow > tempLastSee) {
         dispatch(SellerManagerItemsActions.changeLastSee(dateNow));
-        setTimeout(() => {
-          dispatch(SellerManagerItemsActions.resetSellerItems());
-        }, 50);
-
-        setTimeout(() => {
-          sendItemToSeller(itemIds);
-        }, 100);
+        dispatch(SellerManagerItemsActions.resetSellerItems());
       }
 
-      if (sellingItems.length === 0) {
-        sendItemToSeller(itemIds);
-      }
-    }, []),
+      sendItemToSeller(itemIds);
+    }, [counter]),
   );
+
+  useEffect(() => {
+    const timer = setInterval(() => setCounter(state => state + 1), 500);
+    return () => clearInterval(timer);
+  }, [counter]);
 };
 
 export default useManagerSellerItems;

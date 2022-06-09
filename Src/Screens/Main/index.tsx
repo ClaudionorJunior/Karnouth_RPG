@@ -11,14 +11,14 @@ import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
 
 const Main = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState<boolean>(false);
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   useFocusEffect(
     useCallback(() => {
-      setIsContinueDisabled(!playerState.playerType);
-    }, [playerState.playerType]),
+      setIsContinueDisabled(!PlayerState.playerType);
+    }, [PlayerState.playerType]),
   );
 
   useFocusEffect(
@@ -35,7 +35,7 @@ const Main = () => {
   );
 
   const handleCreatePlayer = useCallback(() => {
-    if (playerState.playerType) {
+    if (PlayerState.playerType) {
       Alert.alert(
         'Caution!',
         'If you press continue, you will lost your progress...',
@@ -57,7 +57,7 @@ const Main = () => {
       return;
     }
     navigation.navigate('CreatePlayer' as never);
-  }, [playerState.playerType]);
+  }, [PlayerState.playerType]);
 
   const handleContinue = useCallback(() => {
     navigation.navigate('TabNavigator' as never);
