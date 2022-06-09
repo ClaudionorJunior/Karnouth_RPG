@@ -4,26 +4,40 @@ import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
 import { RootState } from '../../Store/state';
 
 const useLevelManager = () => {
-  const playerState = useSelector((state: RootState) => state.playerState);
+  const PlayerState = useSelector((state: RootState) => state.PlayerState);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (playerState.playerXPPoints >= playerState.xpToNextLevel) {
+    if (PlayerState.playerXPPoints >= PlayerState.xpToNextLevel) {
       calcXpToNextLevel();
     }
-  }, [playerState.playerXPPoints, playerState.xpToNextLevel]);
+  }, [PlayerState.playerXPPoints, PlayerState.xpToNextLevel]);
 
   const calcXpToNextLevel = useCallback(() => {
-    const nextPlayerLevel = playerState.level + 1;
-    const nextXpNeeded = nextPlayerLevel * 150;
+    const nextPlayerLevel = PlayerState.level + 1;
+    // eslint-disable-next-line prettier/prettier
+    let nextXpNeeded = (50 * ((PlayerState.level**3 - (6 * PlayerState.level**2)) + ((17*PlayerState.level) - 12))) / 3
 
+    if (nextXpNeeded < 300) {
+      nextXpNeeded = 300;
+    }
+
+    if (PlayerState.playerXPPoints >= 300 && PlayerState.playerXPPoints < 450) {
+      nextXpNeeded = 450;
+    }
+
+    if (PlayerState.playerXPPoints >= 450 && PlayerState.playerXPPoints < 600) {
+      nextXpNeeded = 600;
+    }
+
+    dispatch(PlayerStatusActions.resetRemainingPoints({ points: 2 }));
     dispatch(
       PlayerStatusActions.onChangePlayerLevel({
         level: nextPlayerLevel,
         xpToNextLevel: nextXpNeeded,
       }),
     );
-  }, [playerState.level]);
+  }, [PlayerState.level, PlayerState.playerXPPoints]);
 };
 
 export default useLevelManager;

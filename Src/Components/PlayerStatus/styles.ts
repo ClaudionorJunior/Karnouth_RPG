@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { normalizePixel } from '../../Helpers';
 
-export const Container = styled.View`
+export const Container = styled.Pressable`
   flex-direction: row;
   height: ${normalizePixel(90)}px;
 `;

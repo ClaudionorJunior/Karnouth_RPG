@@ -16,12 +16,14 @@ export const SellerManagerItemsSlice = createSlice({
   reducers: {
     addSellerItem: (state, action: PayloadAction<number[]>) => {
       if (action.payload.length <= 5) {
-        action.payload.forEach(n => {
-          if (n !== 9999 && n >= 1000 && n < 9998) {
-            let tempItem: Item = selectItemById(n);
-            state.sellingItems = [...state.sellingItems, tempItem];
-          }
-        });
+        if (!state.sellingItems.length) {
+          action.payload.forEach(n => {
+            if (n !== 9999 && n >= 1000 && n < 9998) {
+              let tempItem: Item = selectItemById(n);
+              state.sellingItems = [...state.sellingItems, tempItem];
+            }
+          });
+        }
       } else {
         state.sellerManagerItemsError = `you don't have more slots to sell`;
       }
