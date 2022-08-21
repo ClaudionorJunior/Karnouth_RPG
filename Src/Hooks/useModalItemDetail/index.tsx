@@ -20,7 +20,7 @@ import { RootState } from '../../Store/state';
 import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
 import { SellerManagerItemsActions } from '../../Store/SellerManagerItemsSlice';
 import { LootManagerActions } from '../../Store/LootManagerSlice';
-import { CloseModalContainer } from '../../Components';
+import CloseModalContainer from '../../Components/CloseModalContainer';
 
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;

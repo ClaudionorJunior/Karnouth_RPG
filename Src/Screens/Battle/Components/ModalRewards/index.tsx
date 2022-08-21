@@ -1,5 +1,6 @@
 import React from 'react';
-import { CloseModalContainer, Inventory } from '../../../../Components';
+import CloseModalContainer from '../../../../Components/CloseModalContainer';
+import { Inventory } from '../../../../Components';
 import { Typography } from '../../../../Elements';
 import {
   BackgroundModal,
