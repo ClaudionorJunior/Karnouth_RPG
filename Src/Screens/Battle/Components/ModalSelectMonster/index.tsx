@@ -39,6 +39,10 @@ const ModalSelectMonster = ({
     }
   };
 
+  const AllMonstersData = useMemo(() => {
+    return AllMonsters;
+  }, [isVisible]);
+
   return (
     <ModalFeedbackMonsters visible={isVisible}>
       <BackgroundModal />
@@ -51,7 +55,7 @@ const ModalSelectMonster = ({
             height: normalizePixel(240),
             marginBottom: normalizePixel(24),
           }}
-          data={AllMonsters}
+          data={AllMonstersData}
           renderItem={({ item }) => <MonsterStatus monsterToRender={item} />}
           keyExtractor={item => item.name}
         />
