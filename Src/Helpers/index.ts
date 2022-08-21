@@ -6,9 +6,9 @@ import {
   Platform,
 } from 'react-native';
 import uuid from 'react-native-uuid';
-import { Item, PlayerTypies } from '../@types';
-import { Mage, Ranger, Warrior } from '../Assets';
-import { AllItems } from '../Assets/Items/@types';
+import { Item, PlayerTypies } from '~/@types';
+import { Mage, Ranger, Warrior } from '~/assets';
+import { AllItems } from '~/assets/Items/@types';
 
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
   Dimensions.get('window');
@@ -16,7 +16,10 @@ export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
 const wscale: number = SCREEN_WIDTH / 360;
 const hscale: number = SCREEN_HEIGHT / 640;
 
-const normalizePixel = (size: number, based: 'width' | 'height' = 'width') => {
+export const normalizePixel = (
+  size: number,
+  based: 'width' | 'height' = 'width',
+) => {
   const newSize = based === 'height' ? size * hscale : size * wscale;
   if (Platform.OS === 'ios') {
     return Math.round(PixelRatio.roundToNearestPixel(newSize));
@@ -24,7 +27,7 @@ const normalizePixel = (size: number, based: 'width' | 'height' = 'width') => {
   return Math.round(PixelRatio.roundToNearestPixel(newSize));
 };
 
-const avatarImgMap = (playerType: PlayerTypies): ImageSourcePropType => {
+export const avatarImgMap = (playerType: PlayerTypies): ImageSourcePropType => {
   switch (playerType) {
     case 'Mage':
       return Mage;
@@ -40,7 +43,7 @@ const avatarImgMap = (playerType: PlayerTypies): ImageSourcePropType => {
  * @param id - between 1000 and 9999
  * @returns Item
  */
-const selectItemById = (itemId: number): Item => {
+export const selectItemById = (itemId: number): Item => {
   let tempItem = AllItems.filter(it => it.itemId === itemId)[0];
   tempItem.id = uuid.v4();
   return tempItem;
@@ -51,7 +54,7 @@ const selectItemById = (itemId: number): Item => {
  * @param amount
  * @returns string - masked gold
  */
-const goldLengthMask = (amount: number): string => {
+export const goldLengthMask = (amount: number): string => {
   if (amount >= 1000000000) {
     return '999kk';
   }
@@ -63,7 +66,7 @@ const goldLengthMask = (amount: number): string => {
  * @param receivedArr number[]
  * @returns number -  gold
  */
-const getRandomGoldByArray = (receivedArr: number[]) => {
+export const getRandomGoldByArray = (receivedArr: number[]) => {
   let min = 0;
   let max = 0;
   if (receivedArr.length === 0) {
@@ -82,12 +85,4 @@ const getRandomGoldByArray = (receivedArr: number[]) => {
     }
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-export {
-  normalizePixel,
-  avatarImgMap,
-  selectItemById,
-  goldLengthMask,
-  getRandomGoldByArray,
 };

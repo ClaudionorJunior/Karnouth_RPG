@@ -1,10 +1,10 @@
 import React from 'react';
 import { PressableProps } from 'react-native';
 import { useSelector } from 'react-redux';
-import { PlayerTypies } from '../../@types';
-import { Typography } from '../../Elements';
-import { avatarImgMap } from '../../Helpers';
-import { RootState } from '../../Store/state';
+import { PlayerTypies } from '~/@types';
+import { Typography } from '~/elements/Typography';
+import { avatarImgMap } from '~/helpers';
+import { RootState } from '~/store/state';
 import {
   Container,
   AvatarContainer,
@@ -16,7 +16,7 @@ interface PlayerSelectProps extends PressableProps {
   playerType: PlayerTypies;
 }
 
-const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
+export const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
   const PlayerState = useSelector((state: RootState) => state.PlayerState);
 
   return (
@@ -65,5 +65,3 @@ const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
     </Container>
   );
 };
-
-export default PlayerSelect;

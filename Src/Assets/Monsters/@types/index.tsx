@@ -1,8 +1,8 @@
 /* eslint-disable import/no-mutable-exports */
-import { MonsterStatus } from '../../../@types';
+import { MonsterStatus } from '~/@types';
 import troll from '../troll.bmp';
 import orc from '../orc.bmp';
-import { selectItemById } from '../../../Helpers';
+import { selectItemById } from '~/helpers';
 
 export let AllMonsters: MonsterStatus[] = [
   {

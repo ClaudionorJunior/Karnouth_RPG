@@ -3,19 +3,18 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
-import {
-  Inventory,
-  ItemsEquippedPlayer,
-  LoadingScreen,
-  PlayerPointsDistribution,
-  PlayerStatus,
-} from '../../Components';
-import { LineWrapper, Typography } from '../../Elements';
-import { RootState } from '../../Store/state';
+import { Inventory } from '~/components/Inventory';
+import { ItemsEquippedPlayer } from '~/components/ItemsEquippedPlayer';
+import { LoadingScreen } from '~/components/LoadingScreen';
+import { PlayerPointsDistribution } from '~/components/PlayerPointsDistribution';
+import { PlayerStatus } from '~/components/PlayerStatus';
+import { Typography } from '~/elements/Typography';
+import { LineWrapper } from '~/elements/LineWrapper';
+import { RootState } from '~/store/state';
 import { Container, PointsContainerText } from './styles';
-import { useAutoRegerateLife } from '../../Hooks';
-import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
-import { normalizePixel } from '../../Helpers';
+import { useAutoRegerateLife } from '~/hooks';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
+import { normalizePixel } from '~/helpers';
 
 const Home = () => {
   const PlayerState = useSelector((state: RootState) => state.PlayerState);

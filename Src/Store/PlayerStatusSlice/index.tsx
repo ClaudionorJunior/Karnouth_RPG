@@ -4,7 +4,7 @@ import {
   ChangePlayerAttributesProps,
   PlayerTypies,
   StatusTypies,
-} from '../../@types';
+} from '~/@types';
 import {
   ChangePlayerLifeParams,
   ChangePlayerStatusParams,

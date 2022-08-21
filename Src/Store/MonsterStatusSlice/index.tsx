@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MonsterStatus } from '../../@types';
+import { MonsterStatus } from '~/@types';
 import { ChangeMonsterLifeParams, MonsterStatusState } from './@types';
 
 const initialState: MonsterStatusState = {

@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import ModalSelectMonster from '../../Components/ModalSelectMonster';
+import { ModalSelectMonster } from '../../components/ModalSelectMonster';
 
 interface ModalSelectMonsterProps {
   showModalMonsters(): void;

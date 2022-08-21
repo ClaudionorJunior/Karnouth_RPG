@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonPutOrTakeOff, Typography } from '../../Elements';
+import { ButtonPutOrTakeOff } from '~/elements/ButtonPutOrTakeOff';
+import { Typography } from '~/elements/Typography';
 import {
   ChangePlayerStatusParams,
   PlayerStatusActions,
-} from '../../Store/PlayerStatusSlice';
-import { RootState } from '../../Store/state';
+} from '~/store/PlayerStatusSlice';
+import { RootState } from '~/store/state';
 import {
   Container,
   SelectableContainer,
@@ -17,7 +18,7 @@ interface PlayerPointsDistributionProps {
   isToDistributeOnLevel?: boolean;
 }
 
-const PlayerPointsDistribution = ({
+export const PlayerPointsDistribution = ({
   isToDistributeOnLevel = false,
 }: PlayerPointsDistributionProps) => {
   const PlayerState = useSelector((state: RootState) => state.PlayerState);
@@ -241,5 +242,3 @@ const PlayerPointsDistribution = ({
     </Container>
   );
 };
-
-export default PlayerPointsDistribution;

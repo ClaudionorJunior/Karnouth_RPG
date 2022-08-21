@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { normalizePixel } from '../../Helpers';
+import { normalizePixel } from '~/helpers';
 
 interface ButtonContainerProps {
   disabled: boolean;

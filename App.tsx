@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { Graduate_400Regular, useFonts } from '@expo-google-fonts/graduate';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import store from './Src/Store/store';
-import { LoadingScreen } from './Src/Components';
-import Root from './Src';
+import store from './src/store/store';
+import { LoadingScreen } from './src/components/LoadingScreen';
+import Root from './src';
 
 const App = () => {
   const [fontsLoaded] = useFonts({

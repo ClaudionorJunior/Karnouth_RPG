@@ -2,12 +2,13 @@ import { StackActions, useNavigation } from '@react-navigation/native';
 import React, { useMemo } from 'react';
 import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
-import { AllMonsters } from '../../../../Assets/Monsters/@types';
-import CloseModalContainer from '../../../../Components/CloseModalContainer';
-import { MonsterStatus } from '../../../../Components';
-import { Button, Typography } from '../../../../Elements';
-import { normalizePixel } from '../../../../Helpers';
-import { RootState } from '../../../../Store/state';
+import { AllMonsters } from '~/assets/Monsters/@types';
+import { CloseModalContainer } from '~/components/CloseModalContainer';
+import { MonsterStatus } from '~/components/MonsterStatus';
+import { Button } from '~/elements/Button';
+import { Typography } from '~/elements/Typography';
+import { normalizePixel } from '~/helpers';
+import { RootState } from '~/store/state';
 import {
   BackgroundModal,
   ContainerModal,
@@ -19,7 +20,7 @@ interface ModalSelectMonsterProps {
   isVisible: boolean;
 }
 
-const ModalSelectMonster = ({
+export const ModalSelectMonster = ({
   hideModalMonsters,
   isVisible,
 }: ModalSelectMonsterProps) => {
@@ -64,5 +65,3 @@ const ModalSelectMonster = ({
     </ModalFeedbackMonsters>
   );
 };
-
-export default ModalSelectMonster;

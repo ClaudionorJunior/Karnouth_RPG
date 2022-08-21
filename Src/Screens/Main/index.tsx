@@ -2,12 +2,13 @@ import React, { useCallback, useState } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, BackHandler } from 'react-native';
-import { SceneMain } from '../../Assets';
-import { Button, Typography } from '../../Elements';
-import { RootState } from '../../Store/state';
+import { SceneMain } from '~/assets';
+import { Typography } from '~/elements/Typography';
+import { Button } from '~/elements/Button';
+import { RootState } from '~/store/state';
 import { Container, MainImage, ButtonContainer } from './styles';
-import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
-import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
+import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
 
 const Main = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState<boolean>(false);
