@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { ViewStyle } from 'react-native';
 import { Item, LocalPressed } from '../../@types';
-import useModalItemDetail from '../../Hooks/useModalItemDetail';
+import useModalItemDetail from '../../hooks/useModalItemDetail';
 
 import { Container, Image } from './styles';
 
@@ -11,7 +11,7 @@ interface Props {
   containerStyles?: ViewStyle;
 }
 
-const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
+export const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
   const { showModalDetails } = useModalItemDetail();
 
   const handleSlot = useCallback(() => {
@@ -26,5 +26,3 @@ const Slotitem = ({ item, localPressed, containerStyles }: Props) => {
     </Container>
   );
 };
-
-export default Slotitem;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Animated, ViewStyle } from 'react-native';
 import { useTheme } from 'styled-components/native';
-import { Typography } from '../../Elements';
+import { Typography } from '../../elements/Typography';
 import { Container, LevelBar, Row } from './styles';
 
 interface ProgressBarTitleProps {
@@ -12,7 +12,7 @@ interface ProgressBarTitleProps {
   textColor?: 'light' | 'dark';
 }
 
-const ProgressBarTitle = ({
+export const ProgressBarTitle = ({
   currentValue,
   totalValue,
   title,
@@ -62,5 +62,3 @@ const ProgressBarTitle = ({
     </Container>
   );
 };
-
-export default ProgressBarTitle;

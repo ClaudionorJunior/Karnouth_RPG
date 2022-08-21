@@ -3,14 +3,14 @@ import { AntDesign } from '@expo/vector-icons';
 import { PressableProps } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { Container } from './styles';
-import { normalizePixel } from '../../Helpers';
+import { normalizePixel } from '../../helpers';
 
 interface ButtonPutOrTakeOffProps extends PressableProps {
   name: 'minuscircle' | 'pluscircle';
   disabled?: boolean;
 }
 
-const ButtonPutOrTakeOff = ({
+export const ButtonPutOrTakeOff = ({
   name,
   disabled,
   ...rest
@@ -26,5 +26,3 @@ const ButtonPutOrTakeOff = ({
     </Container>
   );
 };
-
-export default ButtonPutOrTakeOff;

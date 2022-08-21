@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/native';
-import { normalizePixel } from '../../Helpers';
+import { normalizePixel } from '../../helpers';
 
 export const Container = styled.Pressable<{ isSelected: boolean }>`
   width: 90%;

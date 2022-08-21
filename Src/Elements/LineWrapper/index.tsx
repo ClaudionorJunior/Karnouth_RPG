@@ -1,8 +1,6 @@
 import React from 'react';
 import { Line } from './styles';
 
-const LineWrapper = () => {
+export const LineWrapper = () => {
   return <Line />;
 };
-
-export default LineWrapper;

@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { LootManagerActions } from '../../../../Store/LootManagerSlice';
-import ModalRewards from '../../Components/ModalRewards';
+import { LootManagerActions } from '../../../../store/LootManagerSlice';
+import ModalRewards from '../../components/ModalRewards';
 
 interface ModalRewardsProps {
   showModalRewards(): void;

@@ -1,17 +1,17 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import Slotitem from '../SlotItem';
+import { Slotitem } from '../SlotItem';
 import {
   BodyContainer,
   Container,
   HandsContainer,
   SlotWithDescription,
 } from './styles';
-import { Typography } from '../../Elements';
-import { RootState } from '../../Store/state';
-import { goldLengthMask } from '../../Helpers';
+import { Typography } from '../../elements/Typography';
+import { RootState } from '../../store/state';
+import { goldLengthMask } from '../../helpers';
 
-const ItemsEquippedPlayer = () => {
+export const ItemsEquippedPlayer = () => {
   const bodyItemsState = useSelector(
     (state: RootState) => state.PlayerManagerItemsState.bodyItems,
   );
@@ -88,5 +88,3 @@ const ItemsEquippedPlayer = () => {
     </Container>
   );
 };
-
-export default ItemsEquippedPlayer;

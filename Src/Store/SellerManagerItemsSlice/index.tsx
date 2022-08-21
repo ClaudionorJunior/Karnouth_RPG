@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item } from '../../@types';
-import { selectItemById } from '../../Helpers';
+import { selectItemById } from '../../helpers';
 import { SellerManagerItemsState } from './@types';
 
 const initialState: SellerManagerItemsState = {

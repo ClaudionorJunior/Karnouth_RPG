@@ -1,7 +1,7 @@
 import React from 'react';
-import CloseModalContainer from '../../../../Components/CloseModalContainer';
-import { Inventory } from '../../../../Components';
-import { Typography } from '../../../../Elements';
+import { CloseModalContainer } from '../../../../components/CloseModalContainer';
+import { Inventory } from '../../../../components/Inventory';
+import { Typography } from '../../../../elements/Typography';
 import {
   BackgroundModal,
   ContainerModal,
@@ -13,7 +13,10 @@ interface ModalRewardsProps {
   isVisible: boolean;
 }
 
-const ModalRewards = ({ hideModalRewards, isVisible }: ModalRewardsProps) => (
+export const ModalRewards = ({
+  hideModalRewards,
+  isVisible,
+}: ModalRewardsProps) => (
   <ModalFeedbackRewards visible={isVisible}>
     <BackgroundModal />
 
@@ -27,5 +30,3 @@ const ModalRewards = ({ hideModalRewards, isVisible }: ModalRewardsProps) => (
     </ContainerModal>
   </ModalFeedbackRewards>
 );
-
-export default ModalRewards;

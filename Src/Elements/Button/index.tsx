@@ -1,7 +1,7 @@
 import React from 'react';
 import { PressableProps, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from 'styled-components/native';
-import Typography, { TextSizes } from '../Typography';
+import { Typography, TextSizes } from '../Typography';
 import { ButtonContainer } from './styles';
 
 interface Props extends PressableProps {
@@ -11,7 +11,7 @@ interface Props extends PressableProps {
   containerStyles?: StyleProp<ViewStyle>;
 }
 
-const Button = ({
+export const Button = ({
   text,
   textSize,
   containerStyles,
@@ -25,5 +25,3 @@ const Button = ({
     </ButtonContainer>
   );
 };
-
-export default Button;

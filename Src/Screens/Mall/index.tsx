@@ -1,8 +1,8 @@
 import React from 'react';
-import { SceneMall, SellerKarnouth } from '../../Assets';
-import { Inventory } from '../../Components';
-import { LineWrapper } from '../../Elements';
-import { useManagerSellerItems } from '../../Hooks';
+import { SceneMall, SellerKarnouth } from '../../assets';
+import { Inventory } from '../../components/Inventory';
+import { LineWrapper } from '../../elements/LineWrapper';
+import { useManagerSellerItems } from '../../hooks';
 import {
   ContainerImgs,
   ContainerInventories,

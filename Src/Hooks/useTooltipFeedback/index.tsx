@@ -6,10 +6,10 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '../../Elements';
-import { normalizePixel } from '../../Helpers';
-import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
-import { RootState } from '../../Store/state';
+import { Typography } from '../../elements/Typography';
+import { normalizePixel } from '../../helpers';
+import { PlayerManagerItemsActions } from '../../store/PlayerManagerItemsSlice';
+import { RootState } from '../../store/state';
 import { Container } from './styles';
 
 const TooltipFeedbackContext = createContext({});
