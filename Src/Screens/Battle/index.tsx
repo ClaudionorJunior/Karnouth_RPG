@@ -27,6 +27,9 @@ const Battle = () => {
 
   useEffect(() => {
     return () => hideModalMonsters();
+
+
+    
   }, []);
 
   return (
