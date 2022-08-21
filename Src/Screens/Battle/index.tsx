@@ -1,13 +1,13 @@
 import { useFocusEffect } from '@react-navigation/native';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { MonsterStatus } from '../../components/MonsterStatus';
-import { PlayerStatus } from '../../components/PlayerStatus';
-import { Typography } from '../../elements/Typography';
-import { ButtonBattle } from '../../elements/ButtonBattle';
-import { LineWrapper } from '../../elements/LineWrapper';
-import { BattleHistoryActions } from '../../store/BattleHistorySlice';
-import { MonsterStatusActions } from '../../store/MonsterStatusSlice';
+import { MonsterStatus } from '~/components/MonsterStatus';
+import { PlayerStatus } from '~/components/PlayerStatus';
+import { Typography } from '~/elements/Typography';
+import { ButtonBattle } from '~/elements/ButtonBattle';
+import { LineWrapper } from '~/elements/LineWrapper';
+import { BattleHistoryActions } from '~/store/BattleHistorySlice';
+import { MonsterStatusActions } from '~/store/MonsterStatusSlice';
 import { ScrollTurns } from './components/ScrollTurns';
 import useBattleTurn from './hooks/useBattleTurn';
 import useModalSelectMonster, {

@@ -1,9 +1,9 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AllItems } from '../../assets/Items/@types';
-import { SellerManagerItemsActions } from '../../store/SellerManagerItemsSlice';
-import { RootState } from '../../store/state';
+import { AllItems } from '~/assets/Items/@types';
+import { SellerManagerItemsActions } from '~/store/SellerManagerItemsSlice';
+import { RootState } from '~/store/state';
 
 const tempCalc = 1000 * 60 * 2;
 

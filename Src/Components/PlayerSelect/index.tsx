@@ -1,10 +1,10 @@
 import React from 'react';
 import { PressableProps } from 'react-native';
 import { useSelector } from 'react-redux';
-import { PlayerTypies } from '../../@types';
-import { Typography } from '../../elements/Typography';
-import { avatarImgMap } from '../../helpers';
-import { RootState } from '../../store/state';
+import { PlayerTypies } from '~/@types';
+import { Typography } from '~/elements/Typography';
+import { avatarImgMap } from '~/helpers';
+import { RootState } from '~/store/state';
 import {
   Container,
   AvatarContainer,

@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Item } from '../../@types';
-import { MAX_INVENTORY } from '../../global';
-import { selectItemById } from '../../helpers';
+import { Item } from '~/@types';
+import { MAX_INVENTORY } from '~/global';
+import { selectItemById } from '~/helpers';
 import { PlayerManagerItemsState } from './@types';
 
 const initialState: PlayerManagerItemsState = {

@@ -2,17 +2,17 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/core';
 import { StackActions } from '@react-navigation/routers';
-import { PlayerPointsDistribution } from '../../components/PlayerPointsDistribution';
-import { PlayerSelect } from '../../components/PlayerSelect';
-import { PlayerTypies } from '../../@types';
+import { PlayerPointsDistribution } from '~/components/PlayerPointsDistribution';
+import { PlayerSelect } from '~/components/PlayerSelect';
+import { PlayerTypies } from '~/@types';
 import { Container, RemainingContainer } from './styles';
-import { PlayerStatusActions } from '../../store/PlayerStatusSlice';
-import { Typography } from '../../elements/Typography';
-import { GhostButton } from '../../elements/GhostButton';
-import { Button } from '../../elements/Button';
-import { RootState } from '../../store/state';
+import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { Typography } from '~/elements/Typography';
+import { GhostButton } from '~/elements/GhostButton';
+import { Button } from '~/elements/Button';
+import { RootState } from '~/store/state';
 import { classDescription } from './helpers';
-import { normalizePixel } from '../../helpers';
+import { normalizePixel } from '~/helpers';
 
 const PLAYERS_TYPE: PlayerTypies[] = ['Warrior', 'Mage', 'Ranger'];
 

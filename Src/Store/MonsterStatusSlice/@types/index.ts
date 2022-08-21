@@ -1,4 +1,4 @@
-import { MonsterStatus } from '../../../@types';
+import { MonsterStatus } from '~/@types';
 import { ChangePlayerLifeParams } from '../../PlayerStatusSlice/@types';
 
 export interface MonsterStatusState {

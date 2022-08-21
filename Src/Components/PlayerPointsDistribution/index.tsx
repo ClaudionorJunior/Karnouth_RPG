@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonPutOrTakeOff } from '../../elements/ButtonPutOrTakeOff';
-import { Typography } from '../../elements/Typography';
+import { ButtonPutOrTakeOff } from '~/elements/ButtonPutOrTakeOff';
+import { Typography } from '~/elements/Typography';
 import {
   ChangePlayerStatusParams,
   PlayerStatusActions,
-} from '../../store/PlayerStatusSlice';
-import { RootState } from '../../store/state';
+} from '~/store/PlayerStatusSlice';
+import { RootState } from '~/store/state';
 import {
   Container,
   SelectableContainer,

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { normalizePixel } from '../../helpers';
+import { normalizePixel } from '~/helpers';
 
 interface ContainerProps {
   disabled: boolean;

@@ -1,10 +1,10 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MonsterStatus as MonsterStatusType } from '../../@types';
-import { Typography } from '../../elements/Typography';
-import { MonsterStatusActions } from '../../store/MonsterStatusSlice';
-import { RootState } from '../../store/state';
+import { MonsterStatus as MonsterStatusType } from '~/@types';
+import { Typography } from '~/elements/Typography';
+import { MonsterStatusActions } from '~/store/MonsterStatusSlice';
+import { RootState } from '~/store/state';
 import { ProgressBarTitle } from '../ProgressBarTitle';
 import {
   ContainerStatus,

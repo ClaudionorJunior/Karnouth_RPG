@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { ViewStyle } from 'react-native';
-import { Item, LocalPressed } from '../../@types';
-import useModalItemDetail from '../../hooks/useModalItemDetail';
+import { Item, LocalPressed } from '~/@types';
+import useModalItemDetail from '~/hooks/useModalItemDetail';
 
 import { Container, Image } from './styles';
 

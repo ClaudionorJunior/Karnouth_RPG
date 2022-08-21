@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Item } from '../../@types';
+import { Item } from '~/@types';
 import { LootManagerState, ItemHashedId } from './@types';
 
 const initialState: LootManagerState = {

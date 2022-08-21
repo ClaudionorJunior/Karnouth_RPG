@@ -1,4 +1,4 @@
-import { palletColors } from '../styles';
+import { palletColors } from '~/styles';
 import { Item } from './item';
 
 export type PlayerTypies = 'Warrior' | 'Ranger' | 'Mage';

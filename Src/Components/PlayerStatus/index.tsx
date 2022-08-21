@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Typography } from '../../elements/Typography';
-import { avatarImgMap } from '../../helpers';
-import { RootState } from '../../store/state';
+import { Typography } from '~/elements/Typography';
+import { avatarImgMap } from '~/helpers';
+import { RootState } from '~/store/state';
 import { ProgressBarTitle } from '../ProgressBarTitle';
 import {
   Container,

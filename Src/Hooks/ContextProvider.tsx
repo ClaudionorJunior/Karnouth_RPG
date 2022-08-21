@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components/native';
-import { Colors } from '../@types';
-import { palletColors } from '../styles';
+import { Colors } from '~/@types';
+import { palletColors } from '~/styles';
 import { ModalItemDetailProvider } from './useModalItemDetail';
 import { TooltipFeedbackProvider } from './useTooltipFeedback';
 

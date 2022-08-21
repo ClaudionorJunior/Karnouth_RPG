@@ -1,8 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Typography } from '../../../../elements/Typography';
-import { RootState } from '../../../../store/state';
+import { Typography } from '~/elements/Typography';
+import { RootState } from '~/store/state';
 import { Container, Scroll } from './styles';
 
 export const ScrollTurns = () => {

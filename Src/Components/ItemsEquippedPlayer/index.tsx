@@ -7,9 +7,9 @@ import {
   HandsContainer,
   SlotWithDescription,
 } from './styles';
-import { Typography } from '../../elements/Typography';
-import { RootState } from '../../store/state';
-import { goldLengthMask } from '../../helpers';
+import { Typography } from '~/elements/Typography';
+import { RootState } from '~/store/state';
+import { goldLengthMask } from '~/helpers';
 
 export const ItemsEquippedPlayer = () => {
   const bodyItemsState = useSelector(

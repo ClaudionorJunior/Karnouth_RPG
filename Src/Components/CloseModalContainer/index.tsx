@@ -1,6 +1,5 @@
 import React from 'react';
-import { CloseButton } from '../../elements/CloseButton';
-import { CloseButtonProps } from '../../elements/CloseButtonProps';
+import { CloseButton, CloseButtonProps } from '~/elements/CloseButton';
 import { Container } from './styles';
 
 export const CloseModalContainer = ({

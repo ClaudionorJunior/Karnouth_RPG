@@ -7,21 +7,21 @@ import React, {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PlayerManagerItemsActions } from '../../store/PlayerManagerItemsSlice';
-import { Item, LocalPressed } from '../../@types';
-import { Button } from '../../elements/Button';
-import { Typography } from '../../elements/Typography';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
+import { Button } from '~/elements/Button';
+import { Typography } from '~/elements/Typography';
+import { RootState } from '~/store/state';
+import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { SellerManagerItemsActions } from '~/store/SellerManagerItemsSlice';
+import { LootManagerActions } from '~/store/LootManagerSlice';
+import { CloseModalContainer } from '~/components/CloseModalContainer';
+import type { Item, LocalPressed } from '~/@types';
 import {
   ModalFeedbackItems,
   ContainerModal,
   BackgroundModal,
   TextContainer,
 } from './styles';
-import { RootState } from '../../store/state';
-import { PlayerStatusActions } from '../../store/PlayerStatusSlice';
-import { SellerManagerItemsActions } from '../../store/SellerManagerItemsSlice';
-import { LootManagerActions } from '../../store/LootManagerSlice';
-import { CloseModalContainer } from '../../components/CloseModalContainer';
 
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;

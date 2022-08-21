@@ -2,13 +2,13 @@ import { StackActions, useNavigation } from '@react-navigation/native';
 import React, { useMemo } from 'react';
 import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
-import { AllMonsters } from '../../../../assets/Monsters/@types';
-import { CloseModalContainer } from '../../../../components/CloseModalContainer';
-import { MonsterStatus } from '../../../../components/MonsterStatus';
-import { Button } from '../../../../elements/Button';
-import { Typography } from '../../../../elements/Typography';
-import { normalizePixel } from '../../../../helpers';
-import { RootState } from '../../../../store/state';
+import { AllMonsters } from '~/assets/Monsters/@types';
+import { CloseModalContainer } from '~/components/CloseModalContainer';
+import { MonsterStatus } from '~/components/MonsterStatus';
+import { Button } from '~/elements/Button';
+import { Typography } from '~/elements/Typography';
+import { normalizePixel } from '~/helpers';
+import { RootState } from '~/store/state';
 import {
   BackgroundModal,
   ContainerModal,

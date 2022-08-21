@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { normalizePixel } from '../../helpers';
+import { normalizePixel } from '~/helpers';
 
 export const ModalFeedbackItems = styled.Modal.attrs({
   animationType: 'slide',

@@ -1,4 +1,4 @@
-import { PlayerStatus, PlayerTypies, StatusTypies } from '../../../@types';
+import { PlayerStatus, PlayerTypies, StatusTypies } from '~/@types';
 
 export interface PlayerStatusState {
   Mage: PlayerStatus;

@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
-import { Item, LocalPressed } from '../../@types';
-import { normalizePixel } from '../../helpers';
-import { RootState } from '../../store/state';
+import { Item, LocalPressed } from '~/@types';
+import { normalizePixel } from '~/helpers';
+import { RootState } from '~/store/state';
 import { Slotitem } from '../SlotItem';
-import { Typography } from '../../elements/Typography';
-import { HowManySlots, useMakeFakeSlotWithItems } from '../../hooks';
+import { Typography } from '~/elements/Typography';
+import { HowManySlots, useMakeFakeSlotWithItems } from '~/hooks';
 
 interface InventoryProps {
   item: Item;

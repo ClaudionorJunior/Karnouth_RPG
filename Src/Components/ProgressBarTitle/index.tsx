@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Animated, ViewStyle } from 'react-native';
 import { useTheme } from 'styled-components/native';
-import { Typography } from '../../elements/Typography';
+import { Typography } from '~/elements/Typography';
 import { Container, LevelBar, Row } from './styles';
 
 interface ProgressBarTitleProps {

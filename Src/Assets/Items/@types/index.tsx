@@ -1,6 +1,6 @@
 /* eslint-disable import/no-mutable-exports */
 import uuid from 'react-native-uuid';
-import { Item } from '../../../@types';
+import { Item } from '~/@types';
 import crossbow from '../crossbow.bmp';
 import demon_legs from '../demon_legs.bmp';
 import golden_boots from '../golden_boots.bmp';

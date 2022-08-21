@@ -1,7 +1,7 @@
 import React from 'react';
-import { CloseModalContainer } from '../../../../components/CloseModalContainer';
-import { Inventory } from '../../../../components/Inventory';
-import { Typography } from '../../../../elements/Typography';
+import { CloseModalContainer } from '~/components/CloseModalContainer';
+import { Inventory } from '~/components/Inventory';
+import { Typography } from '~/elements/Typography';
 import {
   BackgroundModal,
   ContainerModal,
