@@ -4,7 +4,7 @@ import troll from '../troll.bmp';
 import orc from '../orc.bmp';
 import { selectItemById } from '../../../Helpers';
 
-export const AllMonsters: MonsterStatus[] = [
+export let AllMonsters: MonsterStatus[] = [
   {
     name: 'troll',
     power: 5,

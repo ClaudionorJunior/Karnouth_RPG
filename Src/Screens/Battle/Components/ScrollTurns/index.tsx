@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Typography } from '../../../../Elements';
 import { RootState } from '../../../../Store/state';
@@ -9,11 +9,16 @@ const ScrollTurns = () => {
   const historyBattle = useSelector(
     (state: RootState) => state.BattleHistoryState.history,
   );
+
+  const reversedHistoryBattle = useMemo(() => {
+    return [...historyBattle].reverse();
+  }, [historyBattle]);
+
   return (
     <Container>
       <Typography text="battle history" textSize="small" />
       <Scroll>
-        {historyBattle.map((it, index) => {
+        {reversedHistoryBattle.map((it, index) => {
           return (
             <Typography
               key={`${it}+${index}`}
