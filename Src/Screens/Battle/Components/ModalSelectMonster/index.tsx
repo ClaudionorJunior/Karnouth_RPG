@@ -8,7 +8,7 @@ import { MonsterStatus } from '~/components/MonsterStatus';
 import { Button } from '~/elements/Button';
 import { Typography } from '~/elements/Typography';
 import { normalizePixel } from '~/helpers';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import {
   BackgroundModal,
   ContainerModal,

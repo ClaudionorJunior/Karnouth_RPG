@@ -6,11 +6,11 @@ import { PlayerPointsDistribution } from '~/components/PlayerPointsDistribution'
 import { PlayerSelect } from '~/components/PlayerSelect';
 import { PlayerTypies } from '~/@types';
 import { Container, RemainingContainer } from './styles';
-import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
 import { Typography } from '~/elements/Typography';
 import { GhostButton } from '~/elements/GhostButton';
 import { Button } from '~/elements/Button';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import { classDescription } from './helpers';
 import { normalizePixel } from '~/helpers';
 

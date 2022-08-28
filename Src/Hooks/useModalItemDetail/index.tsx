@@ -7,13 +7,13 @@ import React, {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
 import { Button } from '~/elements/Button';
 import { Typography } from '~/elements/Typography';
-import { RootState } from '~/store/state';
-import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
-import { SellerManagerItemsActions } from '~/store/SellerManagerItemsSlice';
-import { LootManagerActions } from '~/store/LootManagerSlice';
+import { RootState } from '~/store/@types';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
+import { SellerManagerItemsActions } from '~/store/SellerManagerItems/slice';
+import { LootManagerActions } from '~/store/LootManager/slice';
 import { CloseModalContainer } from '~/components/CloseModalContainer';
 import type { Item, LocalPressed } from '~/@types';
 import {
@@ -22,6 +22,10 @@ import {
   BackgroundModal,
   TextContainer,
 } from './styles';
+
+interface ModalItemDetailProviderProps {
+  children: React.ReactElement;
+}
 
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;
@@ -34,7 +38,9 @@ const ModalItemDetailContext = createContext<ModalItemDetailProps>(
 
 const useModalItemDetail = () => useContext(ModalItemDetailContext);
 
-export const ModalItemDetailProvider: React.FC = ({ children }) => {
+export const ModalItemDetailProvider = ({
+  children,
+}: ModalItemDetailProviderProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [itemToRender, setItemToRender] = useState<Item>();
   const [localPressedCtx, setLocalPressedCtx] = useState<LocalPressed>();

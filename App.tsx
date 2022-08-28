@@ -3,9 +3,11 @@ import { Provider } from 'react-redux';
 import { Graduate_400Regular, useFonts } from '@expo-google-fonts/graduate';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import { NavigationContainer } from '@react-navigation/native';
 import store from './src/store/store';
 import { LoadingScreen } from './src/components/LoadingScreen';
-import Root from './src';
+import ContextProvider from '~/hooks/ContextProvider';
+import MainStack from '~/routes';
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -21,7 +23,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Root />
+        <ContextProvider>
+          <NavigationContainer>
+            <MainStack />
+          </NavigationContainer>
+        </ContextProvider>
       </PersistGate>
     </Provider>
   );

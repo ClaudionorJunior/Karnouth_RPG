@@ -8,11 +8,12 @@ import { useTheme } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { StatusBar } from 'react-native';
 import Main from '~/screens/Main';
 import CreatePlayer from '~/screens/CreatePlayer';
 import Home from '~/screens/Home';
 import { useLevelManager } from '~/hooks';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import { normalizePixel } from '~/helpers';
 import Mall from '~/screens/Mall';
 import Battle from '~/screens/Battle';
@@ -41,23 +42,27 @@ const MainStack = () => {
   );
 
   return (
-    <Stack.Navigator initialRouteName="Main">
-      <Stack.Screen
-        name="Main"
-        component={Main}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreatePlayer"
-        component={CreatePlayer}
-        options={headerOptionsManager('Create Player')}
-      />
-      <Stack.Screen
-        name="TabNavigator"
-        component={TabNavigator}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor={colors.primary1} />
+
+      <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CreatePlayer"
+          component={CreatePlayer}
+          options={headerOptionsManager('Create Player')}
+        />
+        <Stack.Screen
+          name="TabNavigator"
+          component={TabNavigator}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </>
   );
 };
 
