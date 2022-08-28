@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item } from '~/@types';
 import { MAX_INVENTORY } from '~/global';
-import { selectItemById } from '~/helpers';
+import { removeOneItemLogic, selectItemById } from '~/helpers';
 import { initialState } from './initialState';
 
 export const PlayerManagerItemsSlice = createSlice({
@@ -29,8 +29,9 @@ export const PlayerManagerItemsSlice = createSlice({
       state,
       action: PayloadAction<{ id: string | number[] | undefined }>,
     ) => {
-      state.inventoryItems = state.inventoryItems.filter(
-        it => it.id !== action.payload.id,
+      state.inventoryItems = removeOneItemLogic(
+        state.inventoryItems,
+        action.payload?.id || '',
       );
     },
 

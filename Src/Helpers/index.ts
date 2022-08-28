@@ -86,3 +86,21 @@ export const getRandomGoldByArray = (receivedArr: number[]) => {
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+export const removeOneItemLogic = (
+  daties: Item[],
+  idToRemove: string | number[],
+): Item[] => {
+  let counter = 0;
+  return daties.filter(it => {
+    if (it.id !== idToRemove) {
+      return it;
+    }
+
+    if (it.id === idToRemove && counter > 0) {
+      return it;
+    }
+
+    counter = 1;
+  });
+};

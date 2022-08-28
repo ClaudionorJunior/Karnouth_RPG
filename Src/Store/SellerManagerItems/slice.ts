@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item } from '~/@types';
-import { selectItemById } from '~/helpers';
+import { removeOneItemLogic, selectItemById } from '~/helpers';
 import { initialState } from './initialState';
 
 export const SellerManagerItemsSlice = createSlice({
@@ -27,8 +27,9 @@ export const SellerManagerItemsSlice = createSlice({
       state,
       action: PayloadAction<{ id: string | number[] | undefined }>,
     ) => {
-      state.sellingItems = state.sellingItems.filter(
-        it => it.id !== action.payload.id,
+      state.sellingItems = removeOneItemLogic(
+        state.sellingItems,
+        action.payload?.id || '',
       );
     },
 
