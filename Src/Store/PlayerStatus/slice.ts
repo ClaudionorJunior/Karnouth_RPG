@@ -1,137 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  ChangePlayerAttributesProps,
-  PlayerTypies,
-  StatusTypies,
-} from '~/@types';
+import { ChangePlayerAttributesProps, PlayerTypies } from '~/@types';
 import {
   ChangePlayerLifeParams,
   ChangePlayerStatusParams,
   OnChangePlayerLevelParams,
-  PlayerStatusState,
 } from './@types';
-
-const initialState: PlayerStatusState = {
-  playerType: undefined,
-  Mage: {
-    intelligence: 15,
-    life: 5,
-    power: 0,
-    precision: 5,
-    defense: 5,
-  },
-  Warrior: {
-    intelligence: 0,
-    life: 9,
-    power: 9,
-    precision: 5,
-    defense: 7,
-  },
-  Ranger: {
-    intelligence: 0,
-    life: 5,
-    power: 5,
-    precision: 15,
-    defense: 5,
-  },
-  remainingPoints: 10,
-  playerXPPoints: 0,
-  xpToNextLevel: 150,
-  level: 1,
-  playerLifePoints: 150,
-  currentPlayerLifePoints: 150,
-};
+import { addOrTakeOffPlayerStatusBuilder } from './thunks/addOrTakeOffPlayerStatusAsync';
+import { initialState } from './initialState';
 
 export const PlayerStatusSlice = createSlice({
   name: 'PlayerState',
   initialState,
   reducers: {
-    changePlayerStatus: (
-      state,
-      action: PayloadAction<ChangePlayerStatusParams>,
-    ) => {
-      if (state.playerType) {
-        const add = (type: StatusTypies) => {
-          state[state.playerType!][type] += 1;
-          if (state.remainingPoints >= 1) {
-            state.remainingPoints -= 1;
-            if (type === 'life') {
-              switch (state.playerType!) {
-                case 'Mage':
-                  state.playerLifePoints += 5;
-                  break;
-                case 'Warrior':
-                  state.playerLifePoints += 15;
-                  break;
-                case 'Ranger':
-                  state.playerLifePoints += 10;
-                  break;
-              }
-            }
-          }
-        };
-
-        const takeOff = (type: StatusTypies) => {
-          state[state.playerType!][type] -= 1;
-          if (state.remainingPoints < 10) {
-            state.remainingPoints += 1;
-            if (type === 'life') {
-              switch (state.playerType!) {
-                case 'Mage':
-                  state.playerLifePoints -= 5;
-                  break;
-                case 'Warrior':
-                  state.playerLifePoints -= 15;
-                  break;
-                case 'Ranger':
-                  state.playerLifePoints -= 10;
-                  break;
-              }
-            }
-          }
-        };
-
-        switch (action.payload.statusType) {
-          case 'intelligence':
-            if (action.payload.typeToChange === 'add') {
-              add(action.payload.statusType);
-            } else {
-              takeOff(action.payload.statusType);
-            }
-            break;
-          case 'life':
-            if (action.payload.typeToChange === 'add') {
-              add(action.payload.statusType);
-            } else {
-              takeOff(action.payload.statusType);
-            }
-            break;
-          case 'power':
-            if (action.payload.typeToChange === 'add') {
-              add(action.payload.statusType);
-            } else {
-              takeOff(action.payload.statusType);
-            }
-            break;
-          case 'precision':
-            if (action.payload.typeToChange === 'add') {
-              add(action.payload.statusType);
-            } else {
-              takeOff(action.payload.statusType);
-            }
-            break;
-          case 'defense':
-            if (action.payload.typeToChange === 'add') {
-              add(action.payload.statusType);
-            } else {
-              takeOff(action.payload.statusType);
-            }
-            break;
-        }
-      }
-    },
-
     changePlayerClass: (state, action: PayloadAction<PlayerTypies>) => {
       state.playerType = action.payload;
     },
@@ -261,6 +142,9 @@ export const PlayerStatusSlice = createSlice({
       state.playerLifePoints = 150;
       state.currentPlayerLifePoints = 150;
     },
+  },
+  extraReducers: builder => {
+    addOrTakeOffPlayerStatusBuilder(builder);
   },
 });
 

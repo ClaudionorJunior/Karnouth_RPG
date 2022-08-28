@@ -11,7 +11,7 @@ import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
 import { Button } from '~/elements/Button';
 import { Typography } from '~/elements/Typography';
 import { RootState } from '~/store/state';
-import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
 import { SellerManagerItemsActions } from '~/store/SellerManagerItemsSlice';
 import { LootManagerActions } from '~/store/LootManagerSlice';
 import { CloseModalContainer } from '~/components/CloseModalContainer';

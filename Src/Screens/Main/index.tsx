@@ -7,7 +7,7 @@ import { Typography } from '~/elements/Typography';
 import { Button } from '~/elements/Button';
 import { RootState } from '~/store/state';
 import { Container, MainImage, ButtonContainer } from './styles';
-import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
 import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
 
 const Main = () => {

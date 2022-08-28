@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
 import { RootState } from '~/store/state';
 
 const useLevelManager = () => {

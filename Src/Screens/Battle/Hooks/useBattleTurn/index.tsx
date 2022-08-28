@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MonsterStatusActions } from '~/store/MonsterStatusSlice';
 import { RootState } from '~/store/state';
-import { PlayerStatusActions } from '~/store/PlayerStatusSlice';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
 import { BattleHistoryActions } from '~/store/BattleHistorySlice';
 import useModalRewards from '../useModalRewards';
 import { LootManagerActions } from '~/store/LootManagerSlice';

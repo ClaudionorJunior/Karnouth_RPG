@@ -1,15 +1,11 @@
-import { PlayerManagerItemsState } from './PlayerManagerItemsSlice/@types';
-import { PlayerStatusState } from './PlayerStatusSlice/@types';
-import { SellerManagerItemsState } from './SellerManagerItemsSlice/@types';
-import { MonsterStatusState } from './MonsterStatusSlice/@types';
-import { BattleHistoryState } from './BattleHistorySlice/@types';
-import { LootManagerState } from './LootManagerSlice/@types';
+import { Action, ThunkAction } from '@reduxjs/toolkit';
+import store from './store';
 
-export interface RootState {
-  PlayerState: PlayerStatusState;
-  PlayerManagerItemsState: PlayerManagerItemsState;
-  SellerManagerItemsState: SellerManagerItemsState;
-  MonsterState: MonsterStatusState;
-  BattleHistoryState: BattleHistoryState;
-  LootManagerState: LootManagerState;
-}
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

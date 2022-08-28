@@ -11,6 +11,7 @@ export interface PlayerStatusState {
   level: number;
   playerLifePoints: number;
   currentPlayerLifePoints: number;
+  isLoading?: boolean;
 }
 
 export interface ChangePlayerLifeParams {
