@@ -5,10 +5,10 @@ import { Alert, BackHandler } from 'react-native';
 import { SceneMain } from '~/assets';
 import { Typography } from '~/elements/Typography';
 import { Button } from '~/elements/Button';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import { Container, MainImage, ButtonContainer } from './styles';
 import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
-import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
 
 const Main = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState<boolean>(false);

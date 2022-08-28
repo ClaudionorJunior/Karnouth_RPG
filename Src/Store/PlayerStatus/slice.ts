@@ -47,17 +47,24 @@ export const PlayerStatusSlice = createSlice({
       state,
       action: PayloadAction<ChangePlayerLifeParams>,
     ) => {
-      if (action.payload.typeToChange === 'add') {
-        if (
-          state.currentPlayerLifePoints + action.payload.amount >
-          state.playerLifePoints
-        ) {
-          state.currentPlayerLifePoints = state.playerLifePoints;
-        } else {
-          state.currentPlayerLifePoints += action.payload.amount;
-        }
-      } else {
-        state.currentPlayerLifePoints -= action.payload.amount;
+      switch (action.payload.typeToChange) {
+        case 'add':
+          if (
+            state.currentPlayerLifePoints + action.payload.amount >
+            state.playerLifePoints
+          ) {
+            state.currentPlayerLifePoints = state.playerLifePoints;
+          } else {
+            state.currentPlayerLifePoints += action.payload.amount;
+          }
+          break;
+        default:
+          if (state.currentPlayerLifePoints - action.payload.amount <= 0) {
+            state.currentPlayerLifePoints = 0;
+          } else {
+            state.currentPlayerLifePoints -= action.payload.amount;
+          }
+          break;
       }
     },
 
@@ -86,61 +93,26 @@ export const PlayerStatusSlice = createSlice({
     },
 
     resetAllStatus: state => {
-      state.Mage = {
-        intelligence: 15,
-        life: 5,
-        power: 0,
-        precision: 5,
-        defense: 5,
-      };
-      state.Warrior = {
-        intelligence: 0,
-        life: 9,
-        power: 9,
-        precision: 5,
-        defense: 7,
-      };
-      state.Ranger = {
-        intelligence: 0,
-        life: 5,
-        power: 5,
-        precision: 15,
-        defense: 5,
-      };
-      state.playerType = undefined;
-      state.remainingPoints = 10;
-      state.playerXPPoints = 0;
-      state.playerLifePoints = 150;
-      state.currentPlayerLifePoints = 150;
-      state.xpToNextLevel = 150;
-      state.level = 1;
+      state.Mage = initialState.Mage;
+      state.Warrior = initialState.Warrior;
+      state.Ranger = initialState.Ranger;
+      state.playerType = initialState.playerType;
+      state.remainingPoints = initialState.remainingPoints;
+      state.playerXPPoints = initialState.playerXPPoints;
+      state.playerLifePoints = initialState.playerLifePoints;
+      state.currentPlayerLifePoints = initialState.currentPlayerLifePoints;
+      state.xpToNextLevel = initialState.xpToNextLevel;
+      state.level = initialState.level;
+      state.isLoading = false;
     },
 
     resetPartialStatus: state => {
-      state.Mage = {
-        intelligence: 15,
-        life: 5,
-        power: 0,
-        precision: 5,
-        defense: 5,
-      };
-      state.Warrior = {
-        intelligence: 0,
-        life: 9,
-        power: 9,
-        precision: 5,
-        defense: 7,
-      };
-      state.Ranger = {
-        intelligence: 0,
-        life: 5,
-        power: 5,
-        precision: 15,
-        defense: 5,
-      };
+      state.Mage = initialState.Mage;
+      state.Warrior = initialState.Warrior;
+      state.Ranger = initialState.Ranger;
 
-      state.playerLifePoints = 150;
-      state.currentPlayerLifePoints = 150;
+      state.playerLifePoints = initialState.playerLifePoints;
+      state.currentPlayerLifePoints = initialState.currentPlayerLifePoints;
     },
   },
   extraReducers: builder => {

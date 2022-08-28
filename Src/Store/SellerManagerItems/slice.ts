@@ -2,13 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item } from '~/@types';
 import { selectItemById } from '~/helpers';
-import { SellerManagerItemsState } from './@types';
-
-const initialState: SellerManagerItemsState = {
-  sellingItems: [],
-  sellerManagerItemsError: '',
-  lastSee: 0,
-};
+import { initialState } from './initialState';
 
 export const SellerManagerItemsSlice = createSlice({
   name: 'SellerManagerItemsState',
@@ -43,7 +37,7 @@ export const SellerManagerItemsSlice = createSlice({
     },
 
     resetSellerItems: state => {
-      state.sellingItems = [];
+      state.sellingItems = initialState.sellingItems;
     },
 
     resetError: state => {

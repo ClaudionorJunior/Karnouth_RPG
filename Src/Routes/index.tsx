@@ -13,7 +13,7 @@ import Main from '~/screens/Main';
 import CreatePlayer from '~/screens/CreatePlayer';
 import Home from '~/screens/Home';
 import { useLevelManager } from '~/hooks';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import { normalizePixel } from '~/helpers';
 import Mall from '~/screens/Mall';
 import Battle from '~/screens/Battle';

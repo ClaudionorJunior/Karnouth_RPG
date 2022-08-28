@@ -3,15 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Item } from '~/@types';
 import { MAX_INVENTORY } from '~/global';
 import { selectItemById } from '~/helpers';
-import { PlayerManagerItemsState } from './@types';
-
-const initialState: PlayerManagerItemsState = {
-  bodyItems: [],
-  inventoryItems: [],
-  playerManagerItemsError: '',
-  addPlayerBodyItemSuccess: undefined,
-  unquipePlayerBodyItemSuccess: undefined,
-};
+import { initialState } from './initialState';
 
 export const PlayerManagerItemsSlice = createSlice({
   name: 'PlayerManagerItemsState',
@@ -110,8 +102,8 @@ export const PlayerManagerItemsSlice = createSlice({
     },
 
     resetAllItems: state => {
-      state.bodyItems = [];
-      state.inventoryItems = [];
+      state.bodyItems = initialState.bodyItems;
+      state.inventoryItems = initialState.inventoryItems;
     },
 
     setMessageError: (state, action: PayloadAction<string>) => {

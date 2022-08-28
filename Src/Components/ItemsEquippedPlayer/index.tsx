@@ -8,7 +8,7 @@ import {
   SlotWithDescription,
 } from './styles';
 import { Typography } from '~/elements/Typography';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import { goldLengthMask } from '~/helpers';
 
 export const ItemsEquippedPlayer = () => {

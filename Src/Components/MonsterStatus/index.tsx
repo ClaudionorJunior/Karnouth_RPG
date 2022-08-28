@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MonsterStatus as MonsterStatusType } from '~/@types';
 import { Typography } from '~/elements/Typography';
-import { MonsterStatusActions } from '~/store/MonsterStatusSlice';
-import { RootState } from '~/store/state';
+import { MonsterStatusActions } from '~/store/MonsterStatus/slice';
+import { RootState } from '~/store/@types';
 import { ProgressBarTitle } from '../ProgressBarTitle';
 import {
   ContainerStatus,

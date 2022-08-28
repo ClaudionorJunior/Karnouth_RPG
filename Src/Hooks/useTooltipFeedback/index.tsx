@@ -8,8 +8,8 @@ import Animated, {
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '~/elements/Typography';
 import { normalizePixel } from '~/helpers';
-import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
-import { RootState } from '~/store/state';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
+import { RootState } from '~/store/@types';
 import { Container } from './styles';
 
 interface TooltipFeedbackProviderProps {

@@ -153,7 +153,7 @@ export const PlayerPointsDistribution = ({
             isToDistributeOnLevel ||
             PlayerState.isLoading ||
             PlayerState.remainingPoints === 10 ||
-            PlayerState?.[PlayerState?.playerType]?.power === 0
+            PlayerState?.playerType === 'Mage'
           }
           onPress={() =>
             handlePoints({
@@ -173,7 +173,7 @@ export const PlayerPointsDistribution = ({
           disabled={
             PlayerState.isLoading ||
             !PlayerState.remainingPoints ||
-            PlayerState?.[PlayerState?.playerType]?.power === 0
+            PlayerState?.playerType === 'Mage'
           }
           onPress={() =>
             handlePoints({
@@ -193,7 +193,7 @@ export const PlayerPointsDistribution = ({
             isToDistributeOnLevel ||
             PlayerState.isLoading ||
             PlayerState.remainingPoints === 10 ||
-            PlayerState?.[PlayerState?.playerType]?.intelligence === 0
+            PlayerState?.playerType !== 'Mage'
           }
           onPress={() =>
             handlePoints({
@@ -216,7 +216,7 @@ export const PlayerPointsDistribution = ({
           disabled={
             PlayerState.isLoading ||
             !PlayerState.remainingPoints ||
-            PlayerState?.[PlayerState?.playerType]?.intelligence === 0
+            PlayerState?.playerType !== 'Mage'
           }
           onPress={() =>
             handlePoints({

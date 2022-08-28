@@ -10,10 +10,10 @@ import { PlayerPointsDistribution } from '~/components/PlayerPointsDistribution'
 import { PlayerStatus } from '~/components/PlayerStatus';
 import { Typography } from '~/elements/Typography';
 import { LineWrapper } from '~/elements/LineWrapper';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import { Container, PointsContainerText } from './styles';
 import { useAutoRegerateLife } from '~/hooks';
-import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
 import { normalizePixel } from '~/helpers';
 
 const Home = () => {

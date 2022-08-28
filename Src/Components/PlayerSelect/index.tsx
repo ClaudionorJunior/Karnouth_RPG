@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { PlayerTypies } from '~/@types';
 import { Typography } from '~/elements/Typography';
 import { avatarImgMap } from '~/helpers';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import {
   Container,
   AvatarContainer,

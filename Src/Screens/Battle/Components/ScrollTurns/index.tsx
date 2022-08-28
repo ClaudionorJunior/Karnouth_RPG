@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Typography } from '~/elements/Typography';
-import { RootState } from '~/store/state';
+import { RootState } from '~/store/@types';
 import { Container, Scroll } from './styles';
 
 export const ScrollTurns = () => {

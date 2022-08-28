@@ -2,7 +2,7 @@
 /* eslint-disable no-promise-executor-return */
 import { ActionReducerMapBuilder, createAsyncThunk } from '@reduxjs/toolkit';
 import { StatusTypies } from '~/@types';
-import { RootState } from '../../state';
+import { RootState } from '../../@types';
 import { ChangePlayerStatusParams, PlayerStatusState } from '../@types';
 
 export const addOrTakeOffPlayerStatusAsync = createAsyncThunk(
