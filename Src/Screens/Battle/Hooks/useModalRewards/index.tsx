@@ -3,6 +3,10 @@ import { useDispatch } from 'react-redux';
 import { LootManagerActions } from '~/store/LootManagerSlice';
 import { ModalRewards } from '../../components/ModalRewards';
 
+interface ModalRewardsProviderProps {
+  children: React.ReactElement;
+}
+
 interface ModalRewardsProps {
   showModalRewards(): void;
   hideModalRewards(): void;
@@ -15,7 +19,9 @@ const ModalRewardsContext = createContext<ModalRewardsProps>(
 
 const useModalRewards = () => useContext(ModalRewardsContext);
 
-export const ModalRewardsProvider: React.FC = ({ children }) => {
+export const ModalRewardsProvider = ({
+  children,
+}: ModalRewardsProviderProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
 

@@ -12,10 +12,16 @@ import { PlayerManagerItemsActions } from '~/store/PlayerManagerItemsSlice';
 import { RootState } from '~/store/state';
 import { Container } from './styles';
 
+interface TooltipFeedbackProviderProps {
+  children: React.ReactElement;
+}
+
 const TooltipFeedbackContext = createContext({});
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
-export const TooltipFeedbackProvider: React.FC = ({ children }) => {
+export const TooltipFeedbackProvider = ({
+  children,
+}: TooltipFeedbackProviderProps) => {
   const tooltipPosition = useSharedValue(normalizePixel(-280));
   const { playerManagerItemsError } = useSelector(
     (state: RootState) => state.PlayerManagerItemsState,

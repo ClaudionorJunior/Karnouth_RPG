@@ -5,7 +5,11 @@ import { palletColors } from '~/styles';
 import { ModalItemDetailProvider } from './useModalItemDetail';
 import { TooltipFeedbackProvider } from './useTooltipFeedback';
 
-const ContextProvider: React.FC = ({ children }) => {
+interface ContextProviderProps {
+  children: React.ReactElement;
+}
+
+const ContextProvider = ({ children }: ContextProviderProps) => {
   const [colors] = useState<Colors>(palletColors);
   return (
     <ThemeProvider theme={colors}>

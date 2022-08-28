@@ -23,6 +23,10 @@ import {
   TextContainer,
 } from './styles';
 
+interface ModalItemDetailProviderProps {
+  children: React.ReactElement;
+}
+
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;
   hideModalDetails(): void;
@@ -34,7 +38,9 @@ const ModalItemDetailContext = createContext<ModalItemDetailProps>(
 
 const useModalItemDetail = () => useContext(ModalItemDetailContext);
 
-export const ModalItemDetailProvider: React.FC = ({ children }) => {
+export const ModalItemDetailProvider = ({
+  children,
+}: ModalItemDetailProviderProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [itemToRender, setItemToRender] = useState<Item>();
   const [localPressedCtx, setLocalPressedCtx] = useState<LocalPressed>();

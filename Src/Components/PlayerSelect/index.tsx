@@ -1,5 +1,4 @@
 import React from 'react';
-import { PressableProps } from 'react-native';
 import { useSelector } from 'react-redux';
 import { PlayerTypies } from '~/@types';
 import { Typography } from '~/elements/Typography';
@@ -12,15 +11,19 @@ import {
   StatusContainer,
 } from './styles';
 
-interface PlayerSelectProps extends PressableProps {
+interface PlayerSelectProps {
   playerType: PlayerTypies;
+  onPress: () => void;
 }
 
-export const PlayerSelect = ({ playerType, ...rest }: PlayerSelectProps) => {
+export const PlayerSelect = ({ playerType, onPress }: PlayerSelectProps) => {
   const PlayerState = useSelector((state: RootState) => state.PlayerState);
 
   return (
-    <Container isSelected={PlayerState.playerType === playerType} {...rest}>
+    <Container
+      onPress={onPress}
+      isSelected={PlayerState.playerType === playerType}
+    >
       <AvatarContainer>
         <Typography text={playerType} textSize="small" />
         <AvatarTypeImg source={avatarImgMap(playerType)} />

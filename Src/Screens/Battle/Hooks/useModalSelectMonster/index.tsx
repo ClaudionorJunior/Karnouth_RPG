@@ -1,6 +1,10 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { ModalSelectMonster } from '../../components/ModalSelectMonster';
 
+interface ModalSelectMonsterProviderProps {
+  children: React.ReactElement;
+}
+
 interface ModalSelectMonsterProps {
   showModalMonsters(): void;
   hideModalMonsters(): void;
@@ -13,7 +17,9 @@ const ModalSelectMonsterContext = createContext<ModalSelectMonsterProps>(
 
 const useModalSelectMonster = () => useContext(ModalSelectMonsterContext);
 
-export const ModalSelectMonsterProvider: React.FC = ({ children }) => {
+export const ModalSelectMonsterProvider = ({
+  children,
+}: ModalSelectMonsterProviderProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const showModalMonsters = useCallback(() => {
