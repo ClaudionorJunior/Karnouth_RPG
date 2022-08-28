@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import uuid from 'react-native-uuid';
-import { Item } from '../../@types';
+import { Item } from '~/@types';
 
 export type HowManySlots = 5 | 25;
 

@@ -7,20 +7,25 @@ import React, {
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PlayerManagerItemsActions } from '../../Store/PlayerManagerItemsSlice';
-import { Item, LocalPressed } from '../../@types';
-import { Button, Typography } from '../../Elements';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
+import { Button } from '~/elements/Button';
+import { Typography } from '~/elements/Typography';
+import { RootState } from '~/store/@types';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
+import { SellerManagerItemsActions } from '~/store/SellerManagerItems/slice';
+import { LootManagerActions } from '~/store/LootManager/slice';
+import { CloseModalContainer } from '~/components/CloseModalContainer';
+import type { Item, LocalPressed } from '~/@types';
 import {
   ModalFeedbackItems,
   ContainerModal,
   BackgroundModal,
   TextContainer,
 } from './styles';
-import { RootState } from '../../Store/state';
-import { PlayerStatusActions } from '../../Store/PlayerStatusSlice';
-import { SellerManagerItemsActions } from '../../Store/SellerManagerItemsSlice';
-import { LootManagerActions } from '../../Store/LootManagerSlice';
-import CloseModalContainer from '../../Components/CloseModalContainer';
+
+interface ModalItemDetailProviderProps {
+  children: React.ReactElement;
+}
 
 interface ModalItemDetailProps {
   showModalDetails(item: Item, localPressed: LocalPressed): void;
@@ -33,7 +38,9 @@ const ModalItemDetailContext = createContext<ModalItemDetailProps>(
 
 const useModalItemDetail = () => useContext(ModalItemDetailContext);
 
-export const ModalItemDetailProvider: React.FC = ({ children }) => {
+export const ModalItemDetailProvider = ({
+  children,
+}: ModalItemDetailProviderProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [itemToRender, setItemToRender] = useState<Item>();
   const [localPressedCtx, setLocalPressedCtx] = useState<LocalPressed>();

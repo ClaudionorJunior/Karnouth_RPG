@@ -1,17 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Item } from '../../@types';
-import { MAX_INVENTORY } from '../../Global';
-import { selectItemById } from '../../Helpers';
-import { PlayerManagerItemsState } from './@types';
-
-const initialState: PlayerManagerItemsState = {
-  bodyItems: [],
-  inventoryItems: [],
-  playerManagerItemsError: '',
-  addPlayerBodyItemSuccess: undefined,
-  unquipePlayerBodyItemSuccess: undefined,
-};
+import { Item } from '~/@types';
+import { MAX_INVENTORY } from '~/global';
+import { removeOneItemLogic, selectItemById } from '~/helpers';
+import { initialState } from './initialState';
 
 export const PlayerManagerItemsSlice = createSlice({
   name: 'PlayerManagerItemsState',
@@ -37,8 +29,9 @@ export const PlayerManagerItemsSlice = createSlice({
       state,
       action: PayloadAction<{ id: string | number[] | undefined }>,
     ) => {
-      state.inventoryItems = state.inventoryItems.filter(
-        it => it.id !== action.payload.id,
+      state.inventoryItems = removeOneItemLogic(
+        state.inventoryItems,
+        action.payload?.id || '',
       );
     },
 
@@ -110,8 +103,8 @@ export const PlayerManagerItemsSlice = createSlice({
     },
 
     resetAllItems: state => {
-      state.bodyItems = [];
-      state.inventoryItems = [];
+      state.bodyItems = initialState.bodyItems;
+      state.inventoryItems = initialState.inventoryItems;
     },
 
     setMessageError: (state, action: PayloadAction<string>) => {

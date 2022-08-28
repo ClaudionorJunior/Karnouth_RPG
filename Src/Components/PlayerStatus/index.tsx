@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Typography } from '../../Elements';
-import { avatarImgMap } from '../../Helpers';
-import { RootState } from '../../Store/state';
-import ProgressBarTitle from '../ProgressBarTitle';
+import { Typography } from '~/elements/Typography';
+import { avatarImgMap } from '~/helpers';
+import { RootState } from '~/store/@types';
+import { ProgressBarTitle } from '../ProgressBarTitle';
 import {
   Container,
   ProgressBarsContainer,
@@ -12,7 +12,7 @@ import {
   StatusPlayerContainer,
 } from './styles';
 
-const PlayerStatus = () => {
+export const PlayerStatus = () => {
   const PlayerState = useSelector((state: RootState) => state.PlayerState);
 
   return (
@@ -61,5 +61,3 @@ const PlayerStatus = () => {
     </>
   );
 };
-
-export default PlayerStatus;

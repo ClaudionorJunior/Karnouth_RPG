@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ButtonPutOrTakeOff, Typography } from '../../Elements';
-import {
-  ChangePlayerStatusParams,
-  PlayerStatusActions,
-} from '../../Store/PlayerStatusSlice';
-import { RootState } from '../../Store/state';
+import React, { useCallback } from 'react';
+import { ButtonPutOrTakeOff } from '~/elements/ButtonPutOrTakeOff';
+import { Typography } from '~/elements/Typography';
+import { useAppDispatch } from '~/hooks/useAppDispatch';
+import { useAppSelector } from '~/hooks/useAppSelector';
+import { ChangePlayerStatusParams } from '~/store/PlayerStatus/@types';
+import { addOrTakeOffPlayerStatusAsync } from '~/store/PlayerStatus/thunks/addOrTakeOffPlayerStatusAsync';
 import {
   Container,
   SelectableContainer,
@@ -17,28 +16,18 @@ interface PlayerPointsDistributionProps {
   isToDistributeOnLevel?: boolean;
 }
 
-const PlayerPointsDistribution = ({
+export const PlayerPointsDistribution = ({
   isToDistributeOnLevel = false,
 }: PlayerPointsDistributionProps) => {
-  const PlayerState = useSelector((state: RootState) => state.PlayerState);
-  const [isLoading, setIsloading] = useState(false);
-  const dispatch = useDispatch();
+  const PlayerState = useAppSelector(state => state.PlayerState);
+  const dispatch = useAppDispatch();
 
-  const handlePoints = useCallback((payload: ChangePlayerStatusParams) => {
-    setIsloading(true);
-    dispatch(PlayerStatusActions.changePlayerStatus(payload));
-  }, []);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isLoading) {
-      timer = setTimeout(() => {
-        setIsloading(false);
-      }, 250);
-    }
-
-    return () => timer && clearTimeout(timer);
-  }, [isLoading]);
+  const handlePoints = useCallback(
+    (payload: ChangePlayerStatusParams) => {
+      dispatch(addOrTakeOffPlayerStatusAsync(payload));
+    },
+    [PlayerState.isLoading],
+  );
 
   if (!PlayerState.playerType) {
     return <></>;
@@ -53,7 +42,7 @@ const PlayerPointsDistribution = ({
         <ButtonPutOrTakeOff
           disabled={
             isToDistributeOnLevel ||
-            isLoading ||
+            PlayerState.isLoading ||
             PlayerState.remainingPoints === 10
           }
           onPress={() =>
@@ -71,7 +60,7 @@ const PlayerPointsDistribution = ({
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={isLoading || !PlayerState.remainingPoints}
+          disabled={PlayerState.isLoading || !PlayerState.remainingPoints}
           onPress={() =>
             handlePoints({
               statusType: 'life',
@@ -88,7 +77,7 @@ const PlayerPointsDistribution = ({
         <ButtonPutOrTakeOff
           disabled={
             isToDistributeOnLevel ||
-            isLoading ||
+            PlayerState.isLoading ||
             PlayerState.remainingPoints === 10
           }
           onPress={() =>
@@ -108,7 +97,7 @@ const PlayerPointsDistribution = ({
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={isLoading || !PlayerState.remainingPoints}
+          disabled={PlayerState.isLoading || !PlayerState.remainingPoints}
           onPress={() =>
             handlePoints({
               statusType: 'precision',
@@ -125,7 +114,7 @@ const PlayerPointsDistribution = ({
         <ButtonPutOrTakeOff
           disabled={
             isToDistributeOnLevel ||
-            isLoading ||
+            PlayerState.isLoading ||
             PlayerState.remainingPoints === 10
           }
           onPress={() =>
@@ -145,7 +134,7 @@ const PlayerPointsDistribution = ({
           />
         </StatusQuantity>
         <ButtonPutOrTakeOff
-          disabled={isLoading || !PlayerState.remainingPoints}
+          disabled={PlayerState.isLoading || !PlayerState.remainingPoints}
           onPress={() =>
             handlePoints({
               statusType: 'defense',
@@ -162,9 +151,9 @@ const PlayerPointsDistribution = ({
         <ButtonPutOrTakeOff
           disabled={
             isToDistributeOnLevel ||
-            isLoading ||
+            PlayerState.isLoading ||
             PlayerState.remainingPoints === 10 ||
-            PlayerState?.[PlayerState?.playerType]?.power === 0
+            PlayerState?.playerType === 'Mage'
           }
           onPress={() =>
             handlePoints({
@@ -182,9 +171,9 @@ const PlayerPointsDistribution = ({
         </StatusQuantity>
         <ButtonPutOrTakeOff
           disabled={
-            isLoading ||
+            PlayerState.isLoading ||
             !PlayerState.remainingPoints ||
-            PlayerState?.[PlayerState?.playerType]?.power === 0
+            PlayerState?.playerType === 'Mage'
           }
           onPress={() =>
             handlePoints({
@@ -202,9 +191,9 @@ const PlayerPointsDistribution = ({
         <ButtonPutOrTakeOff
           disabled={
             isToDistributeOnLevel ||
-            isLoading ||
+            PlayerState.isLoading ||
             PlayerState.remainingPoints === 10 ||
-            PlayerState?.[PlayerState?.playerType]?.intelligence === 0
+            PlayerState?.playerType !== 'Mage'
           }
           onPress={() =>
             handlePoints({
@@ -225,9 +214,9 @@ const PlayerPointsDistribution = ({
         </StatusQuantity>
         <ButtonPutOrTakeOff
           disabled={
-            isLoading ||
+            PlayerState.isLoading ||
             !PlayerState.remainingPoints ||
-            PlayerState?.[PlayerState?.playerType]?.intelligence === 0
+            PlayerState?.playerType !== 'Mage'
           }
           onPress={() =>
             handlePoints({
@@ -241,5 +230,3 @@ const PlayerPointsDistribution = ({
     </Container>
   );
 };
-
-export default PlayerPointsDistribution;

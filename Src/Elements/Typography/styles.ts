@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { TypographyProps, TextSizes } from '.';
-import { normalizePixel } from '../../Helpers';
+import { normalizePixel } from '~/helpers';
 
 const textSizeMap: {
   [key in TextSizes]: number;

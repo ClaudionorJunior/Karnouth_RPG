@@ -1,11 +1,11 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MonsterStatus as MonsterStatusType } from '../../@types';
-import { Typography } from '../../Elements';
-import { MonsterStatusActions } from '../../Store/MonsterStatusSlice';
-import { RootState } from '../../Store/state';
-import ProgressBarTitle from '../ProgressBarTitle';
+import { MonsterStatus as MonsterStatusType } from '~/@types';
+import { Typography } from '~/elements/Typography';
+import { MonsterStatusActions } from '~/store/MonsterStatus/slice';
+import { RootState } from '~/store/@types';
+import { ProgressBarTitle } from '../ProgressBarTitle';
 import {
   ContainerStatus,
   ProgressBarsContainer,
@@ -20,7 +20,7 @@ interface MonsterStatusProps {
   showModalMonsters?: () => void;
 }
 
-const MonsterStatus = ({
+export const MonsterStatus = ({
   monsterToRender,
   showModalMonsters,
 }: MonsterStatusProps) => {
@@ -91,5 +91,3 @@ const MonsterStatus = ({
     </Container>
   );
 };
-
-export default MonsterStatus;

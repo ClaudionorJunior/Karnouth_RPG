@@ -12,7 +12,7 @@ export interface TypographyProps extends TextProps {
   containerStyles?: StyleProp<TextStyle>;
 }
 
-const Typography = ({
+export const Typography = ({
   textSize,
   text,
   color,
@@ -28,5 +28,3 @@ const Typography = ({
     {text}
   </CustomText>
 );
-
-export default Typography;

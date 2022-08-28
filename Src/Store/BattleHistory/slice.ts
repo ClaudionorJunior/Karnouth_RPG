@@ -1,10 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { BattleHistoryState } from './@types';
-
-const initialState: BattleHistoryState = {
-  history: [],
-};
+import { initialState } from './initialState';
 
 export const BattleHistorySlice = createSlice({
   name: 'BattleHistoryState',
@@ -17,7 +13,7 @@ export const BattleHistorySlice = createSlice({
     },
 
     resetAllStatus: state => {
-      state.history = [];
+      state.history = initialState.history;
     },
   },
 });

@@ -1,11 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Item } from '../../@types';
-import { LootManagerState, ItemHashedId } from './@types';
-
-const initialState: LootManagerState = {
-  loot: [],
-};
+import { Item } from '~/@types';
+import { ItemHashedId } from './@types';
+import { initialState } from './initialState';
 
 export const LootManagerSlice = createSlice({
   name: 'LootManagerState',
@@ -20,7 +17,7 @@ export const LootManagerSlice = createSlice({
     },
 
     resetAllStatus: state => {
-      state.loot = [];
+      state.loot = initialState.loot;
     },
   },
 });

@@ -1,4 +1,4 @@
-import { PlayerStatus, PlayerTypies, StatusTypies } from '../../../@types';
+import { PlayerStatus, PlayerTypies, StatusTypies } from '~/@types';
 
 export interface PlayerStatusState {
   Mage: PlayerStatus;
@@ -11,6 +11,7 @@ export interface PlayerStatusState {
   level: number;
   playerLifePoints: number;
   currentPlayerLifePoints: number;
+  isLoading?: boolean;
 }
 
 export interface ChangePlayerLifeParams {

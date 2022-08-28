@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MonsterStatusActions } from '../../../../Store/MonsterStatusSlice';
-import { RootState } from '../../../../Store/state';
-import { PlayerStatusActions } from '../../../../Store/PlayerStatusSlice';
-import { BattleHistoryActions } from '../../../../Store/BattleHistorySlice';
+import { MonsterStatusActions } from '~/store/MonsterStatus/slice';
+import { RootState } from '~/store/@types';
+import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
+import { BattleHistoryActions } from '~/store/BattleHistory/slice';
 import useModalRewards from '../useModalRewards';
-import { LootManagerActions } from '../../../../Store/LootManagerSlice';
-import { PlayerManagerItemsActions } from '../../../../Store/PlayerManagerItemsSlice';
-import { getRandomGoldByArray } from '../../../../Helpers';
+import { LootManagerActions } from '~/store/LootManager/slice';
+import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
+import { getRandomGoldByArray } from '~/helpers';
 
 interface UseBattleTurnReturns {
   handleBattle: () => void;

@@ -1,14 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Item } from '../../@types';
-import { selectItemById } from '../../Helpers';
-import { SellerManagerItemsState } from './@types';
-
-const initialState: SellerManagerItemsState = {
-  sellingItems: [],
-  sellerManagerItemsError: '',
-  lastSee: 0,
-};
+import { Item } from '~/@types';
+import { removeOneItemLogic, selectItemById } from '~/helpers';
+import { initialState } from './initialState';
 
 export const SellerManagerItemsSlice = createSlice({
   name: 'SellerManagerItemsState',
@@ -33,8 +27,9 @@ export const SellerManagerItemsSlice = createSlice({
       state,
       action: PayloadAction<{ id: string | number[] | undefined }>,
     ) => {
-      state.sellingItems = state.sellingItems.filter(
-        it => it.id !== action.payload.id,
+      state.sellingItems = removeOneItemLogic(
+        state.sellingItems,
+        action.payload?.id || '',
       );
     },
 
@@ -43,7 +38,7 @@ export const SellerManagerItemsSlice = createSlice({
     },
 
     resetSellerItems: state => {
-      state.sellingItems = [];
+      state.sellingItems = initialState.sellingItems;
     },
 
     resetError: state => {

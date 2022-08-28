@@ -1,8 +1,8 @@
 import React from 'react';
-import { CloseButton, CloseButtonProps } from '../../Elements';
+import { CloseButton, CloseButtonProps } from '~/elements/CloseButton';
 import { Container } from './styles';
 
-const CloseModalContainer = ({
+export const CloseModalContainer = ({
   containerStyles,
   ...rest
 }: CloseButtonProps) => {
@@ -12,5 +12,3 @@ const CloseModalContainer = ({
     </Container>
   );
 };
-
-export default CloseModalContainer;

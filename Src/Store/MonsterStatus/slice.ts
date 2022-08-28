@@ -1,15 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MonsterStatus } from '../../@types';
-import { ChangeMonsterLifeParams, MonsterStatusState } from './@types';
-
-const initialState: MonsterStatusState = {
-  Monster: undefined,
-  currentMonsterLifePoints: undefined,
-  monsterLifePoints: undefined,
-  monsterXPPoints: undefined,
-  monsterDead: false,
-};
+import { MonsterStatus } from '~/@types';
+import { ChangeMonsterLifeParams } from './@types';
+import { initialState } from './initialState';
 
 export const MonsterStatusSlice = createSlice({
   name: 'MonsterState',
@@ -47,10 +40,10 @@ export const MonsterStatusSlice = createSlice({
     },
 
     resetAllStatus: state => {
-      state.Monster = undefined;
-      state.currentMonsterLifePoints = undefined;
-      state.monsterLifePoints = undefined;
-      state.monsterXPPoints = undefined;
+      state.Monster = initialState.Monster;
+      state.currentMonsterLifePoints = initialState.currentMonsterLifePoints;
+      state.monsterLifePoints = initialState.monsterLifePoints;
+      state.monsterXPPoints = initialState.monsterXPPoints;
       state.monsterDead = false;
     },
   },

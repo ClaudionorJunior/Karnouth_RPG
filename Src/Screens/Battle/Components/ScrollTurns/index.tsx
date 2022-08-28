@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Typography } from '../../../../Elements';
-import { RootState } from '../../../../Store/state';
+import { Typography } from '~/elements/Typography';
+import { RootState } from '~/store/@types';
 import { Container, Scroll } from './styles';
 
-const ScrollTurns = () => {
+export const ScrollTurns = () => {
   const historyBattle = useSelector(
     (state: RootState) => state.BattleHistoryState.history,
   );
@@ -31,5 +31,3 @@ const ScrollTurns = () => {
     </Container>
   );
 };
-
-export default ScrollTurns;
