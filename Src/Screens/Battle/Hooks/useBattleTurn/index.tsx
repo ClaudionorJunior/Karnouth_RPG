@@ -8,6 +8,7 @@ import useModalRewards from '../useModalRewards';
 import { LootManagerActions } from '~/store/LootManager/slice';
 import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
 import { getRandomGoldByArray } from '~/helpers';
+import { TURN_DURATION } from '~/global';
 
 interface UseBattleTurnReturns {
   handleBattle: () => void;
@@ -104,7 +105,7 @@ const useBattleTurn = (): UseBattleTurnReturns => {
 
       timer = setTimeout(() => {
         setBattleTurn('monster');
-      }, 700);
+      }, TURN_DURATION);
     }
     if (battleTurn === 'monster') {
       amount = calcHitPoints(battleTurn);
@@ -119,7 +120,7 @@ const useBattleTurn = (): UseBattleTurnReturns => {
 
       timer = setTimeout(() => {
         setBattleTurn(undefined);
-      }, 700);
+      }, TURN_DURATION);
     }
 
     if (!monsterDead && monsterState.Monster) {

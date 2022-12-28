@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PlayerStatusActions } from '~/store/PlayerStatus/slice';
 import { RootState } from '~/store/@types';
+import { NEXT_LEVEL_GAIN_POINTS } from '~/global';
 
 const useLevelManager = () => {
   const PlayerState = useSelector((state: RootState) => state.PlayerState);
@@ -30,7 +31,11 @@ const useLevelManager = () => {
       nextXpNeeded = 600;
     }
 
-    dispatch(PlayerStatusActions.resetRemainingPoints({ points: 2 }));
+    dispatch(
+      PlayerStatusActions.resetRemainingPoints({
+        points: NEXT_LEVEL_GAIN_POINTS,
+      }),
+    );
     dispatch(
       PlayerStatusActions.onChangePlayerLevel({
         level: nextPlayerLevel,

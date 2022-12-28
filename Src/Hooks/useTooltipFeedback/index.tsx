@@ -11,6 +11,7 @@ import { normalizePixel } from '~/helpers';
 import { PlayerManagerItemsActions } from '~/store/PlayerManagerItems/slice';
 import { RootState } from '~/store/@types';
 import { Container } from './styles';
+import { TIME_TO_RESET_TOOLTIP } from '~/global';
 
 interface TooltipFeedbackProviderProps {
   children: React.ReactElement;
@@ -35,7 +36,7 @@ export const TooltipFeedbackProvider = ({
       });
       setTimeout(() => {
         dispatch(PlayerManagerItemsActions.resetError());
-      }, 3500);
+      }, TIME_TO_RESET_TOOLTIP);
     } else if (!tooltipPosition.value) {
       tooltipPosition.value = withTiming(normalizePixel(-280), {
         duration: 700,
