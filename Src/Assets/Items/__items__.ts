@@ -1,16 +1,16 @@
 /* eslint-disable import/no-mutable-exports */
 import uuid from 'react-native-uuid';
 import { Item } from '~/@types';
-import crossbow from '../crossbow.bmp';
-import demon_legs from '../demon_legs.bmp';
-import golden_boots from '../golden_boots.bmp';
-import plate_armor from '../plate_armor.bmp';
-import plate_helmet from '../plate_helmet.bmp';
-import rapier_sword from '../rapier_sword.bmp';
-import steel_sword from '../steel_sword.bmp';
-import wooden_shield from '../wooden_shield.bmp';
-import light_wand from '../light_wand.bmp';
-import gold from '../gold.bmp';
+import crossbow from './crossbow.bmp';
+import demon_legs from './demon_legs.bmp';
+import golden_boots from './golden_boots.bmp';
+import plate_armor from './plate_armor.bmp';
+import plate_helmet from './plate_helmet.bmp';
+import rapier_sword from './rapier_sword.bmp';
+import steel_sword from './steel_sword.bmp';
+import wooden_shield from './wooden_shield.bmp';
+import light_wand from './light_wand.bmp';
+import gold from './gold.bmp';
 
 export let AllItems: Item[] = [
   {

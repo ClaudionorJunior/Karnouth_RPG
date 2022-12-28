@@ -1,6 +1,6 @@
 import { useFocusEffect } from '@react-navigation/native';
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { MonsterStatus } from '~/components/MonsterStatus';
 import { PlayerStatus } from '~/components/PlayerStatus';
 import { Typography } from '~/elements/Typography';

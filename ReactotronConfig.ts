@@ -9,7 +9,7 @@ Reactotron.setAsyncStorageHandler(AsyncStorage) // AsyncStorage would either com
     asyncStorage: false, // there are more options to the async storage.
     networking: {
       // optionally, you can turn it off with false.
-      ignoreUrls: /symbolicate/,
+      ignoreUrls: /symbolicate|localhost/,
     },
     editor: false, // there are more options to editor
     errors: { veto: stackFrame => false }, // or turn it off with false

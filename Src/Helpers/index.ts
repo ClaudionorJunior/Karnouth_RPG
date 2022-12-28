@@ -8,7 +8,7 @@ import {
 import uuid from 'react-native-uuid';
 import { Item, PlayerTypies } from '~/@types';
 import { Mage, Ranger, Warrior } from '~/assets';
-import { AllItems } from '~/assets/Items/@types';
+import { AllItems } from '~/assets/Items/__items__';
 
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
   Dimensions.get('window');

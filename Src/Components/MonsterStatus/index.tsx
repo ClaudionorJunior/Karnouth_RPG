@@ -37,18 +37,15 @@ export const MonsterStatus = ({
   }, [monsterToRender]);
 
   return (
-    <Container
-      onPress={handleSelected}
-      isSelected={monsterState?.Monster?.name === monsterToRender?.name}
-    >
+    <Container onPress={handleSelected}>
       <Typography
         text={monsterToRender?.name || monsterState?.Monster?.name || 'monster'}
         textSize="small"
       />
-      <ContainerStatus
-        isSelected={monsterState?.Monster?.name === monsterToRender?.name}
-      >
-        <AvatarContainerImg>
+      <ContainerStatus>
+        <AvatarContainerImg
+          isSelected={monsterState?.Monster?.name === monsterToRender?.name}
+        >
           <AvatarImg
             source={monsterToRender?.source || monsterState.Monster?.source}
           />

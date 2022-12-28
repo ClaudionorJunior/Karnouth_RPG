@@ -11,10 +11,9 @@ import { Typography } from '~/elements/Typography';
 import { GhostButton } from '~/elements/GhostButton';
 import { Button } from '~/elements/Button';
 import { RootState } from '~/store/@types';
-import { classDescription } from './helpers';
 import { normalizePixel } from '~/helpers';
-
-const PLAYERS_TYPE: PlayerTypies[] = ['Warrior', 'Mage', 'Ranger'];
+import { classDescription } from '~/assets';
+import { PLAYERS_TYPE } from '~/global';
 
 const CreatePlayer = () => {
   const [lastClass, setLastClass] = useState<PlayerTypies>();
@@ -52,8 +51,8 @@ const CreatePlayer = () => {
       {PlayerState.playerType && (
         <Typography
           containerStyles={{
-            marginTop: 16,
-            marginBottom: 16,
+            marginTop: normalizePixel(16),
+            marginBottom: normalizePixel(16),
             textAlign: 'center',
           }}
           text={classDescription[PlayerState.playerType]}
@@ -63,7 +62,7 @@ const CreatePlayer = () => {
       {PlayerState.playerType && (
         <RemainingContainer>
           <Typography
-            containerStyles={{ marginBottom: 16 }}
+            containerStyles={{ marginBottom: normalizePixel(16) }}
             text={`Remaining points: ${PlayerState.remainingPoints}`}
             textSize="paragraphy"
           />

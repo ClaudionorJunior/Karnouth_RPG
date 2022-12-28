@@ -1,24 +1,16 @@
 import styled, { css } from 'styled-components/native';
 import { normalizePixel } from '~/helpers';
 
-export const Container = styled.Pressable<{ isSelected: boolean }>`
+export const Container = styled.Pressable`
   width: 90%;
   align-items: center;
   justify-content: center;
   margin-top: ${normalizePixel(12)}px;
 `;
 
-export const ContainerStatus = styled.View<{ isSelected: boolean }>`
+export const ContainerStatus = styled.View`
   width: 100%;
   flex-direction: row;
-  border-width: ${normalizePixel(2)}px;
-  border-color: transparent;
-  border-radius: ${normalizePixel(6)}px;
-  ${({ theme, isSelected }) =>
-    isSelected &&
-    css`
-      border-color: ${theme.colors.green};
-    `}
 `;
 
 export const ProgressBarsContainer = styled.View`
@@ -37,11 +29,16 @@ export const AvatarImg = styled.Image`
   height: ${normalizePixel(48)}px;
 `;
 
-export const AvatarContainerImg = styled.View`
+export const AvatarContainerImg = styled.View<{ isSelected: boolean }>`
   align-self: baseline;
   justify-content: center;
   align-items: center;
   border-width: ${normalizePixel(4)}px;
-  border-color: ${({ theme }) => theme.colors.secondary1};
+  ${({ theme, isSelected }) =>
+    css`
+      border-color: ${isSelected
+        ? theme.colors.green
+        : theme.colors.secondary1};
+    `}
   border-radius: ${normalizePixel(6)}px;
 `;

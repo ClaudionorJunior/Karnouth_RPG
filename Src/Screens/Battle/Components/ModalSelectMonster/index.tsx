@@ -2,7 +2,7 @@ import { StackActions, useNavigation } from '@react-navigation/native';
 import React, { useMemo } from 'react';
 import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
-import { AllMonsters } from '~/assets/Monsters/@types';
+import { AllMonsters } from '~/assets/Monsters/__monsters__';
 import { CloseModalContainer } from '~/components/CloseModalContainer';
 import { MonsterStatus } from '~/components/MonsterStatus';
 import { Button } from '~/elements/Button';

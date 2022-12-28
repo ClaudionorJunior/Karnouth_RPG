@@ -1,11 +1,13 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AllItems } from '~/assets/Items/@types';
+import { AllItems } from '~/assets/Items/__items__';
 import { SellerManagerItemsActions } from '~/store/SellerManagerItems/slice';
 import { RootState } from '~/store/@types';
-
-const tempCalc = 1000 * 60 * 2;
+import {
+  INTERVAL_TO_NEXT_ITEMS_TO_SELL,
+  TEMP_TO_NEXT_ITEMS_TO_SELL,
+} from '~/global';
 
 const useManagerSellerItems = () => {
   const [counter, setCounter] = useState<number>(0);
@@ -38,7 +40,7 @@ const useManagerSellerItems = () => {
       let itemIds: number[] = [];
 
       if (lastSee) {
-        tempLastSee = lastSee + tempCalc;
+        tempLastSee = lastSee + TEMP_TO_NEXT_ITEMS_TO_SELL;
       }
 
       [1, 2, 3, 4, 5].forEach(() => {
@@ -58,7 +60,10 @@ const useManagerSellerItems = () => {
   );
 
   useEffect(() => {
-    const timer = setInterval(() => setCounter(state => state + 1), 500);
+    const timer = setInterval(
+      () => setCounter(state => state + 1),
+      INTERVAL_TO_NEXT_ITEMS_TO_SELL,
+    );
     return () => clearInterval(timer);
   }, [counter]);
 };
